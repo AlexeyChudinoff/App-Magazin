@@ -1,12 +1,10 @@
 package org.skypro.skyshop;
 
-import java.util.Arrays;
-
-public class Basket {
+public class basket {
 
   private static final Product[] productBasket = new Product[5];
 
-  public static void greateBasket() {
+  void greateBasket() {
     System.out.println("Vvod rukami");
     for (int i = 0; i < productBasket.length; i++) {
       productBasket[0] = new Product("Rubashka", 700);
@@ -18,7 +16,7 @@ public class Basket {
     System.out.println("---------------");
   }
 
-  public static void addProduct(String nameProduct, int costProduct) {
+  public void addProduct(String nameProduct, int costProduct) {
     System.out.println("  addProduct");
     String answer = "Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
@@ -32,7 +30,7 @@ public class Basket {
     System.out.println("-------------");
   }
 
-  public static void printBasket() {
+  public void printBasket() {
     System.out.println("  printBasket");
     for (int i = 0; i < productBasket.length; i++) {
       System.out.println(productBasket[i]);
@@ -40,7 +38,7 @@ public class Basket {
     System.out.println("-------------");
   }
 
-  public static int summCostBasket() {
+  public int summCostBasket() {
     System.out.println("summCostBasket");
     int summ = 0;
     for (int i = 0; i < productBasket.length; i++) {
@@ -53,7 +51,7 @@ public class Basket {
     return summ;
   }
 
-  public static void printBasketCost() {
+  public void printBasketCost() {
     System.out.println("printBasketCost");
     int summ = 0;
     for (int j = 0; j < productBasket.length; j++) {
@@ -70,7 +68,7 @@ public class Basket {
     System.out.println("-------------");
   }
 
-  public static void searchNameProduct(String searchName) {
+  public void searchNameProduct(String searchName) {
     System.out.println("searchNameProduct");
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
@@ -85,7 +83,7 @@ public class Basket {
     System.out.println("------------");
   }
 
-  public static void deliteAllBasket() {
+  public void deliteAllBasket() {
     System.out.println("deliteAllBasket");
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {

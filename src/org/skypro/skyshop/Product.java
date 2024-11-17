@@ -2,9 +2,6 @@ package org.skypro.skyshop;
 
 public class Product {
 
-  public static String getNameProduct;
-  public static int getCostProduct;
-
   private String nameProduct;
   private int costProduct;
 

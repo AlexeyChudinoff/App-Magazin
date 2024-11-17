@@ -4,20 +4,23 @@ public class App {
 
   public static void main(String[] args) {
 
-    Basket.greateBasket();
-    Basket.addProduct("Noski", 100);
+    Product product = new Product("null", 0);
+    basket basket = new basket();
+
+    basket.greateBasket();
+    basket.addProduct("Noski", 100);
     //   для проверки переполнения корзины
-    //  Basket.addProduct("Kepka", 100);
-    //  Basket.addProduct("Ochki", 100);
-    Basket.printBasket();
-    Basket.printBasketCost();
-    System.out.println("Итого:" + Basket.summCostBasket());
+    //  basket.addProduct("Kepka", 100);
+    //  basket.addProduct("Ochki", 100);
+    basket.printBasket();
+    basket.printBasketCost();
+    System.out.println("Итого:" + basket.summCostBasket());
     System.out.println("------------");
-    Basket.searchNameProduct("Rubashka");
-    Basket.searchNameProduct("Sorochka");
-    Basket.deliteAllBasket();
-    Basket.printBasket();
-    Basket.searchNameProduct("Rubashka");
+    basket.searchNameProduct("Rubashka");
+    basket.searchNameProduct("Sorochka");
+    basket.deliteAllBasket();
+    basket.printBasket();
+    basket.searchNameProduct("Rubashka");
 
   }
 }
