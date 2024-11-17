@@ -21,14 +21,15 @@ public class Basket {
   public static void addProduct(String nameProduct, int costProduct) {
     System.out.println("  addProduct");
     String answer = "Невозможно добавить продукт";
-  for (int i = 0; i < productBasket.length; i++) {
-        if (productBasket[i] == null) {
+    for (int i = 0; i < productBasket.length; i++) {
+      if (productBasket[i] == null) {
         answer = "Add " + nameProduct + " " + costProduct;
         productBasket[i] = new Product(nameProduct, costProduct);
-               break;
+        break;
       }
-    } System.out.println(answer);
-        System.out.println("-------------");
+    }
+    System.out.println(answer);
+    System.out.println("-------------");
   }
 
   public static void printBasket() {
