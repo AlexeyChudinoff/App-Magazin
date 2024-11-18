@@ -1,17 +1,21 @@
 package org.skypro.skyshop;
 
-public class basket {
+import java.util.Random;
 
-  private static final Product[] productBasket = new Product[5];
+public class Basket {
 
-  void greateBasket() {
-    System.out.println("Vvod rukami");
-    for (int i = 0; i < productBasket.length; i++) {
-      productBasket[0] = new Product("Rubashka", 700);
-      productBasket[1] = new Product("Shtani", 900);
-      productBasket[2] = new Product("Trusi", 400);
+  private Product[] productBasket = new Product[5];
+  private final String[] produktName = {" Трико ", " Кофта ",
+      " Панамка ", " Майка ", " Галстук ", " Свитер ", " Рубашка ", " Брюки ", " Панамка ",
+      " Лифчик 4 размера ", " Тапочки ", " Перчатки ", " Красное Ферари ", " АК-47 ",
+      " Солёный шоколад ", " Лапти ", " Шлем богатырский "};
+  private final Random random = new Random();
 
-      System.out.println(productBasket[i]);
+  public void greateBasket() {
+    // заполням корзину не полностью, потом добавим с помощью метода
+    for (int i = 0; i < productBasket.length - 1; i++) {
+      productBasket[i] = new Product((produktName[random.nextInt(0, produktName.length)]),
+          (random.nextInt(100, 1000)));
     }
     System.out.println("---------------");
   }
@@ -46,7 +50,8 @@ public class basket {
         continue;
       }
       summ += productBasket[i].getCostProduct();
-      //System.out.println(summ); последовательное суммирование
+      //вывод результатов последовательного суммирования(если надо)
+      //System.out.println(summ);
     }
     return summ;
   }

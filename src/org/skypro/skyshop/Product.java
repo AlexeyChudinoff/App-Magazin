@@ -28,7 +28,7 @@ public class Product {
 
   @Override
   public String toString() {
-    return " _Наименование продукта = " + nameProduct + " _Цена продукта = "
+    return " Наименование продукта : " + nameProduct + " ; Цена продукта = "
         + costProduct;
   }
 
