@@ -6,11 +6,11 @@ public class App {
 
     Basket basket = new Basket();
 
-    basket.addDiscountedProduct("Виски", 800, 50);
-    basket.addFixPriceProduct("Вода");
-    basket.addSimpleProduct("Штаны", 400);
-    basket.addSimpleProduct("Рубаха", 300);
-    basket.addSimpleProduct("Трусы", 200);
+    basket.addProduct("Виски", 800, 50);
+    basket.addProduct("Вода");
+    basket.addProduct("Штаны", 400);
+    basket.addProduct("Рубаха", 300);
+    basket.addProduct("Трусы", 200);
 
     basket.printBasketCost();
     basket.SpecialProduct();

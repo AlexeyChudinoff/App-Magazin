@@ -6,8 +6,7 @@ public class Basket {
 
   private Product[] productBasket = new Product[5];
 
-
-  public void addSimpleProduct(String nameSimpleProduct, int costSimpleProduct) {
+  public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
     System.out.println("  addProduct");
     String answer = "Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
@@ -21,7 +20,7 @@ public class Basket {
     System.out.println("-------------");
   }
 
-  public void addFixPriceProduct(String nameFixPriceProduct) {
+  public void addProduct(String nameFixPriceProduct) {
     System.out.println("  addProduct");
     String answer = "Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
@@ -35,7 +34,7 @@ public class Basket {
     System.out.println("-------------");
   }
 
-  public void addDiscountedProduct(String nameDiscountedProduct, int baseCost,
+  public void addProduct(String nameDiscountedProduct, int baseCost,
       int discountBaseCost) {
     System.out.println("  addProduct");
     String answer = "Невозможно добавить продукт";
@@ -72,11 +71,8 @@ public class Basket {
     int namber = 0;
     System.out.println("Spec tovar : ");
     for (int i = 0; i < productBasket.length; i++) {
-      if (productBasket[i] == null) {
-        continue;
-      }
-      if (productBasket[i].isSpecial()) {
-        namber += 1;
+      if (productBasket[i] != null && productBasket[i].isSpecial()) {
+        namber++;
         System.out.println(productBasket[i]);
       }
     }
