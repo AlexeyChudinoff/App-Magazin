@@ -2,57 +2,50 @@ package org.skypro.skyshop.product;
 
 public class Basket {
 
-  private static Product[] productBasket = new Product[5];
+  private Product[] productBasket = new Product[5];
 
   public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
-    String answer = " Невозможно добавить продукт";
+    System.out.println("  addProduct");
+    String answer = "Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
-        answer = "Name: " + nameSimpleProduct + ". Cost: " + costSimpleProduct;
-        try {
-          productBasket[i] = new SimpleProduct(nameSimpleProduct, costSimpleProduct);
-        } catch (IllegalArgumentException e) {
-          System.out.println(e.getMessage() + " Невозможно добавить продукт");
-        }
+        answer = "Add " + nameSimpleProduct + " " + costSimpleProduct;
+        productBasket[i] = new SimpleProduct(nameSimpleProduct, costSimpleProduct);
         break;
       }
     }
-    System.out.println("addProduct- " + answer);
-
+    System.out.println(answer);
+    System.out.println("-------------");
   }
 
-  public void addProduct(String nameFixPriceProduct) throws IllegalArgumentException {
-    String answer = " Невозможно добавить продукт"
-        + nameFixPriceProduct;
+  public void addProduct(String nameFixPriceProduct) {
+    System.out.println("  addProduct");
+    String answer = "Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
-        answer = "Name: " + nameFixPriceProduct + ". Cost: " + FixPriceProduct.FIX_PRICE_PRODUCT;
+        answer = "Add " + nameFixPriceProduct + " " + FixPriceProduct.FIX_PRICE_PRODUCT;
         productBasket[i] = new FixPriceProduct(nameFixPriceProduct);
         break;
       }
     }
-    System.out.println("addProduct- " + answer);
+    System.out.println(answer);
+    System.out.println("-------------");
   }
 
   public void addProduct(String nameDiscountedProduct, int baseCost,
-      int discountBaseCost) throws IllegalArgumentException {
-    String answer = " Невозможно добавить продукт";
+      int discountBaseCost) {
+    System.out.println("  addProduct");
+    String answer = "Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
-        answer = "Name: " + nameDiscountedProduct + ". Cost:  " + baseCost +
+        answer = "Add " + nameDiscountedProduct + " " + " цена " + baseCost +
             " скидка = " + discountBaseCost + "%";
-        try {
-          productBasket[i] = new DiscountedProduct(nameDiscountedProduct, baseCost,
-              discountBaseCost);
-        } catch (RuntimeException e) {
-          System.out.println(e.getMessage() +
-              " Невозможно добавить продукт");
-        }
+        productBasket[i] = new DiscountedProduct(nameDiscountedProduct, baseCost, discountBaseCost);
         break;
       }
     }
-    System.out.println("addProduct- " + answer);
-
+    System.out.println(answer);
+    System.out.println("-------------");
   }
 
   public void printBasketCost() {
@@ -84,7 +77,9 @@ public class Basket {
     System.out.println(" Всего специальных товаров: " + namber + " шт");
   }
 
-  public static Product[] getProductBasket() {
-    return productBasket;
-  }
+
+
+
+
+
 }

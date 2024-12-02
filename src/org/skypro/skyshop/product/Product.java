@@ -1,18 +1,12 @@
 package org.skypro.skyshop.product;
 
-import org.skypro.skyshop.searchProduct.Searchable;
-
 public abstract class Product implements Searchable {
 
-  private final String nameProduct;
+  private String nameProduct;
 
-  public Product(String nameProduct) throws IllegalArgumentException {
-    if (nameProduct.isBlank()) {
-      throw new IllegalArgumentException(
-          ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + "Нет имени продукта");
-    }
+  public Product(String nameProduct) {
     this.nameProduct = nameProduct;
-  }
+     }
 
   public abstract boolean isSpecial();
 
@@ -22,28 +16,27 @@ public abstract class Product implements Searchable {
     return nameProduct;
   }
 
+  public void setNameProduct(String nameProduct) {
+    this.nameProduct = nameProduct;
+  }
+
   @Override
   public String toString() {
-    return "Product- имя продукта : " + nameProduct + " ; стоимость  = "
+    return " имя продукта : " + nameProduct + " ; стоимость  = "
         + getCostProduct();
   }
 
   @Override
-  public String searchTerm() {
+  public String SearchTerm(){
     return nameProduct;
   }
 
   @Override
-  public String searchTipContent() {
+  public  String getTipContent(){
     return "PRODUCT";
   }
 
 
-  public static final String ANSI_RESET = "\u001B[0m";
-  public static final String ANSI_RED = "\u001B[31m";
-  public static final String ANSI_GREEN = "\u001B[32m";
-  public static final String ANSI_YELLOW = "\u001B[33m";
-  public static final String ANSI_BLUE = "\u001B[34m";
-  //ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET +
 
 }
+
