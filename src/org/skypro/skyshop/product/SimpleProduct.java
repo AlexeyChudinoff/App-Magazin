@@ -1,4 +1,4 @@
-package org.skypro.skyshop;
+package org.skypro.skyshop.product;
 
 public class SimpleProduct extends Product {
 
@@ -23,4 +23,5 @@ public class SimpleProduct extends Product {
   public boolean isSpecial() {
     return false;
   }
+
 }

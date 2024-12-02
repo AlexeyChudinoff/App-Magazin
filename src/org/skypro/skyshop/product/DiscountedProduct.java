@@ -1,4 +1,4 @@
-package org.skypro.skyshop;
+package org.skypro.skyshop.product;
 
 public class DiscountedProduct extends Product {
 
@@ -36,4 +36,5 @@ public class DiscountedProduct extends Product {
   public boolean isSpecial() {
     return true;
   }
+
 }
