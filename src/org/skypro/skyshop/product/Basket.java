@@ -1,6 +1,4 @@
-package org.skypro.skyshop;
-
-import java.util.Random;
+package org.skypro.skyshop.product;
 
 public class Basket {
 
@@ -78,5 +76,10 @@ public class Basket {
     }
     System.out.println(" Всего специальных товаров: " + namber + " шт");
   }
+
+
+
+
+
 
 }
