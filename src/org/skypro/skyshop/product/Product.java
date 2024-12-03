@@ -6,7 +6,7 @@ public abstract class Product implements Searchable {
 
   public Product(String nameProduct) {
     this.nameProduct = nameProduct;
-     }
+  }
 
   public abstract boolean isSpecial();
 
@@ -16,10 +16,6 @@ public abstract class Product implements Searchable {
     return nameProduct;
   }
 
-  public void setNameProduct(String nameProduct) {
-    this.nameProduct = nameProduct;
-  }
-
   @Override
   public String toString() {
     return " имя продукта : " + nameProduct + " ; стоимость  = "
@@ -27,16 +23,17 @@ public abstract class Product implements Searchable {
   }
 
   @Override
-  public String SearchTerm(){
-    return nameProduct;
+  public String searchTerm() {
+    return getNameProduct();
   }
 
   @Override
-  public  String getTipContent(){
+  public String searchTipContent() {
     return "PRODUCT";
   }
 
-
-
+  @Override
+  public void getStringRepresentation() {
+    Searchable.super.getStringRepresentation();
+  }
 }
-
