@@ -2,50 +2,44 @@ package org.skypro.skyshop.product;
 
 public class Basket {
 
-  private Product[] productBasket = new Product[5];
+  private static Product[] productBasket = new Product[5];
 
-  public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
-    System.out.println("  addProduct");
+    public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
     String answer = "Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
-        answer = "Add " + nameSimpleProduct + " " + costSimpleProduct;
+        answer = "Name: " + nameSimpleProduct + ". Cost: " + costSimpleProduct;
         productBasket[i] = new SimpleProduct(nameSimpleProduct, costSimpleProduct);
         break;
       }
     }
-    System.out.println(answer);
-    System.out.println("-------------");
+    System.out.println("addProduct- " + answer);
   }
 
   public void addProduct(String nameFixPriceProduct) {
-    System.out.println("  addProduct");
-    String answer = "Невозможно добавить продукт";
+    String answer = "Нет места Невозможно добавить продукт" + nameFixPriceProduct;
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
-        answer = "Add " + nameFixPriceProduct + " " + FixPriceProduct.FIX_PRICE_PRODUCT;
+        answer = "Name: " + nameFixPriceProduct + ". Cost: " + FixPriceProduct.FIX_PRICE_PRODUCT;
         productBasket[i] = new FixPriceProduct(nameFixPriceProduct);
         break;
       }
     }
-    System.out.println(answer);
-    System.out.println("-------------");
+    System.out.println("addProduct- " + answer);
   }
 
   public void addProduct(String nameDiscountedProduct, int baseCost,
       int discountBaseCost) {
-    System.out.println("  addProduct");
     String answer = "Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
-        answer = "Add " + nameDiscountedProduct + " " + " цена " + baseCost +
+        answer = "Name: " + nameDiscountedProduct + ". Cos:  " + baseCost +
             " скидка = " + discountBaseCost + "%";
         productBasket[i] = new DiscountedProduct(nameDiscountedProduct, baseCost, discountBaseCost);
         break;
       }
     }
-    System.out.println(answer);
-    System.out.println("-------------");
+    System.out.println("addProduct- " + answer);
   }
 
   public void printBasketCost() {
@@ -76,10 +70,6 @@ public class Basket {
     }
     System.out.println(" Всего специальных товаров: " + namber + " шт");
   }
-
-
-
-
 
 
 }
