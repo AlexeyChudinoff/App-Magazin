@@ -2,7 +2,7 @@ package org.skypro.skyshop.product;
 
 public abstract class Product implements Searchable {
 
-  private String nameProduct;
+  private final String nameProduct;
 
   public Product(String nameProduct) {
     this.nameProduct = nameProduct;
@@ -18,13 +18,13 @@ public abstract class Product implements Searchable {
 
   @Override
   public String toString() {
-    return " имя продукта : " + nameProduct + " ; стоимость  = "
+    return "Product- имя продукта : " + nameProduct + " ; стоимость  = "
         + getCostProduct();
   }
 
   @Override
   public String searchTerm() {
-    return getNameProduct();
+    return nameProduct;
   }
 
   @Override
