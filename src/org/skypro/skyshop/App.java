@@ -7,6 +7,7 @@ import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SearchEngine;
+import org.skypro.skyshop.product.Searchable;
 import org.skypro.skyshop.product.SimpleProduct;
 
 public class App {
@@ -27,59 +28,38 @@ public class App {
     System.out.println("=============================");
     System.out.println();
     System.out.println();
-    System.out.println();
 
-    Article article = new Article(" ЗАГОЛОВОК ", " СТАТЬЯ");
-    Product product = new SimpleProduct("Кофейник", 900);
-    SearchEngine searchable = new SearchEngine();
 
-    Article article2 = new Article(" ЗАГОЛОВОК2 ", " СТАТЬЯ2");
-    SimpleProduct simpleproduct = new SimpleProduct("Чайник", 800);
-    FixPriceProduct fixproduct = new FixPriceProduct("Vaza");
-    DiscountedProduct discproduct = new DiscountedProduct("Kartina", 800, 10);
+    SearchEngine searchEngine = new SearchEngine();
+    Article article = new Article("Title", "Content");
+    Product product = new SimpleProduct("product", 600);
 
-    article.addArticle("Ода Вискарику", "Как пить и не напиваться ...");
-    article.addArticle("Интструкция Рубаха", "Рубаха это ....");
-    article.addArticle("Интструкция Трусы", "Трусы это ....");
-    article.addArticle("Интструкция Штаны", "Штаны это ....");
-    System.out.println();
-    article.printArticles();
-    System.out.println("oooooooooooo");
-    System.out.println();
-    System.out.println();
+    Searchable article1 = new Article("article1", "Инструкция к article1");
+    Searchable article2 = new Article("article2", "Инструкция к article2");
+    Searchable article3 = new Article("article3", "Инструкция к article3");
+    Searchable article4 = new Article("article4", "Инструкция к article4");
+    Searchable product1 = new FixPriceProduct("product1");
+    Searchable product2 = new SimpleProduct("product2", 300);
+    Searchable product3 = new DiscountedProduct("product3",1000,50);
 
-    searchable.GenerateSearchable(10);
+    searchEngine.GenerateSearchable(7);
     System.out.println();
-searchable.printSearchEngine();
+    searchEngine.add(article);
+    searchEngine.add(product);
+    searchEngine.add(article1);
+    searchEngine.add(article2);
+    searchEngine.add(article3);
+    searchEngine.add(product1);
+    searchEngine.add(product2);
+    searchEngine.add(product3);
     System.out.println();
-searchable.toString();
+    searchEngine.printSearchEngine();
     System.out.println();
+    searchEngine.printGetStringRepresentation();
+    System.out.println();
+    searchEngine.search("Инструкция");
 
-    System.out.println();
-    /*SearchEngine.add("ложка",null,null);
-    SearchEngine.add("вилка",null,null);
-    SearchEngine.add("чашка",null,null);
-    SearchEngine.add("тарелка",null,null);
-    SearchEngine.add("нож",null,null);
-    SearchEngine.add(null,"инструкция скатерть","скатерть это ...");
-    SearchEngine.add(null,"инструкция нож","нож это ...");
-    SearchEngine.add(null,"инструкция чашка","чашка это ...");
-    SearchEngine.add(null,"инструкция вилка","вилка это ...");*/
-    System.out.println();
 
-    System.out.println();
-
-    System.out.println();
-
-    System.out.println();
-
-    System.out.println();
-
-    System.out.println();
-
-    System.out.println();
-
-    System.out.println();
 
 
   }//maim
