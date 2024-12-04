@@ -14,11 +14,12 @@ public class FixPriceProduct extends Product {
 
   @Override
   public String toString() {
-    return "Fix._"
+    return "Fix. продукт= "
         + getNameProduct() + " = цена = " + FIX_PRICE_PRODUCT;
   }
 
   public boolean isSpecial() {
     return true;
   }
+
 }
