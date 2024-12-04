@@ -1,72 +1,68 @@
 package org.skypro.skyshop.product;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SearchEngine {
 
-
-  /*public String poleSearch;
-  public void poleSearch (String poleSearch) {
-    this.poleSearch = poleSearch;
-  }*/
-
- public  SearchEngine[] searchable;
+  private Searchable[] searchable;
+  private int id;
 
   public void GenerateSearchable(int size) {
     System.out.println("GenerateSearchable SearchEngine");
-    searchable = new SearchEngine[size];
+    searchable = new Searchable[size];
+    id = 0;
     System.out.println("создан массив searchable[" + size + "]");
   }
 
-  public void add(String nameProduct) {
-    String answer = "Нет места Невозможно добавить продукт " + nameProduct;
-    for (int i = 0; i < searchable.length; i++) {
-      if (searchable[i] == null) {
-        answer = "add :  " + nameProduct ;
-        searchable[i] = new SearchEngine();
-        break;
-      }
+  public void add(Searchable searchTerm) {
+    if (id == searchable.length) {
+      System.out.println("невозможно добавить " + searchTerm);
+      return;
     }
-    System.out.println(answer);
-  }
-
-  public void add(String nameArticle, String textArticle) {
-    String answer = "Нет места Невозможно добавить продукт " + nameArticle;
-    for (int i = 0; i < searchable.length; i++) {
-      if (searchable[i] == null) {
-        answer = "add :  " + nameArticle +  textArticle;
-        searchable[i] = new SearchEngine();
-        break;
-      }
-    }
-    System.out.println(answer);
+    searchable[id] = searchTerm;
+    System.out.println("add :" + searchTerm);
+    id++;
   }
 
 
-  public void search(String strSearch) {
-    System.out.println("'search SearchEngine'");
-    SearchEngine[] searchArray = new SearchEngine[5];
-    for (int i = 0; i < searchArray.length; i++) {
-      if (searchable[i].equals(strSearch)) {
-        searchArray[i] = searchable[i];
-      } else {
-        System.out.println("Совпадений не найдено");
+  public void search(String find) {
+    ArrayList<String> findeProduct = new ArrayList<>();
+    for (int i = 0; i < searchable.length; i++) {
+      if (searchable[i].searchTerm().contains(find)) {
+        findeProduct.add(searchable[i].searchTerm());
+            if (findeProduct.size() == 5) {
+          break;
+        }
       }
+    }
+    for (int i = 0; i < findeProduct.size(); i++) {
+      System.out.println(findeProduct.get(i));
+    }
+
+  }
+
+
+  public void printGetStringRepresentation() {
+    System.out.println("printGetStringRepresentation");
+    for (Searchable object : searchable) {
+      if (object == null) {
+        return;
+      }
+      object.getStringRepresentation();
     }
   }
 
   public void printSearchEngine() {
     System.out.println("printSearchEngine");
-    for (SearchEngine object : searchable) {
+    for (Searchable object : searchable) {
       System.out.println(object);
     }
   }
 
   @Override
   public String toString() {
-    return "SearchEngine{" +
-        "searchable=" + Arrays.toString(searchable) +
-        '}';
+    return Arrays.toString(searchable);
   }
 
 
