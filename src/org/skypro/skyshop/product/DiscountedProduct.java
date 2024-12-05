@@ -1,4 +1,4 @@
-package org.skypro.skyshop;
+package org.skypro.skyshop.product;
 
 public class DiscountedProduct extends Product {
 
@@ -28,12 +28,18 @@ public class DiscountedProduct extends Product {
 
   @Override
   public String toString() {
-    return "имя продукта со скидкой = " + getNameProduct() + " = цена без скидки = " + baseCost +
+    return "Disc. продукт= " + getNameProduct() + " = цена без скидки = " + baseCost +
         " , скидка = " + discountBaseCost + "%" +
         " = цена со скидкой = " + costAfterDiscount;
+  }
+
+  @Override
+  public String searchTerm() {
+    return "";
   }
 
   public boolean isSpecial() {
     return true;
   }
+
 }
