@@ -6,8 +6,8 @@ import org.skypro.skyshop.product.Basket;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
-import org.skypro.skyshop.product.SearchEngine;
-import org.skypro.skyshop.product.Searchable;
+import org.skypro.skyshop.searchProduct.SearchEngine;
+import org.skypro.skyshop.searchProduct.Searchable;
 import org.skypro.skyshop.product.SimpleProduct;
 
 public class App {
@@ -29,7 +29,6 @@ public class App {
     System.out.println();
     System.out.println();
 
-
     SearchEngine searchEngine = new SearchEngine();
     Article article = new Article("Title", "Content");
     Product product = new SimpleProduct("product", 600);
@@ -40,7 +39,7 @@ public class App {
     Searchable article4 = new Article("article4", "Инструкция к article4");
     Searchable product1 = new FixPriceProduct("product1");
     Searchable product2 = new SimpleProduct("product2", 300);
-    Searchable product3 = new DiscountedProduct("product3",1000,50);
+    Searchable product3 = new DiscountedProduct("product3", 1000, 50);
 
     searchEngine.GenerateSearchable(7);
     System.out.println();
@@ -53,13 +52,11 @@ public class App {
     searchEngine.add(product2);
     searchEngine.add(product3);
     System.out.println();
-    searchEngine.printSearchEngine();
+    //searchEngine.printSearchEngine();
     System.out.println();
     searchEngine.printGetStringRepresentation();
     System.out.println();
     searchEngine.search("Инструкция");
-
-
 
 
   }//maim
