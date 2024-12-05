@@ -2,20 +2,46 @@ package org.skypro.skyshop.searchProduct;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.skypro.skyshop.product.Basket;
+import org.skypro.skyshop.product.Product;
+import org.skypro.skyshop.product.SimpleProduct;
 
 public class SearchEngine {
 
   private Searchable[] searchable;
-  private int id;
 
   public void GenerateSearchable(int size) {
     System.out.println("GenerateSearchable SearchEngine");
     searchable = new Searchable[size];
-    id = 0;
     System.out.println("создан массив searchable[" + size + "]");
   }
 
   public void add(Searchable searchTerm) {
+    String answer = "Невозможно добавить: " + searchTerm;
+    for (int i = 0; i < searchable.length; i++) {
+      if (searchable[i] == null) {
+        answer = "add: " + searchTerm;
+        searchable[i] = searchTerm;
+        break;
+      }
+    }
+    System.out.println(answer);
+  }
+
+  public void add1(Product getNameProduct) {
+    String answer = "Невозможно добавить: " + getNameProduct;
+    for (int i = 0; i < searchable.length; i++) {
+      if (searchable[i] == null) {
+        answer = "add: " + getNameProduct;
+        searchable[i] = getNameProduct;
+        break;
+      }
+    }
+    System.out.println(answer);
+  }
+
+
+  /*public void add(Searchable searchTerm) {
     if (id == searchable.length) {
       System.out.println("невозможно добавить " + searchTerm);
       return;
@@ -23,7 +49,7 @@ public class SearchEngine {
     searchable[id] = searchTerm;
     System.out.println("add :" + searchTerm);
     id++;
-  }
+  }*/
 
 
   public void search(String find) {
@@ -53,11 +79,12 @@ public class SearchEngine {
       object.getStringRepresentation();
     }
   }
-//для проверки
+
+  //для проверки
   public void printSearchEngine() {
     System.out.println("printSearchEngine");
     for (Searchable object : searchable) {
-      System.out.println(object);
+      System.out.println(object/*.searchTerm()*/);
     }
   }
 
@@ -65,6 +92,20 @@ public class SearchEngine {
   public String toString() {
     return Arrays.toString(searchable);
   }
+
+  public void setCopyBasket() {
+    System.out.println("setCopyBasket");
+    Searchable[] copyBasket = new Product[Basket.getProductBasket().length];
+    {
+      for (int i = 0; i < copyBasket.length; i++) {
+        copyBasket[i] = Basket.getProductBasket()[i];
+        //System.out.println(copyBasket[i]);
+      }
+    }
+    System.out.println(Arrays.toString(copyBasket));
+  }
+
+
 
 
 }//class
