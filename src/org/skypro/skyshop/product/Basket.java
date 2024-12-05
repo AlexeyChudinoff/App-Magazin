@@ -71,5 +71,7 @@ public class Basket {
     System.out.println(" Всего специальных товаров: " + namber + " шт");
   }
 
-
+  public static Product[] getProductBasket() {
+    return productBasket;
+  }
 }
