@@ -31,20 +31,21 @@ public class App {
 
     SearchEngine searchEngine = new SearchEngine();
     Article article = new Article("Title", "Content");
-    Product product = new SimpleProduct("product", 600);
+    Product product = new SimpleProduct("product", 50);
 
     Searchable article1 = new Article("article1", "Инструкция к article1");
     Searchable article2 = new Article("article2", "Инструкция к article2");
     Searchable article3 = new Article("article3", "Инструкция к article3");
     Searchable article4 = new Article("article4", "Инструкция к article4");
     Searchable product1 = new FixPriceProduct("product1");
-    Searchable product2 = new SimpleProduct("product2", 300);
+    Searchable product2 = new SimpleProduct("product2", 50);
+     Product product4 = new SimpleProduct("product4", 50);
     Searchable product3 = new DiscountedProduct("product3", 1000, 50);
 
     searchEngine.GenerateSearchable(7);
     System.out.println();
     searchEngine.add(article);
-    searchEngine.add(product);
+    searchEngine.add1(product4);
     searchEngine.add(article1);
     searchEngine.add(article2);
     searchEngine.add(article3);
@@ -52,11 +53,16 @@ public class App {
     searchEngine.add(product2);
     searchEngine.add(product3);
     System.out.println();
-    //searchEngine.printSearchEngine();
+    searchEngine.printSearchEngine();
     System.out.println();
     searchEngine.printGetStringRepresentation();
     System.out.println();
     searchEngine.search("Инструкция");
+    System.out.println();
+    searchEngine.setCopyBasket();
+    System.out.println();
+
+
 
 
   }//maim

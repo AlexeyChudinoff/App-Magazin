@@ -5,7 +5,6 @@ public interface Searchable {
   String searchTerm();
 
   String searchTipContent();
-  // String searchAble();
 
   // вместо toString
   default void getStringRepresentation() {
