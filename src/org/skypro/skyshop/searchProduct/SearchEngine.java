@@ -1,4 +1,4 @@
-package org.skypro.skyshop.product;
+package org.skypro.skyshop.searchProduct;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,11 +27,12 @@ public class SearchEngine {
 
 
   public void search(String find) {
+    System.out.println("search");
     ArrayList<String> findeProduct = new ArrayList<>();
     for (int i = 0; i < searchable.length; i++) {
       if (searchable[i].searchTerm().contains(find)) {
         findeProduct.add(searchable[i].searchTerm());
-            if (findeProduct.size() == 5) {
+        if (findeProduct.size() == 5) {
           break;
         }
       }
@@ -52,7 +53,7 @@ public class SearchEngine {
       object.getStringRepresentation();
     }
   }
-
+//для проверки
   public void printSearchEngine() {
     System.out.println("printSearchEngine");
     for (Searchable object : searchable) {
