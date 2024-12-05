@@ -4,7 +4,7 @@ public class Basket {
 
   private static Product[] productBasket = new Product[5];
 
-    public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
+  public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
     String answer = "Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
