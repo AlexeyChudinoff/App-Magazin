@@ -7,20 +7,20 @@ import org.skypro.skyshop.product.Product;
 
 public class SearchEngine {
 
-  private Searchable[] searchable;
+  private Searchable[] searchList;
 
   public void GenerateSearchable(int size) {
     System.out.println("GenerateSearchable SearchEngine");
-    searchable = new Searchable[size];
+    searchList = new Searchable[size];
     System.out.println("создан массив searchable[" + size + "]");
   }
 
   public void add(Searchable searchTerm) {
     String answer = "Невозможно добавить: " + searchTerm;
-    for (int i = 0; i < searchable.length; i++) {
-      if (searchable[i] == null) {
+    for (int i = 0; i < searchList.length; i++) {
+      if (searchList[i] == null) {
         answer = "add: " + searchTerm;
-        searchable[i] = searchTerm;
+        searchList[i] = searchTerm;
         break;
       }
     }
@@ -29,10 +29,10 @@ public class SearchEngine {
 
   public void add1(Product getNameProduct) {
     String answer = "Невозможно добавить: " + getNameProduct;
-    for (int i = 0; i < searchable.length; i++) {
-      if (searchable[i] == null) {
+    for (int i = 0; i < searchList.length; i++) {
+      if (searchList[i] == null) {
         answer = "add: " + getNameProduct;
-        searchable[i] = getNameProduct;
+        searchList[i] = getNameProduct;
         break;
       }
     }
@@ -42,9 +42,9 @@ public class SearchEngine {
   public void search(String find) {
     System.out.println("search");
     ArrayList<String> findeProduct = new ArrayList<>();
-    for (int i = 0; i < searchable.length; i++) {
-      if (searchable[i].searchTerm().contains(find)) {
-        findeProduct.add(searchable[i].searchTerm());
+    for (int i = 0; i < searchList.length; i++) {
+      if (searchList[i].searchTerm().contains(find)) {
+        findeProduct.add(searchList[i].searchTerm());
       }
       if (findeProduct.size() == 5) {
           break;
@@ -59,7 +59,7 @@ public class SearchEngine {
 
   public void printGetStringRepresentation() {
     System.out.println("printGetStringRepresentation");
-    for (Searchable object : searchable) {
+    for (Searchable object : searchList) {
       if (object == null) {
         return;
       }
@@ -70,14 +70,14 @@ public class SearchEngine {
   //для проверки
   public void printSearchEngine() {
     System.out.println("printSearchEngine");
-    for (Searchable object : searchable) {
+    for (Searchable object : searchList) {
       System.out.println(object/*.searchTerm()*/);
     }
   }
 
   @Override
   public String toString() {
-    return Arrays.toString(searchable);
+    return Arrays.toString(searchList);
   }
 
   Searchable[] copyBasket = new Product[Basket.getProductBasket().length];
@@ -95,14 +95,14 @@ public class SearchEngine {
   //                       copyBasket
   public void addBasket(Product getNameProduct) {
     String answer = "Невозможно добавить: " + getNameProduct;
-    for (int i = 0; i < searchable.length; i++) {
-      if (searchable[i] == null) {
+    for (int i = 0; i < searchList.length; i++) {
+      if (searchList[i] == null) {
         answer = "add: " + getNameProduct;
-        searchable[i] = getNameProduct;
+        searchList[i] = getNameProduct;
       }
     }
     System.out.println(answer);
-    for (Searchable object : searchable) {
+    for (Searchable object : searchList) {
       System.out.println(object);
     }
   }
