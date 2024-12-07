@@ -2,7 +2,7 @@ package org.skypro.skyshop.product;
 
 public class Basket {
 
-  private static Product[] productBasket = new Product[5];
+  private  Product[] productBasket = new Product[5];
 
   public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
     String answer = "Невозможно добавить продукт";
