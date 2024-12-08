@@ -34,8 +34,4 @@ public abstract class Product implements Searchable {
     return "PRODUCT";
   }
 
-  @Override
-  public void getStringRepresentation() {
-    Searchable.super.getStringRepresentation();
-  }
 }
