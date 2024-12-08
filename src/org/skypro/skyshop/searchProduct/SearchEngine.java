@@ -54,7 +54,6 @@ public class SearchEngine {
     }
   }
 
-
   public void printGetStringRepresentation() {
     System.out.println("printGetStringRepresentation");
     for (Searchable object : searchList) {
@@ -78,7 +77,7 @@ public class SearchEngine {
     return Arrays.toString(searchList);
   }
 
-  Searchable[] copyBasket = new Searchable[Basket.getProductBasket().length];
+  Product[] copyBasket = new Product[Basket.getProductBasket().length];
 
   public void setCopyBasket() {
     System.out.println("setCopyBasket");
@@ -89,38 +88,22 @@ public class SearchEngine {
       System.out.println(object);
     }
   }
-  /*public void addBasket() {
-    System.out.println("addBasket");
-    String answer = "Нет места";
-    for (int i = 0; i < searchList.length; i++) {
-      if (searchList[i] == null || i < copyBasket.length) {
-          searchList[i] = copyBasket[i].searchTerm();
-          answer = "add: " + copyBasket[i].searchTerm();
-          break; // Выходим из цикла после успешного добавления
-        } else {
-        }
-      }
-      System.out.println(answer);
 
-      for (Searchable object : searchList) {
-        System.out.println(object);
-      }
-    }*/
-  /*
   public void addBasket() {
     System.out.println("addBasket");
     String answer = "Нет места";
-    for (int i = 0; i < copyBasket.length; i++) {
-      if (searchList[i] == null) {
-        answer = "add: " + copyBasket[i].searchTerm();
-        searchList[i] = copyBasket[i];
-      }
-      System.out.println(answer);
-      for (Searchable object : searchList) {
-        System.out.println(object);
+    for (int i = 0; i < Basket.getProductBasket().length; i++) {
+      if (searchList[i] == null ) {
+        searchList[i] = Basket.getProductBasket()[i];
+        answer = "add: " + Basket.getProductBasket()[i];
+      } else {
+        System.out.println(answer);
       }
     }
-  }*/
+    for (Searchable object : searchList) {
+      System.out.println(object);
+    }
+  }
 
 
 }//class
