@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.Basket;
-import org.skypro.skyshop.product.Product;
 
 public class SearchEngine {
 
@@ -21,24 +20,13 @@ public class SearchEngine {
     String answer = "Невозможно добавить: " + nameArticle + textArticle;
     for (int i = 0; i < searchList.length; i++) {
       if (searchList[i] == null) {
-        answer = "add: " + nameArticle + textArticle;
+        answer = "add: " + nameArticle +" , " + textArticle;
         searchList[i] = new Article(nameArticle, textArticle);
         break;
       }
     }
     System.out.println(answer);
   }
- /* public void add(Product getNameProduct) {
-    String answer = "Невозможно добавить: " + getNameProduct;
-    for (int i = 0; i < searchList.length; i++) {
-      if (searchList[i] == null) {
-        answer = "add: " + getNameProduct;
-        searchList[i] = getNameProduct;
-        break;
-      }
-    }
-    System.out.println(answer);
-  }*/
 
   public void search(String find) {
     System.out.println("search");
@@ -64,32 +52,12 @@ public class SearchEngine {
     }
   }
 
-  //для проверки
-  public void printSearchEngine() {
-    System.out.println("printSearchEngine");
-    for (Searchable object : searchList) {
-      System.out.println(object/*.searchTerm()*/);
-    }
-  }
-
   @Override
   public String toString() {
     return Arrays.toString(searchList);
   }
 
-  Product[] copyBasket = new Product[Basket.getProductBasket().length];
-
-  public void setCopyBasket() {
-    System.out.println("setCopyBasket");
-    for (int i = 0; i < copyBasket.length; i++) {
-      copyBasket[i] = Basket.getProductBasket()[i];
-    }
-    for (Searchable object : copyBasket) {
-      System.out.println(object);
-    }
-  }
-
-  public void addBasket() {
+   public void addBasket() {
     System.out.println("addBasket");
     String answer = "Нет места";
     for (int i = 0; i < Basket.getProductBasket().length; i++) {
