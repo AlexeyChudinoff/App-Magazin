@@ -33,11 +33,6 @@ public class DiscountedProduct extends Product {
         " = цена со скидкой = " + costAfterDiscount;
   }
 
-  @Override
-  public String searchTerm() {
-    return "";
-  }
-
   public boolean isSpecial() {
     return true;
   }
