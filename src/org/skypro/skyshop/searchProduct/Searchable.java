@@ -2,7 +2,7 @@ package org.skypro.skyshop.searchProduct;
 
 public interface Searchable {
 
-  String searchTerm();
+ String searchTerm();
 
   String searchTipContent();
 
