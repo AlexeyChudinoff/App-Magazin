@@ -34,7 +34,7 @@ public class App {
     System.out.println();
     searchEngine.setCopyBasket();
     System.out.println();
-    //searchEngine.addBasket();
+    searchEngine.addBasket();
     System.out.println();
     System.out.println();
 
