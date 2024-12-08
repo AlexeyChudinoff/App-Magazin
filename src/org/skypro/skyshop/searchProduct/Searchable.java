@@ -2,7 +2,7 @@ package org.skypro.skyshop.searchProduct;
 
 public interface Searchable {
 
- String searchTerm();
+  String searchTerm();
 
   String searchTipContent();
 
@@ -11,7 +11,6 @@ public interface Searchable {
     System.out.println("Имя объекта: " + searchTerm() + " ;  " +
         " тип объекта: " + searchTipContent());
   }
-
 
 }
 

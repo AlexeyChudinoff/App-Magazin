@@ -30,7 +30,7 @@ public class Article implements Searchable {
 
   @Override
   public void getStringRepresentation() {
-   Searchable.super.getStringRepresentation();
+    Searchable.super.getStringRepresentation();
   }
 
 }
