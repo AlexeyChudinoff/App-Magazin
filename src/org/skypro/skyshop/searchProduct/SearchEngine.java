@@ -2,32 +2,33 @@ package org.skypro.skyshop.searchProduct;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.Basket;
 import org.skypro.skyshop.product.Product;
 
 public class SearchEngine {
 
-  private Searchable[] searchList;
+  private final Searchable[] searchList;
 
-  public void GenerateSearchable(int size) {
-    System.out.println("GenerateSearchable SearchEngine");
+  public SearchEngine(int size) {
     searchList = new Searchable[size];
-    System.out.println("создан массив searchable[" + size + "]");
+    System.out.println("создан массив searchList[" + size + "]");
   }
 
-  public void add(Searchable searchTerm) {
-    String answer = "Невозможно добавить: " + searchTerm;
+  public void addArticle(String nameArticle, String textArticle) {
+    // System.out.println("addArticle");
+    String answer = "Невозможно добавить: " + nameArticle + textArticle;
     for (int i = 0; i < searchList.length; i++) {
       if (searchList[i] == null) {
-        answer = "add: " + searchTerm;
-        searchList[i] = searchTerm;
+        answer = "add: " + nameArticle + textArticle;
+        searchList[i] = new Article(nameArticle, textArticle);
         break;
       }
     }
     System.out.println(answer);
   }
-
-  public void add1(Product getNameProduct) {
+ /* public void add(Product getNameProduct) {
     String answer = "Невозможно добавить: " + getNameProduct;
     for (int i = 0; i < searchList.length; i++) {
       if (searchList[i] == null) {
@@ -37,23 +38,20 @@ public class SearchEngine {
       }
     }
     System.out.println(answer);
-  }
+  }*/
 
   public void search(String find) {
     System.out.println("search");
-    ArrayList<String> findeProduct = new ArrayList<>();
+    List findeProduct = new ArrayList<>();
     for (int i = 0; i < searchList.length; i++) {
       if (searchList[i].searchTerm().contains(find)) {
         findeProduct.add(searchList[i].searchTerm());
-      }
-      if (findeProduct.size() == 5) {
+        System.out.println(searchList[i].searchTerm());
+        if (findeProduct.size() == 5) {
           break;
+        }
       }
     }
-    for (int i = 0; i < findeProduct.size(); i++) {
-      System.out.println(findeProduct.get(i));
-    }
-
   }
 
 
@@ -80,7 +78,7 @@ public class SearchEngine {
     return Arrays.toString(searchList);
   }
 
-  Searchable[] copyBasket = new Product[Basket.getProductBasket().length];
+  Searchable[] copyBasket = new Searchable[Basket.getProductBasket().length];
 
   public void setCopyBasket() {
     System.out.println("setCopyBasket");
@@ -91,21 +89,38 @@ public class SearchEngine {
       System.out.println(object);
     }
   }
-
-  //                       copyBasket
-  public void addBasket(Product getNameProduct) {
-    String answer = "Невозможно добавить: " + getNameProduct;
+  /*public void addBasket() {
+    System.out.println("addBasket");
+    String answer = "Нет места";
     for (int i = 0; i < searchList.length; i++) {
+      if (searchList[i] == null || i < copyBasket.length) {
+          searchList[i] = copyBasket[i].searchTerm();
+          answer = "add: " + copyBasket[i].searchTerm();
+          break; // Выходим из цикла после успешного добавления
+        } else {
+        }
+      }
+      System.out.println(answer);
+
+      for (Searchable object : searchList) {
+        System.out.println(object);
+      }
+    }*/
+  /*
+  public void addBasket() {
+    System.out.println("addBasket");
+    String answer = "Нет места";
+    for (int i = 0; i < copyBasket.length; i++) {
       if (searchList[i] == null) {
-        answer = "add: " + getNameProduct;
-        searchList[i] = getNameProduct;
+        answer = "add: " + copyBasket[i].searchTerm();
+        searchList[i] = copyBasket[i];
+      }
+      System.out.println(answer);
+      for (Searchable object : searchList) {
+        System.out.println(object);
       }
     }
-    System.out.println(answer);
-    for (Searchable object : searchList) {
-      System.out.println(object);
-    }
-  }
+  }*/
 
 
 }//class
