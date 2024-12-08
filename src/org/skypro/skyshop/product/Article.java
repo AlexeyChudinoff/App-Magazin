@@ -28,9 +28,4 @@ public class Article implements Searchable {
     return "ARTICLE";
   }
 
-  @Override
-  public void getStringRepresentation() {
-    Searchable.super.getStringRepresentation();
-  }
-
 }
