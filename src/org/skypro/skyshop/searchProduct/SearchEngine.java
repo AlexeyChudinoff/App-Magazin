@@ -20,7 +20,7 @@ public class SearchEngine {
     String answer = "Невозможно добавить: " + nameArticle + textArticle;
     for (int i = 0; i < searchList.length; i++) {
       if (searchList[i] == null) {
-        answer = "add: " + nameArticle +" , " + textArticle;
+        answer = "add: " + nameArticle + " , " + textArticle;
         searchList[i] = new Article(nameArticle, textArticle);
         break;
       }
@@ -57,20 +57,36 @@ public class SearchEngine {
     return Arrays.toString(searchList);
   }
 
-   public void addBasket() {
+  public void addBasket() {
     System.out.println("addBasket");
     String answer = "Нет места";
-    for (int i = 0; i < Basket.getProductBasket().length; i++) {
-      if (searchList[i] == null ) {
-        searchList[i] = Basket.getProductBasket()[i];
-        answer = "add: " + Basket.getProductBasket()[i];
-      } else {
-        System.out.println(answer);
+    if (searchList.length >= Basket.getProductBasket().length) {
+      for (int i = 0; i < Basket.getProductBasket().length; i++) {
+        if (searchList[i] == null) {
+          searchList[i] = Basket.getProductBasket()[i];
+          answer = "add: " + Basket.getProductBasket()[i];
+          System.out.println(answer);
+          if (i == Basket.getProductBasket().length) {
+            break;
+          }
+
+        }
+      }
+    } else {
+      for (int i = 0; i < searchList.length; i++) {
+        if (searchList[i] == null) {
+          searchList[i] = Basket.getProductBasket()[i];
+          answer = "add: " + Basket.getProductBasket()[i];
+          System.out.println(answer);
+          if (Basket.getProductBasket().length == searchList.length) {
+            break;
+          }
+
+        }
       }
     }
-    for (Searchable object : searchList) {
-      System.out.println(object);
-    }
+
+
   }
 
 
