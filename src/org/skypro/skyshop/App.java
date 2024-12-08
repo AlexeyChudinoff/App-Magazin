@@ -22,7 +22,7 @@ public class App {
     System.out.println();
     System.out.println();
 
-    SearchEngine searchEngine = new SearchEngine(10);
+    SearchEngine searchEngine = new SearchEngine(4);
 
     System.out.println();
     searchEngine.addBasket();
