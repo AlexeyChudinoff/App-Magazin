@@ -8,6 +8,16 @@ public class DiscountedProduct extends Product {
 
   public DiscountedProduct(String nameProduct, int baseCost, int discountBaseCost) {
     super(nameProduct);
+    if (baseCost <= 0) {
+      throw new IllegalArgumentException("цена продукта с дисконтом меньше нуля");
+    }
+
+    if (discountBaseCost < 0) {
+      throw new IllegalArgumentException(" размер скидки меньше нуля");
+    }
+    if (discountBaseCost > 100) {
+      throw new IllegalArgumentException(" размер скидки больше ста процентов");
+    }
     this.baseCost = baseCost;
     this.discountBaseCost = discountBaseCost;
     costAfterDiscount = (this.baseCost * this.discountBaseCost) / 100;
