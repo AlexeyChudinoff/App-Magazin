@@ -10,6 +10,7 @@ public class App {
     Basket basket = new Basket();
 
     basket.addProduct("Виски", 800, 50);
+    basket.addProduct("   ", -200, 120);
     basket.addProduct("Вода");
     basket.addProduct("Штаны", 400);
     basket.addProduct("Рубаха", 300);
