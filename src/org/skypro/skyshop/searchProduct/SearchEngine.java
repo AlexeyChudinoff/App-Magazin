@@ -30,11 +30,11 @@ public class SearchEngine {
 
   public void search(String find) {
     System.out.println("search");
-    List findeProduct = new ArrayList<>();
-    for (int i = 0; i < searchList.length; i++) {
-      if (searchList[i].searchTerm().contains(find)) {
-        findeProduct.add(searchList[i].searchTerm());
-        System.out.println(searchList[i].searchTerm());
+    List<Object> findeProduct = new ArrayList<>();
+    for (Searchable searchable : searchList) {
+      if (searchable.searchTerm().contains(find)) {
+        findeProduct.add(searchable.searchTerm());
+        System.out.println(searchable.searchTerm());
         if (findeProduct.size() == 5) {
           break;
         }
