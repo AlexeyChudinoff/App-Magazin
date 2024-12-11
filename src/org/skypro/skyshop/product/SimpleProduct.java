@@ -4,10 +4,12 @@ public class SimpleProduct extends Product {
 
   int costSimpleProduct;
 
-  public SimpleProduct(String nameProduct, int costSimpleProduct) {
-    super(nameProduct);
+  public SimpleProduct(String nameProduct, int costSimpleProduct)
+      throws IllegalArgumentException{
+         super(nameProduct);
+
     if (costSimpleProduct <= 0) {
-      throw new IllegalArgumentException(" цена меньше нуля");
+      throw new IllegalArgumentException(" цена SimpleProduct  не может быть меньше нуля");
     }
     this.costSimpleProduct = costSimpleProduct;
   }

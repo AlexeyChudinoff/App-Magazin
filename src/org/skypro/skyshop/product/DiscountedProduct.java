@@ -6,12 +6,12 @@ public class DiscountedProduct extends Product {
   private int discountBaseCost;//целое число от 0 до 100
   private int costAfterDiscount;
 
-  public DiscountedProduct(String nameProduct, int baseCost, int discountBaseCost) {
+  public DiscountedProduct(String nameProduct, int baseCost, int discountBaseCost)
+      throws RuntimeException {
     super(nameProduct);
     if (baseCost <= 0) {
       throw new IllegalArgumentException("цена продукта с дисконтом меньше нуля");
     }
-
     if (discountBaseCost < 0) {
       throw new IllegalArgumentException(" размер скидки меньше нуля");
     }
