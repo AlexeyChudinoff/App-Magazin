@@ -3,6 +3,7 @@ package org.skypro.skyshop.searchProduct;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.skypro.skyshop.Exeption.BestResultNotFound;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.Basket;
 
@@ -85,8 +86,34 @@ public class SearchEngine {
         }
       }
     }
+  }
+
+  public void searchForMostSuitable(String substring){
+    System.out.println("searchForMostSuitable");
+    for (Searchable object : searchList) {
+      if (object == null) {
+        System.out.println(" Больше нет объектов для поиска");
+       break;
+      }
+      int count = 0;
+      int idx = 0;
+      int indexStr = 0;
+
+        indexStr = object.searchTerm().indexOf(substring, idx);
 
 
+      while (indexStr != -1) {
+        count++;
+        idx = indexStr + substring.length();
+        indexStr = object.searchTerm().indexOf(substring, idx);
+      }
+
+
+      if (count > 0) {
+        System.out.println(object);
+      }
+     //System.out.println("Количество повторений: " + count);
+    }
   }
 
 
