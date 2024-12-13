@@ -5,14 +5,14 @@ public class Basket {
   private static Product[] productBasket = new Product[5];
 
   public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
-    String answer = "Невозможно добавить продукт";
+    String answer = " Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
         answer = "Name: " + nameSimpleProduct + ". Cost: " + costSimpleProduct;
         try {
           productBasket[i] = new SimpleProduct(nameSimpleProduct, costSimpleProduct);
         } catch (IllegalArgumentException e) {
-          System.out.println(e.getMessage() + " невозможно добавить продукт :");
+          System.out.println(e.getMessage() + " Невозможно добавить продукт");
         }
         break;
       }
@@ -22,7 +22,8 @@ public class Basket {
   }
 
   public void addProduct(String nameFixPriceProduct) throws IllegalArgumentException {
-    String answer = "Нет места Невозможно добавить продукт" + nameFixPriceProduct;
+    String answer = " Невозможно добавить продукт"
+        + nameFixPriceProduct;
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
         answer = "Name: " + nameFixPriceProduct + ". Cost: " + FixPriceProduct.FIX_PRICE_PRODUCT;
@@ -35,7 +36,7 @@ public class Basket {
 
   public void addProduct(String nameDiscountedProduct, int baseCost,
       int discountBaseCost) throws IllegalArgumentException {
-    String answer = "Невозможно добавить продукт";
+    String answer = " Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
         answer = "Name: " + nameDiscountedProduct + ". Cost:  " + baseCost +
@@ -43,7 +44,8 @@ public class Basket {
         try {
           productBasket[i] = new DiscountedProduct(nameDiscountedProduct, baseCost, discountBaseCost);
         } catch (RuntimeException e) {
-          System.out.println(e.getMessage() + " невозможно добавить продукт :");
+          System.out.println(e.getMessage() +
+              " Невозможно добавить продукт");
         }
         break;
       }
@@ -81,7 +83,7 @@ public class Basket {
     System.out.println(" Всего специальных товаров: " + namber + " шт");
   }
 
-  public static Product[] getProductBasket() {
-    return productBasket;
-  }
+ public static Product[] getProductBasket() {
+ return productBasket;
+ }
 }

@@ -13,7 +13,7 @@ public class App {
     basket.addProduct("КЕПКО", 200, -5);
     basket.addProduct("Вода");
     basket.addProduct("Штаны", 400);
-    basket.addProduct("Штаны", 500);
+    basket.addProduct("Штаны красивые Штаны удобные Штаны", 500);
     basket.addProduct("ШАПКО", -100);
     basket.addProduct("Рубаха", 300);
     basket.addProduct("Трусы", 200);
@@ -25,7 +25,7 @@ public class App {
     System.out.println();
     System.out.println();
 
-    SearchEngine searchEngine = new SearchEngine(6);
+    SearchEngine searchEngine = new SearchEngine(20);
 
     System.out.println();
     searchEngine.addBasket();
@@ -41,7 +41,7 @@ public class App {
     System.out.println();
     searchEngine.search("Инструкция");
     System.out.println();
-    searchEngine.searchForMostSuitable("Штаны");
+    searchEngine.searchForMostSuitable("лорли");
 
 
   }//maim
