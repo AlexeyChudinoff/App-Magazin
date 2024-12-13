@@ -9,7 +9,7 @@ public class SimpleProduct extends Product {
          super(nameProduct);
 
     if (costSimpleProduct <= 0) {
-      throw new IllegalArgumentException(" цена SimpleProduct  не может быть меньше нуля");
+      throw new IllegalArgumentException(ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " цена SimpleProduct  не может быть меньше нуля");
     }
     this.costSimpleProduct = costSimpleProduct;
   }
@@ -29,5 +29,10 @@ public class SimpleProduct extends Product {
     return false;
   }
 
-
+  public static final String ANSI_RESET = "\u001B[0m";
+  public static final String ANSI_RED = "\u001B[31m";
+  public static final String ANSI_GREEN = "\u001B[32m";
+  public static final String ANSI_YELLOW = "\u001B[33m";
+  public static final String ANSI_BLUE = "\u001B[34m";
+  //ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET +
 }
