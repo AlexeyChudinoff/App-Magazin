@@ -7,6 +7,7 @@ import org.skypro.skyshop.Exeption.BestResultNotFound;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.Basket;
 
+
 public class SearchEngine {
 
   private final Searchable[] searchList;
@@ -18,7 +19,7 @@ public class SearchEngine {
 
   public void addArticle(String nameArticle, String textArticle) {
     // System.out.println("addArticle");
-    String answer = "Невозможно добавить: " + nameArticle + textArticle;
+    String answer = " Невозможно добавить: " + nameArticle + textArticle;
     for (int i = 0; i < searchList.length; i++) {
       if (searchList[i] == null) {
         answer = "add: " + nameArticle + " , " + textArticle;
@@ -88,33 +89,49 @@ public class SearchEngine {
     }
   }
 
-  public void searchForMostSuitable(String substring){
+  public void searchForMostSuitable(String substring) /*throws BestResultNotFound */{
     System.out.println("searchForMostSuitable");
     for (Searchable object : searchList) {
       if (object == null) {
-        System.out.println(" Больше нет объектов для поиска");
-       break;
+        System.out.println(ANSI_BLUE + "Дальше нет объектов для поиска, список пуст " + ANSI_RESET);
+        return;
       }
+      int i = 0;//   System.out.println("начинаем проверку объекта " + object.searchTerm() + " с индекса = " + i);
+      int idxVhod = object.searchTerm().indexOf(substring, i);
+      //System.out.println(" Взяли объект " + object.searchTerm() + " поискали и получили idxVhod  = " + idxVhod);
+
+      if (idxVhod < 0) {
+        System.out.println("Не найдено :" + substring);
+
+        return;
+      }
+
       int count = 0;
-      int idx = 0;
-      int indexStr = 0;
 
-        indexStr = object.searchTerm().indexOf(substring, idx);
-
-
-      while (indexStr != -1) {
+      while (idxVhod >= 0) {
+        // System.out.println("пошли в цикл wille");
         count++;
-        idx = indexStr + substring.length();
-        indexStr = object.searchTerm().indexOf(substring, idx);
+        //System.out.println("count = " + count);
+        //System.out.println("в итоге пока нашли " +  substring +" " + count + " раз ");
+        i = idxVhod
+            + substring.length();//System.out.println(" сделали i + поисковое слово = " + i);
+        idxVhod = object.searchTerm().indexOf(substring, i);
+        //System.out.println(" поискали с нового инднекса " + i +
+        //    " и получили idxVhod = " + idxVhod);
+
       }
-
-
       if (count > 0) {
-        System.out.println(object);
+
+        System.out.println("в объекте: " + object.searchTerm() + " =  Нашлось " + count + " раз(а)");
       }
-     //System.out.println("Количество повторений: " + count);
     }
   }
 
+  public static final String ANSI_RESET = "\u001B[0m";
+  public static final String ANSI_RED = "\u001B[31m";
+  public static final String ANSI_GREEN = "\u001B[32m";
+  public static final String ANSI_YELLOW = "\u001B[33m";
+  public static final String ANSI_BLUE = "\u001B[34m";
+  //ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET +
 
 }//class
