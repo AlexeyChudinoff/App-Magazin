@@ -42,7 +42,8 @@ public class Basket {
         answer = "Name: " + nameDiscountedProduct + ". Cost:  " + baseCost +
             " скидка = " + discountBaseCost + "%";
         try {
-          productBasket[i] = new DiscountedProduct(nameDiscountedProduct, baseCost, discountBaseCost);
+          productBasket[i] = new DiscountedProduct(nameDiscountedProduct, baseCost,
+              discountBaseCost);
         } catch (RuntimeException e) {
           System.out.println(e.getMessage() +
               " Невозможно добавить продукт");
@@ -83,7 +84,7 @@ public class Basket {
     System.out.println(" Всего специальных товаров: " + namber + " шт");
   }
 
- public static Product[] getProductBasket() {
- return productBasket;
- }
+  public static Product[] getProductBasket() {
+    return productBasket;
+  }
 }

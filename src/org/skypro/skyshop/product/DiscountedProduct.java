@@ -10,13 +10,16 @@ public class DiscountedProduct extends Product {
       throws RuntimeException {
     super(nameProduct);
     if (baseCost <= 0) {
-      throw new IllegalArgumentException(ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " цена продукта с дисконтом меньше нуля");
+      throw new IllegalArgumentException(
+          ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " цена продукта с дисконтом меньше нуля");
     }
     if (discountBaseCost < 0) {
-      throw new IllegalArgumentException(ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " размер скидки меньше нуля");
+      throw new IllegalArgumentException(
+          ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " размер скидки меньше нуля");
     }
     if (discountBaseCost > 100) {
-      throw new IllegalArgumentException(ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " размер скидки больше ста процентов");
+      throw new IllegalArgumentException(
+          ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " размер скидки больше ста процентов");
     }
     this.baseCost = baseCost;
     this.discountBaseCost = discountBaseCost;

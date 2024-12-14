@@ -5,11 +5,12 @@ public class SimpleProduct extends Product {
   int costSimpleProduct;
 
   public SimpleProduct(String nameProduct, int costSimpleProduct)
-      throws IllegalArgumentException{
-         super(nameProduct);
+      throws IllegalArgumentException {
+    super(nameProduct);
 
     if (costSimpleProduct <= 0) {
-      throw new IllegalArgumentException(ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " цена SimpleProduct  не может быть меньше нуля");
+      throw new IllegalArgumentException(ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET
+          + " цена SimpleProduct  не может быть меньше нуля");
     }
     this.costSimpleProduct = costSimpleProduct;
   }

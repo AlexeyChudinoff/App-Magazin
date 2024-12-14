@@ -7,7 +7,6 @@ import org.skypro.skyshop.Exeption.BestResultNotFound;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.Basket;
 
-
 public class SearchEngine {
 
   private final Searchable[] searchList;
@@ -19,7 +18,7 @@ public class SearchEngine {
 
   public void addArticle(String nameArticle, String textArticle) {
     // System.out.println("addArticle");
-    String answer = " Невозможно добавить: " + nameArticle + textArticle;
+    String answer = " Невозможно добавить: " + nameArticle +","+ textArticle;
     for (int i = 0; i < searchList.length; i++) {
       if (searchList[i] == null) {
         answer = "add: " + nameArticle + " , " + textArticle;
@@ -89,25 +88,27 @@ public class SearchEngine {
     }
   }
 
-  public void searchForMostSuitable(String substring) /*throws BestResultNotFound */{
-    System.out.println("searchForMostSuitable");
+  public void searchForMostSuitable(String substring) {
     for (Searchable object : searchList) {
       if (object == null) {
         System.out.println(ANSI_BLUE + "Дальше нет объектов для поиска, список пуст " + ANSI_RESET);
         return;
       }
-      int i = 0;//   System.out.println("начинаем проверку объекта " + object.searchTerm() + " с индекса = " + i);
+      int i = 0;//   System.out.println("начинаем проверку объекта "
+      // + object.searchTerm() + " с индекса = " + i);
       int idxVhod = object.searchTerm().indexOf(substring, i);
-      //System.out.println(" Взяли объект " + object.searchTerm() + " поискали и получили idxVhod  = " + idxVhod);
+      //System.out.println(" Взяли объект " + object.searchTerm()
+      // + " поискали и получили idxVhod  = " + idxVhod);
 
       if (idxVhod < 0) {
-        System.out.println("Не найдено :" + substring);
-
-        return;
+        try {
+          throw new BestResultNotFound("Не найдено :" + substring);
+        } catch (BestResultNotFound e) {
+          System.out.println(e.getMessage());
+        }
       }
 
       int count = 0;
-
       while (idxVhod >= 0) {
         // System.out.println("пошли в цикл wille");
         count++;
@@ -118,11 +119,10 @@ public class SearchEngine {
         idxVhod = object.searchTerm().indexOf(substring, i);
         //System.out.println(" поискали с нового инднекса " + i +
         //    " и получили idxVhod = " + idxVhod);
-
       }
       if (count > 0) {
-
-        System.out.println("в объекте: " + object.searchTerm() + " =  Нашлось " + count + " раз(а)");
+        System.out.println(
+            "в объекте: " + object.searchTerm() + " =  Нашлось " + count + " раз(а)");
       }
     }
   }
