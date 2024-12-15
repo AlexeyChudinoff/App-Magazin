@@ -3,6 +3,7 @@ package org.skypro.skyshop.searchProduct;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.skypro.skyshop.Exeption.BestResultNotFound;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.Basket;
 
@@ -17,7 +18,7 @@ public class SearchEngine {
 
   public void addArticle(String nameArticle, String textArticle) {
     // System.out.println("addArticle");
-    String answer = "Невозможно добавить: " + nameArticle + textArticle;
+    String answer = " Невозможно добавить: " + nameArticle +","+ textArticle;
     for (int i = 0; i < searchList.length; i++) {
       if (searchList[i] == null) {
         answer = "add: " + nameArticle + " , " + textArticle;
@@ -30,11 +31,11 @@ public class SearchEngine {
 
   public void search(String find) {
     System.out.println("search");
-    List findeProduct = new ArrayList<>();
-    for (int i = 0; i < searchList.length; i++) {
-      if (searchList[i].searchTerm().contains(find)) {
-        findeProduct.add(searchList[i].searchTerm());
-        System.out.println(searchList[i].searchTerm());
+    List<Object> findeProduct = new ArrayList<>();
+    for (Searchable searchable : searchList) {
+      if (searchable.searchTerm().contains(find)) {
+        findeProduct.add(searchable.searchTerm());
+        System.out.println(searchable.searchTerm());
         if (findeProduct.size() == 5) {
           break;
         }
@@ -85,9 +86,52 @@ public class SearchEngine {
         }
       }
     }
-
-
   }
 
+  public void searchForMostSuitable(String substring) {
+    for (Searchable object : searchList) {
+      if (object == null) {
+        System.out.println(ANSI_BLUE + "Дальше нет объектов для поиска, список пуст " + ANSI_RESET);
+        return;
+      }
+      int i = 0;//   System.out.println("начинаем проверку объекта "
+      // + object.searchTerm() + " с индекса = " + i);
+      int idxVhod = object.searchTerm().indexOf(substring, i);
+      //System.out.println(" Взяли объект " + object.searchTerm()
+      // + " поискали и получили idxVhod  = " + idxVhod);
+
+      if (idxVhod < 0) {
+        try {
+          throw new BestResultNotFound("Не найдено :" + substring);
+        } catch (BestResultNotFound e) {
+          System.out.println(e.getMessage());
+        }
+      }
+
+      int count = 0;
+      while (idxVhod >= 0) {
+        // System.out.println("пошли в цикл wille");
+        count++;
+        //System.out.println("count = " + count);
+        //System.out.println("в итоге пока нашли " +  substring +" " + count + " раз ");
+        i = idxVhod
+            + substring.length();//System.out.println(" сделали i + поисковое слово = " + i);
+        idxVhod = object.searchTerm().indexOf(substring, i);
+        //System.out.println(" поискали с нового инднекса " + i +
+        //    " и получили idxVhod = " + idxVhod);
+      }
+      if (count > 0) {
+        System.out.println(
+            "в объекте: " + object.searchTerm() + " =  Нашлось " + count + " раз(а)");
+      }
+    }
+  }
+
+  public static final String ANSI_RESET = "\u001B[0m";
+  public static final String ANSI_RED = "\u001B[31m";
+  public static final String ANSI_GREEN = "\u001B[32m";
+  public static final String ANSI_YELLOW = "\u001B[33m";
+  public static final String ANSI_BLUE = "\u001B[34m";
+  //ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET +
 
 }//class

@@ -5,19 +5,25 @@ public class Basket {
   private static Product[] productBasket = new Product[5];
 
   public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
-    String answer = "Невозможно добавить продукт";
+    String answer = " Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
         answer = "Name: " + nameSimpleProduct + ". Cost: " + costSimpleProduct;
-        productBasket[i] = new SimpleProduct(nameSimpleProduct, costSimpleProduct);
+        try {
+          productBasket[i] = new SimpleProduct(nameSimpleProduct, costSimpleProduct);
+        } catch (IllegalArgumentException e) {
+          System.out.println(e.getMessage() + " Невозможно добавить продукт");
+        }
         break;
       }
     }
     System.out.println("addProduct- " + answer);
+
   }
 
-  public void addProduct(String nameFixPriceProduct) {
-    String answer = "Нет места Невозможно добавить продукт" + nameFixPriceProduct;
+  public void addProduct(String nameFixPriceProduct) throws IllegalArgumentException {
+    String answer = " Невозможно добавить продукт"
+        + nameFixPriceProduct;
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
         answer = "Name: " + nameFixPriceProduct + ". Cost: " + FixPriceProduct.FIX_PRICE_PRODUCT;
@@ -29,17 +35,24 @@ public class Basket {
   }
 
   public void addProduct(String nameDiscountedProduct, int baseCost,
-      int discountBaseCost) {
-    String answer = "Невозможно добавить продукт";
+      int discountBaseCost) throws IllegalArgumentException {
+    String answer = " Невозможно добавить продукт";
     for (int i = 0; i < productBasket.length; i++) {
       if (productBasket[i] == null) {
-        answer = "Name: " + nameDiscountedProduct + ". Cos:  " + baseCost +
+        answer = "Name: " + nameDiscountedProduct + ". Cost:  " + baseCost +
             " скидка = " + discountBaseCost + "%";
-        productBasket[i] = new DiscountedProduct(nameDiscountedProduct, baseCost, discountBaseCost);
+        try {
+          productBasket[i] = new DiscountedProduct(nameDiscountedProduct, baseCost,
+              discountBaseCost);
+        } catch (RuntimeException e) {
+          System.out.println(e.getMessage() +
+              " Невозможно добавить продукт");
+        }
         break;
       }
     }
     System.out.println("addProduct- " + answer);
+
   }
 
   public void printBasketCost() {
