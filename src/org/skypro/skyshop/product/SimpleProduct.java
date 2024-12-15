@@ -10,7 +10,7 @@ public class SimpleProduct extends Product {
 
     if (costSimpleProduct <= 0) {
       throw new IllegalArgumentException(
-          ANSI_GREEN + "ВНИМАНИЕ ! Цена меньше нуля !" + ANSI_RESET);
+          ANSI_GREEN + "ВНИМАНИЕ ! Цена меньше нуля !"+ ANSI_RESET);
     }
     this.costSimpleProduct = costSimpleProduct;
   }
