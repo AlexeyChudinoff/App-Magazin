@@ -14,7 +14,7 @@ public class FixPriceProduct extends Product {
 
   @Override
   public String toString() {
-    return "Fix. продукт= "
+    return "Fix._"
         + getNameProduct() + " = цена = " + FIX_PRICE_PRODUCT;
   }
 
