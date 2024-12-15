@@ -6,6 +6,7 @@ import java.util.List;
 import org.skypro.skyshop.Exeption.BestResultNotFound;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.Basket;
+import org.skypro.skyshop.product.Product;
 
 public class SearchEngine {
 
@@ -15,18 +16,23 @@ public class SearchEngine {
     searchList = new Searchable[size];
     System.out.println("создан массив searchList[" + size + "]");
   }
+//  public void addBasket() {
+//    System.out.println("addBasket");
+//    for (int i = 0; i < searchList.length; i++) {
+//      if (searchList[i] == null) {
+//        searchList [i] = Basket.;
+//        System.out.println("Add: " + searchList);
+//      }
+//    }
+//  }
 
   public void addArticle(String nameArticle, String textArticle) {
-    // System.out.println("addArticle");
-    String answer = " Невозможно добавить: " + nameArticle +","+ textArticle;
     for (int i = 0; i < searchList.length; i++) {
       if (searchList[i] == null) {
-        answer = "add: " + nameArticle + " , " + textArticle;
         searchList[i] = new Article(nameArticle, textArticle);
-        break;
+        System.out.println("Add: " + nameArticle + " , " + textArticle);
       }
     }
-    System.out.println(answer);
   }
 
   public void search(String find) {
@@ -44,7 +50,6 @@ public class SearchEngine {
   }
 
 
-
   public void printGetStringRepresentation() {
     System.out.println("printGetStringRepresentation");
     for (Searchable object : searchList) {
@@ -57,33 +62,9 @@ public class SearchEngine {
 
   @Override
   public String toString() {
+
     return Arrays.toString(searchList);
   }
-
-  public void addBasket() {
-    System.out.println("addBasket");
-    String answer = "Нет места";
-    if (searchList.length >= Basket.getProductBasket().length) {
-      for (int i = 0; i < Basket.getProductBasket().length; i++) {
-        if (searchList[i] == null) {
-          searchList[i] = Basket.getProductBasket()[i];
-          answer = "add: " + Basket.getProductBasket()[i];
-          System.out.println(answer);
-          if (i == Basket.getProductBasket().length) {
-            break;
-          }
-
-        }
-      }
-    } else {
-      for (int i = 0; i < searchList.length; i++) {
-        if (searchList[i] == null) {
-          searchList[i] = Basket.getProductBasket()[i];
-          answer = "add: " + Basket.getProductBasket()[i];
-          System.out.println(answer);
-          if (Basket.getProductBasket().length == searchList.length) {
-            break;
-          }
 
   public void searchForMostSuitable(String substring) {
     for (Searchable object : searchList) {

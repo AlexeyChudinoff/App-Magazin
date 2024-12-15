@@ -1,12 +1,13 @@
 package org.skypro.skyshop.product;
 
 import java.util.LinkedList;
-import java.util.List;
+import org.skypro.skyshop.searchProduct.SearchEngine;
+import org.skypro.skyshop.searchProduct.Searchable;
 
 public class Basket {
 
   //private final Product[] productBasket = new Product[5];
-  private final List<Product> productBasket = new LinkedList<>();
+  private final LinkedList<Product> productBasket = new LinkedList<>();
 
   public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
     Product product = null;
@@ -47,7 +48,6 @@ public class Basket {
       productBasket.add(product);
       System.out.println("Add: " + product);
     }
-
   }
 
   public void printBasketCost() {
@@ -80,10 +80,6 @@ public class Basket {
     System.out.println(" Всего спец. товаров: " + namber + " шт");
   }
 
-//  public Object getProductBasket() {
-//    return productBasket.get();
-//  }
-
   public void printBasket() {
 
     if (productBasket.isEmpty()) {
@@ -96,5 +92,26 @@ public class Basket {
     }
   }
 
+  public void getProductBasket() {
+    LinkedList<Product> productLinkedList = new LinkedList<>();
+    for (int i = 0; i < productBasket.size(); i++) {
+      productLinkedList =productBasket;
+    }
+    System.out.println(productLinkedList);
+  }
+    //  public Object getProductBasket() {
+//    Iterable<Object> list = null;
+//    // Получение итератора
+//    Iterator<Object> iterator = list.iterator();
+//
+//    // Перебор элементов с использованием итератора
+//    while (iterator.hasNext()) {
+//      Object element = iterator.next();
+//      System.out.println(element);
+//      System.out.println(productBasket.iterator());
+//    }return "";
+//  }
 
-}
+
+
+  }// main
