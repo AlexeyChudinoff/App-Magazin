@@ -10,13 +10,16 @@ public class DiscountedProduct extends Product {
       throws RuntimeException {
     super(nameProduct);
     if (baseCost <= 0) {
-      throw new IllegalArgumentException(ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " цена продукта с дисконтом меньше нуля");
+      throw new IllegalArgumentException(
+          ANSI_GREEN + "ВНИМАНИЕ ! Цена продукта меньше нуля !" + ANSI_RESET);
     }
     if (discountBaseCost < 0) {
-      throw new IllegalArgumentException(ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " размер скидки меньше нуля");
+      throw new IllegalArgumentException(
+          ANSI_GREEN + "ВНИМАНИЕ ! Размер скидки меньше нуля !" + ANSI_RESET);
     }
     if (discountBaseCost > 100) {
-      throw new IllegalArgumentException(ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " размер скидки больше ста процентов");
+      throw new IllegalArgumentException(
+          ANSI_GREEN + "ВНИМАНИЕ ! Размер скидки больше ста процентов !" + ANSI_RESET);
     }
     this.baseCost = baseCost;
     this.discountBaseCost = discountBaseCost;
@@ -38,7 +41,7 @@ public class DiscountedProduct extends Product {
 
   @Override
   public String toString() {
-    return "Disc. продукт= " + getNameProduct() + " = цена без скидки = " + baseCost +
+    return "Disc._" + getNameProduct() + " = цена без скидки = " + baseCost +
         " , скидка = " + discountBaseCost + "%" +
         " = цена со скидкой = " + costAfterDiscount;
   }
