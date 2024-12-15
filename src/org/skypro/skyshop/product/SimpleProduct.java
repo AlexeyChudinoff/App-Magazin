@@ -5,11 +5,12 @@ public class SimpleProduct extends Product {
   int costSimpleProduct;
 
   public SimpleProduct(String nameProduct, int costSimpleProduct)
-      throws IllegalArgumentException{
-         super(nameProduct);
+      throws IllegalArgumentException {
+    super(nameProduct);
 
     if (costSimpleProduct <= 0) {
-      throw new IllegalArgumentException(ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + " цена SimpleProduct  не может быть меньше нуля");
+      throw new IllegalArgumentException(
+          ANSI_GREEN + "ВНИМАНИЕ ! Цена меньше нуля !"+ ANSI_RESET);
     }
     this.costSimpleProduct = costSimpleProduct;
   }
@@ -21,8 +22,8 @@ public class SimpleProduct extends Product {
 
   @Override
   public String toString() {
-    return "Simpl. продукт = " + getNameProduct() +
-        " стоимость= " + costSimpleProduct;
+    return "Simpl._" + getNameProduct() +
+        "  = цена =  " + costSimpleProduct;
   }
 
   public boolean isSpecial() {
