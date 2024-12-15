@@ -34,6 +34,8 @@ public class App {
     SearchEngine searchEngine = new SearchEngine(10);
 
     System.out.println();
+
+    System.out.println();
       searchEngine.addArticle("article1", "Инструкция к article1");
     searchEngine.addArticle("article2", "Инструкция к article2");
     searchEngine.addArticle("article3", "Инструкция к article3");
@@ -46,6 +48,7 @@ public class App {
     searchEngine.search("Инструкция");
     System.out.println();
     searchEngine.searchForMostSuitable("Штаны");
+    basket.getProductBasket();
 
 
   }//maim
