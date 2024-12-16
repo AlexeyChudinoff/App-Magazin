@@ -2,35 +2,40 @@ package org.skypro.skyshop.searchProduct;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import org.skypro.skyshop.Exeption.BestResultNotFound;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.Basket;
 import org.skypro.skyshop.product.Product;
 
+
 public class SearchEngine {
 
-  private final Searchable[] searchList;
+  private Searchable[] searchList;
 
   public SearchEngine(int size) {
+    // searchList = new ArrayList<>(size).toArray(new Searchable[size]);
     searchList = new Searchable[size];
     System.out.println("создан массив searchList[" + size + "]");
   }
-//  public void addBasket() {
-//    System.out.println("addBasket");
-//    for (int i = 0; i < searchList.length; i++) {
-//      if (searchList[i] == null) {
-//        searchList [i] = Basket.;
-//        System.out.println("Add: " + searchList);
-//      }
-//    }
-//  }
+
+  public void addBasket() {
+    System.out.println("addBasket");
+    ArrayList<ArrayList> addProduct = new ArrayList<>();
+      addProduct.add(new Basket().getProductBasket());
+      System.out.println(addProduct);
+
+  }
+
 
   public void addArticle(String nameArticle, String textArticle) {
     for (int i = 0; i < searchList.length; i++) {
       if (searchList[i] == null) {
         searchList[i] = new Article(nameArticle, textArticle);
         System.out.println("Add: " + nameArticle + " , " + textArticle);
+        break;
       }
     }
   }
@@ -39,16 +44,18 @@ public class SearchEngine {
     System.out.println("search");
     List<Object> findeProduct = new ArrayList<>();
     for (Searchable searchable : searchList) {
+      if (searchable == null) {
+        return;
+      }
       if (searchable.searchTerm().contains(find)) {
         findeProduct.add(searchable.searchTerm());
         System.out.println(searchable.searchTerm());
-        if (findeProduct.size() == 5) {
-          break;
-        }
+//        if (findeProduct.size() == 5) {
+//          break;
+//        }
       }
     }
   }
-
 
   public void printGetStringRepresentation() {
     System.out.println("printGetStringRepresentation");
@@ -62,11 +69,11 @@ public class SearchEngine {
 
   @Override
   public String toString() {
-
     return Arrays.toString(searchList);
   }
 
   public void searchForMostSuitable(String substring) {
+    System.out.println("searchForMostSuitable");
     for (Searchable object : searchList) {
       if (object == null) {
         System.out.println(ANSI_BLUE + "Дальше нет объектов для поиска, список пуст " + ANSI_RESET);
