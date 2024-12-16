@@ -12,7 +12,7 @@ public class Basket {
     try {
       product = new SimpleProduct(nameSimpleProduct, costSimpleProduct);
     } catch (IllegalArgumentException e) {
-      System.out.println(e.getMessage()+", Не удалось добавить: "+nameSimpleProduct);
+      System.out.println(e.getMessage() + ", Не удалось добавить: " + nameSimpleProduct);
     }
 
     if (product != null) {
@@ -26,7 +26,7 @@ public class Basket {
     try {
       product = new FixPriceProduct(nameFixPriceProduct);
     } catch (Exception e) {
-      System.out.println(e.getMessage() + ", Не удалось добавить: " +nameFixPriceProduct);
+      System.out.println(e.getMessage() + ", Не удалось добавить: " + nameFixPriceProduct);
     }
     if (product != null) {
       productBasket.add(product);
@@ -36,9 +36,9 @@ public class Basket {
 
   public void addProduct(String nameDiscountedProduct, int baseCost,
       int discountBaseCost) throws IllegalArgumentException {
- Product product = null ;
+    Product product = null;
     try {
-     product = new DiscountedProduct(nameDiscountedProduct, baseCost, discountBaseCost);
+      product = new DiscountedProduct(nameDiscountedProduct, baseCost, discountBaseCost);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage() + ", Не удалось добавить: " + nameDiscountedProduct);
     }
@@ -52,13 +52,13 @@ public class Basket {
     System.out.println("printBasketCost");
     if (productBasket.isEmpty()) {
       System.out.println("Корзина пуста.");
-          } else {
+    } else {
       int summ = 0;
       for (Product product : productBasket) {
 
         if (product != null) {
           System.out.println(product.getNameProduct() + " cost " + product.getCostProduct());
-          summ +=  product.getCostProduct();
+          summ += product.getCostProduct();
         }
       }
       System.out.println("________________________");

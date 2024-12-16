@@ -8,7 +8,6 @@ import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.Basket;
 import org.skypro.skyshop.product.Product;
 
-
 public class SearchEngine {
 
   private Searchable[] searchList;
@@ -30,8 +29,6 @@ public class SearchEngine {
         }
       }
     }
-
-
   }
 
   public void addArticle(String nameArticle, String textArticle) {
