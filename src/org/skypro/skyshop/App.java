@@ -34,7 +34,7 @@ public class App {
     SearchEngine searchEngine = new SearchEngine(10);
 
     System.out.println();
-    searchEngine.addBasket();
+    searchEngine.addBasket(basket);// указываем объект для вытягивания
     System.out.println();
     searchEngine.addArticle("article1", "Инструкция к article1");
     searchEngine.addArticle("article2", "Инструкция к article2");
