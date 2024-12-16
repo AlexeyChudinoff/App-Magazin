@@ -21,6 +21,7 @@ public class App {
     basket.addProduct("Трусы", 200);
     basket.addProduct("Мыло", 900, 50);
     basket.addProduct("Сало", 900, 50);
+
     System.out.println();
     basket.printBasketCost();
     System.out.println();
@@ -31,7 +32,7 @@ public class App {
     System.out.println();
     System.out.println();
 
-    SearchEngine searchEngine = new SearchEngine(10);
+    SearchEngine searchEngine = new SearchEngine(20);
 
     System.out.println();
     searchEngine.addBasket(basket);// указываем объект для вытягивания
