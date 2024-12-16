@@ -34,9 +34,9 @@ public class App {
     SearchEngine searchEngine = new SearchEngine(10);
 
     System.out.println();
-
+    searchEngine.addBasket();
     System.out.println();
-      searchEngine.addArticle("article1", "Инструкция к article1");
+    searchEngine.addArticle("article1", "Инструкция к article1");
     searchEngine.addArticle("article2", "Инструкция к article2");
     searchEngine.addArticle("article3", "Инструкция к article3");
     searchEngine.addArticle("article4", "Инструкция к article4");
