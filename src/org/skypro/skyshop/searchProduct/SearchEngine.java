@@ -2,9 +2,7 @@ package org.skypro.skyshop.searchProduct;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 import org.skypro.skyshop.Exeption.BestResultNotFound;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.Basket;
@@ -16,19 +14,25 @@ public class SearchEngine {
   private Searchable[] searchList;
 
   public SearchEngine(int size) {
-    // searchList = new ArrayList<>(size).toArray(new Searchable[size]);
     searchList = new Searchable[size];
     System.out.println("создан массив searchList[" + size + "]");
   }
 
-  public void addBasket() {
+  public void addBasket(Basket basket) {
     System.out.println("addBasket");
-    ArrayList<ArrayList> addProduct = new ArrayList<>();
-      addProduct.add(new Basket().getProductBasket());
-      System.out.println(addProduct);
+    List<Product> copiedList = basket.getProductBasket();
+    for (Product product : copiedList) {
+      for (int i = 0; i < searchList.length; i++) {
+        if (searchList[i] == null) {
+          searchList[i] = product;
+          System.out.println("Add: " + product);
+          break; // вышли для следующего входа
+        }
+      }
+    }
+
 
   }
-
 
   public void addArticle(String nameArticle, String textArticle) {
     for (int i = 0; i < searchList.length; i++) {
