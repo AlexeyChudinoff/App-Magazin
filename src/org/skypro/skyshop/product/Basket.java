@@ -94,9 +94,10 @@ public class Basket {
   public ArrayList getProductBasket() {
     ArrayList <Product> arrayBasket = new ArrayList<>();{
     for (Product product : productBasket) {
-      arrayBasket = new ArrayList(productBasket);
-    }
-    System.out.println(Arrays.toString(new ArrayList[]{arrayBasket}));
+      arrayBasket = new ArrayList<Product>(productBasket);
+      System.out.println(product.getNameProduct());
+    }//product.getNameProduct()
+    //System.out.println(Arrays.toString(new ArrayList[]{arrayBasket}));
     }
     return arrayBasket;
   }
