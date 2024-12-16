@@ -1,13 +1,12 @@
 package org.skypro.skyshop.product;
 
-import java.util.LinkedList;
-import org.skypro.skyshop.searchProduct.SearchEngine;
-import org.skypro.skyshop.searchProduct.Searchable;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Basket {
 
   //private final Product[] productBasket = new Product[5];
-  private final LinkedList<Product> productBasket = new LinkedList<>();
+  private final ArrayList<Product> productBasket = new ArrayList<>();
 
   public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
     Product product = null;
@@ -92,13 +91,23 @@ public class Basket {
     }
   }
 
-  public void getProductBasket() {
-    LinkedList<Product> productLinkedList = new LinkedList<>();
-    for (int i = 0; i < productBasket.size(); i++) {
-      productLinkedList =productBasket;
+  public ArrayList getProductBasket() {
+    ArrayList <Product> arrayBasket = new ArrayList<>();{
+    for (Product product : productBasket) {
+      arrayBasket = new ArrayList(productBasket);
     }
-    System.out.println(productLinkedList);
+    System.out.println(Arrays.toString(new ArrayList[]{arrayBasket}));
+    }
+    return arrayBasket;
   }
+
+
+//    for (int i = 0; i < productBasket.size(); i++) {
+//      productLinkedList = productBasket;
+//      System.out.println(productLinkedList.get(i));
+//    }
+
+
     //  public Object getProductBasket() {
 //    Iterable<Object> list = null;
 //    // Получение итератора
