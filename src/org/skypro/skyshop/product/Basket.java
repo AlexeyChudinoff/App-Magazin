@@ -1,7 +1,6 @@
 package org.skypro.skyshop.product;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Basket {
 
@@ -91,37 +90,9 @@ public class Basket {
     }
   }
 
-  public ArrayList getProductBasket() {
-    ArrayList <Product> arrayBasket = new ArrayList<>();{
-    for (Product product : productBasket) {
-      arrayBasket = new ArrayList<Product>(productBasket);
-      System.out.println(product.getNameProduct());
-    }//product.getNameProduct()
-    //System.out.println(Arrays.toString(new ArrayList[]{arrayBasket}));
-    }
-    return arrayBasket;
+  public ArrayList<Product> getProductBasket() {
+    //System.out.println(productBasket);
+    return productBasket;
   }
 
-
-//    for (int i = 0; i < productBasket.size(); i++) {
-//      productLinkedList = productBasket;
-//      System.out.println(productLinkedList.get(i));
-//    }
-
-
-    //  public Object getProductBasket() {
-//    Iterable<Object> list = null;
-//    // Получение итератора
-//    Iterator<Object> iterator = list.iterator();
-//
-//    // Перебор элементов с использованием итератора
-//    while (iterator.hasNext()) {
-//      Object element = iterator.next();
-//      System.out.println(element);
-//      System.out.println(productBasket.iterator());
-//    }return "";
-//  }
-
-
-
-  }// main
+}// main
