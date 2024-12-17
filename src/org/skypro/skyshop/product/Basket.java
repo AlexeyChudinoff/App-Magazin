@@ -1,11 +1,13 @@
 package org.skypro.skyshop.product;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
 
 public class Basket {
 
   //private final Product[] productBasket = new Product[5];
-  private final ArrayList<Product> productBasket = new ArrayList<>();
+  private final List<Product> productBasket = new ArrayList<>();
 
   public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
     Product product = null;
@@ -14,7 +16,6 @@ public class Basket {
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage() + ", Не удалось добавить: " + nameSimpleProduct);
     }
-
     if (product != null) {
       productBasket.add(product);
       System.out.println("Add: " + product);
@@ -79,7 +80,6 @@ public class Basket {
   }
 
   public void printBasket() {
-
     if (productBasket.isEmpty()) {
       System.out.println("Корзина пуста");
     } else {
@@ -89,9 +89,28 @@ public class Basket {
       }
     }
   }
-
+// нужен для другого метода
   public ArrayList<Product> getProductBasket() {
     return productBasket;
   }
+
+  public  List<Product> dellProductByName(String name) {
+    System.out.println("dellProductByName");
+    List<Product> dellBasket = new ArrayList<>();
+    Iterator<Product> iterator = productBasket.iterator();
+    String answer = name + " Не найдено";
+    while (iterator.hasNext()) {
+      Product product = iterator.next();
+      if (product.searchTerm().equals(name)) {
+        dellBasket.add(product);
+        iterator.remove();
+        answer = "Найден и удалён: " + product.searchTerm();
+      }
+    }
+    System.out.println(answer);
+    System.out.println(dellBasket);
+  return dellBasket;
+  }
+
 
 }// main
