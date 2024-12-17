@@ -10,10 +10,10 @@ import org.skypro.skyshop.product.Product;
 
 public class SearchEngine {
 
-  private Searchable[] searchList;
+  private final List<Product> searchList;
 
   public SearchEngine(int size) {
-    searchList = new Searchable[size];
+    searchList = new ArrayList<>(size);
     System.out.println("создан массив searchList[" + size + "]");
   }
 
@@ -21,9 +21,9 @@ public class SearchEngine {
     System.out.println("addBasket");
     List<Product> copiedList = basket.getProductBasket();
     for (Product product : copiedList) {
-      for (int i = 0; i < searchList.length; i++) {
-        if (searchList[i] == null) {
-          searchList[i] = product;
+      for (int i = 0; i < searchList.size(); i++) {
+        if (searchList.get(i) == null) {
+          searchList.set(i, product);
           System.out.println("Add: " + product);
           break; // вышли для следующего входа
         }
@@ -32,9 +32,9 @@ public class SearchEngine {
   }
 
   public void addArticle(String nameArticle, String textArticle) {
-    for (int i = 0; i < searchList.length; i++) {
-      if (searchList[i] == null) {
-        searchList[i] = new Article(nameArticle, textArticle);
+    for (int i = 0; i < searchList.size(); i++) {
+      if (searchList.get(i) == null) {
+        searchList.set(i, new Article(nameArticle, textArticle));
         System.out.println("Add: " + nameArticle + " , " + textArticle);
         break;
       }

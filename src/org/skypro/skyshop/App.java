@@ -49,7 +49,10 @@ public class App {
     searchEngine.search("Инструкция");
     System.out.println();
     searchEngine.searchForMostSuitable("Штаны");
-    basket.getProductBasket();
+    System.out.println();
+    basket.dellProductByName("Штаны");
+    System.out.println();
+    basket.printBasket();
 
 
   }//maim
