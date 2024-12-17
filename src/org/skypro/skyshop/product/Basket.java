@@ -91,7 +91,6 @@ public class Basket {
   }
 
   public ArrayList<Product> getProductBasket() {
-    //System.out.println(productBasket);
     return productBasket;
   }
 
