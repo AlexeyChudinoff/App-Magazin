@@ -80,6 +80,7 @@ public class Basket {
   }
 
   public void printBasket() {
+    System.out.println("printBasket");
     if (productBasket.isEmpty()) {
       System.out.println("Корзина пуста");
     } else {
@@ -89,12 +90,13 @@ public class Basket {
       }
     }
   }
-// нужен для другого метода
-  public ArrayList<Product> getProductBasket() {
+
+  // нужен для другого метода
+  public List<Product> getProductBasket() {
     return productBasket;
   }
 
-  public  List<Product> dellProductByName(String name) {
+  public List<Product> dellProductByName(String name) {
     System.out.println("dellProductByName");
     List<Product> dellBasket = new ArrayList<>();
     Iterator<Product> iterator = productBasket.iterator();
@@ -109,7 +111,7 @@ public class Basket {
     }
     System.out.println(answer);
     System.out.println(dellBasket);
-  return dellBasket;
+    return dellBasket;
   }
 
 
