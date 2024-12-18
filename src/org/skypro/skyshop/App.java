@@ -1,13 +1,13 @@
 package org.skypro.skyshop;
 
-import org.skypro.skyshop.product.Basket;
+import org.skypro.skyshop.product.ProductBasket;
 import org.skypro.skyshop.searchProduct.SearchEngine;
 
 public class App {
 
   public static void main(String[] args) {
 
-    Basket basket = new Basket();
+    ProductBasket basket = new ProductBasket();
     System.out.println();
     System.out.println();
     basket.addProduct("КЕПКО", 200, -5);//специально ошибочный
@@ -25,7 +25,7 @@ public class App {
     System.out.println();
     basket.printBasketCost();
     System.out.println();
-    basket.SpecialProduct();
+    basket.specialProduct();
     System.out.println();
     basket.printBasket();
     System.out.println("=============================");
@@ -53,7 +53,6 @@ public class App {
     System.out.println();
     basket.dellProductByName("Штаны");
     System.out.println();
-    basket.printBasket();
 
 
   }//maim

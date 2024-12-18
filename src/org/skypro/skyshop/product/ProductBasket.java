@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
-public class Basket {
+public class ProductBasket {
 
   //private final Product[] productBasket = new Product[5];
   private final List<Product> productBasket = new ArrayList<>();
@@ -67,7 +67,7 @@ public class Basket {
     }
   }
 
-  public void SpecialProduct() {
+  public void specialProduct() {
     int namber = 0;
     System.out.println("Spec tovar : ");
     for (int i = 0; i < productBasket.size(); i++) {
