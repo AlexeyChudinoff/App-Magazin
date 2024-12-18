@@ -32,10 +32,9 @@ public class App {
     System.out.println();
     System.out.println();
 
-    SearchEngine searchEngine = new SearchEngine(20);
-
+    SearchEngine searchEngine = new SearchEngine(5);
     System.out.println();
-    searchEngine.addBasket(basket);// указываем объект для вытягивания
+    searchEngine.addBasketInSearchList(basket);// указываем объект для вытягивания
     System.out.println();
     searchEngine.addArticle("article1", "Инструкция к article1");
     searchEngine.addArticle("article2", "Инструкция к article2");
@@ -44,9 +43,11 @@ public class App {
     searchEngine.addArticle("article5", "Инструкция к article5");
     searchEngine.addArticle("article6", "Инструкция к article6");
     System.out.println();
+    searchEngine.printSerchList();
+    System.out.println();
     searchEngine.printGetStringRepresentation();
     System.out.println();
-    searchEngine.search("Инструкция");
+    searchEngine.searchProduct("Инструкция");
     System.out.println();
     searchEngine.searchForMostSuitable("Штаны");
     System.out.println();
