@@ -6,30 +6,42 @@ import java.util.Iterator;
 
 public class ProductBasket {
 
+  //private final Product[] productBasket = new Product[5];
   private final List<Product> productBasket = new ArrayList<>();
 
-  public void addProduct(String name, int cost, int discount)
-      throws IllegalArgumentException {
-
+  public void addProduct(String nameSimpleProduct, int costSimpleProduct) {
     Product product = null;
-    if (cost == 0 && discount == 0) {
-      try {
-        product = new FixPriceProduct(name);
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось добавить: " + name);
-      }
-    } else if (cost > 0 && discount == 0) {
-      try {
-        product = new SimpleProduct(name, cost);
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось добавить: " + name);
-      }
-    } else {
-      try {
-        product = new DiscountedProduct(name, cost, discount);
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось добавить: " + name);
-      }
+    try {
+      product = new SimpleProduct(nameSimpleProduct, costSimpleProduct);
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage() + ", Не удалось добавить: " + nameSimpleProduct);
+    }
+    if (product != null) {
+      productBasket.add(product);
+      System.out.println("Add: " + product);
+    }
+  }
+
+  public void addProduct(String nameFixPriceProduct) throws IllegalArgumentException {
+    Product product = null;
+    try {
+      product = new FixPriceProduct(nameFixPriceProduct);
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", Не удалось добавить: " + nameFixPriceProduct);
+    }
+    if (product != null) {
+      productBasket.add(product);
+      System.out.println("Add: " + product);
+    }
+  }
+
+  public void addProduct(String nameDiscountedProduct, int baseCost,
+      int discountBaseCost) throws IllegalArgumentException {
+    Product product = null;
+    try {
+      product = new DiscountedProduct(nameDiscountedProduct, baseCost, discountBaseCost);
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage() + ", Не удалось добавить: " + nameDiscountedProduct);
     }
     if (product != null) {
       productBasket.add(product);
