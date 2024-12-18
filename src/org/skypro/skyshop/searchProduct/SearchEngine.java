@@ -71,12 +71,8 @@ public class SearchEngine {
         System.out.println(ANSI_BLUE + "Дальше нет объектов для поиска, список пуст " + ANSI_RESET);
         return;
       }
-      int i = 0;//   System.out.println("начинаем проверку объекта "
-      // + object.searchTerm() + " с индекса = " + i);
+      int i = 0;
       int idxVhod = object.searchTerm().indexOf(substring, i);
-      //System.out.println(" Взяли объект " + object.searchTerm()
-      // + " поискали и получили idxVhod  = " + idxVhod);
-
       if (idxVhod < 0) {
         try {
           throw new BestResultNotFound("Не найдено :" + substring);
@@ -84,19 +80,11 @@ public class SearchEngine {
           System.out.println(e.getMessage());
         }
       }
-
       int count = 0;
       while (idxVhod >= 0) {
-        // System.out.println("пошли в цикл wille");
         count++;
-        //System.out.println("count = " + count);
-        //System.out.println("в итоге пока нашли " +  substring +" " + count + " раз ");
-        i = idxVhod
-            + substring.length();//System.out.println(" сделали i + поисковое слово = " + i);
+        i = idxVhod + substring.length();
         idxVhod = object.searchTerm().indexOf(substring, i);
-        //System.out.println(" поискали с нового инднекса " + i +
-        //    " и получили idxVhod = " + idxVhod);
-
       }
       if (count > 0) {
         System.out.println(
