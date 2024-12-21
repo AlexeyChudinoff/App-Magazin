@@ -7,34 +7,34 @@ public class App {
 
   public static void main(String[] args) {
 
-    ProductBasket basket = new ProductBasket();
+    ProductBasket productBasket = new ProductBasket();
     System.out.println();
     System.out.println();
-    basket.addProduct("КЕПКО", 200, -5);//специально ошибочный
-    basket.addProduct("ШАПКО", -100);//специально ошибочный
-    basket.addProduct(" ");//специально ошибочный
-    basket.addProduct("Вода");
-    basket.addProduct("Еда");
-    basket.addProduct("Штаны", 400);
-    basket.addProduct("Штаны красивые Штаны удобные Штаны дорогие", 500);
-    basket.addProduct("Рубаха", 300);
-    basket.addProduct("Трусы", 200);
-    basket.addProduct("Мыло", 900, 50);
-    basket.addProduct("Сало", 900, 50);
+   // productBasket.addProduct("КЕПКО", 200, -5);//специально ошибочный
+   // productBasket.addProduct("ШАПКО", -100);//специально ошибочный
+   // productBasket.addProduct(" ");//специально ошибочный
+    productBasket.addProduct("Вода",0,0);
+  //  productBasket.addProduct("Еда");
+    productBasket.addProduct("Штаны", 400,0);
+   // productBasket.addProduct("Штаны красивые Штаны удобные Штаны дорогие", 500);
+   // productBasket.addProduct("Рубаха", 300);
+   // productBasket.addProduct("Трусы", 200);
+   // productBasket.addProduct("Мыло", 900, 50);
+    productBasket.addProduct("Сало", 900, 50);
 
     System.out.println();
-    basket.printBasketCost();
+    productBasket.printBasketCost();
     System.out.println();
-    basket.specialProduct();
+    productBasket.specialProduct();
     System.out.println();
-    basket.printBasket();
+    productBasket.printBasket();
     System.out.println("=============================");
     System.out.println();
     System.out.println();
 
     SearchEngine searchEngine = new SearchEngine(5);
     System.out.println();
-    searchEngine.addBasketInSearchList(basket);// указываем объект для вытягивания
+    searchEngine.addBasketInSearchList(productBasket);// указываем объект для вытягивания
     System.out.println();
     searchEngine.addArticle("article1", "Инструкция к article1");
     searchEngine.addArticle("article2", "Инструкция к article2");
@@ -51,7 +51,7 @@ public class App {
     System.out.println();
     searchEngine.searchForMostSuitable("Штаны");
     System.out.println();
-    basket.dellProductByName("Штаны");
+    productBasket.dellProductByName("Штаны");
     System.out.println();
 
 
