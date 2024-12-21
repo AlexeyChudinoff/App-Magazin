@@ -82,13 +82,13 @@ public class SearchEngine {
       }
       int count = 0;
       while (idxVhod >= 0) {
-         count++;
-         listMostSuitable.add(object);
+        count++;
+        listMostSuitable.add(object);
         i = idxVhod + substring.length();
         idxVhod = object.searchTerm().indexOf(substring, i);
       }
       if (count > 0) {
-               System.out.println(
+        System.out.println(
             "в объекте: " + object.searchTerm() + " =  Нашлось " + count + " раз(а)");
       }
     }
