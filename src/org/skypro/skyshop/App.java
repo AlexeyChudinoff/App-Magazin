@@ -10,9 +10,9 @@ public class App {
     ProductBasket productBasket = new ProductBasket();
     System.out.println();
     System.out.println();
-    productBasket.addProduct("КЕПКО", 200, -5);//специально ошибочный
-    productBasket.addProduct("ШАПКО", -100, 0);//специально ошибочный
-    productBasket.addProduct(" ", 0, 0);//специально ошибочный
+   // productBasket.addProduct("КЕПКО", 200, -5);//специально ошибочный
+   // productBasket.addProduct("ШАПКО", -100, 0);//специально ошибочный
+   // productBasket.addProduct(" ", 0, 0);//специально ошибочный
     productBasket.addProduct("Вода", 0, 0);
     productBasket.addProduct("Еда", 0, 0);
     productBasket.addProduct("Штаны", 400, 0);
