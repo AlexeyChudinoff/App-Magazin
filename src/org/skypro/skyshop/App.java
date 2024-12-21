@@ -10,16 +10,16 @@ public class App {
     ProductBasket productBasket = new ProductBasket();
     System.out.println();
     System.out.println();
-   // productBasket.addProduct("КЕПКО", 200, -5);//специально ошибочный
-   // productBasket.addProduct("ШАПКО", -100);//специально ошибочный
-   // productBasket.addProduct(" ");//специально ошибочный
-    productBasket.addProduct("Вода",0,0);
-  //  productBasket.addProduct("Еда");
-    productBasket.addProduct("Штаны", 400,0);
-   // productBasket.addProduct("Штаны красивые Штаны удобные Штаны дорогие", 500);
-   // productBasket.addProduct("Рубаха", 300);
-   // productBasket.addProduct("Трусы", 200);
-   // productBasket.addProduct("Мыло", 900, 50);
+    productBasket.addProduct("КЕПКО", 200, -5);//специально ошибочный
+    productBasket.addProduct("ШАПКО", -100, 0);//специально ошибочный
+    productBasket.addProduct(" ", 0, 0);//специально ошибочный
+    productBasket.addProduct("Вода", 0, 0);
+    productBasket.addProduct("Еда", 0, 0);
+    productBasket.addProduct("Штаны", 400, 0);
+    productBasket.addProduct("Штаны красивые Штаны удобные Штаны дорогие", 500, 0);
+    productBasket.addProduct("Рубаха", 300, 0);
+    productBasket.addProduct("Трусы", 200, 0);
+    productBasket.addProduct("Мыло", 900, 50);
     productBasket.addProduct("Сало", 900, 50);
 
     System.out.println();
