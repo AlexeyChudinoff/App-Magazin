@@ -1,7 +1,9 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.ProductBasket;
 import org.skypro.skyshop.searchProduct.SearchEngine;
+import org.skypro.skyshop.searchProduct.Searchable;
 
 public class App {
 
@@ -9,19 +11,21 @@ public class App {
 
     ProductBasket productBasket = new ProductBasket();
     System.out.println();
-    System.out.println();
-   // productBasket.addProduct("КЕПКО", 200, -5);//специально ошибочный
-    productBasket.addProduct("ШАПКО", -100, 0);//специально ошибочный
-    productBasket.addProduct(" ", 0, 0);//специально ошибочный
-    productBasket.addProduct("Вода", 0, 0);
-    productBasket.addProduct("Еда", 0, 0);
-    productBasket.addProduct("Штаны", 400, 0);
-    productBasket.addProduct("Штаны красивые Штаны удобные Штаны дорогие", 500, 0);
-    productBasket.addProduct("Рубаха", 300, 0);
-    productBasket.addProduct("Трусы", 200, 0);
-    productBasket.addProduct("Мыло", 900, 50);
-    productBasket.addProduct("Сало", 900, 50);
 
+   productBasket.generateProduct("КЕПКО", 200, -5);//специально ошибочный
+    productBasket.generateProduct("ШАПКО", -100, 0);//специально ошибочный
+    productBasket.generateProduct(" ", 0, 0);//специально ошибочный
+    productBasket.generateProduct("Вода", 0, 0);
+    productBasket.generateProduct("Еда", 0, 0);
+    productBasket.generateProduct("Штаны", 400, 0);
+    productBasket.generateProduct("Штаны красивые Штаны удобные Штаны дорогие", 500, 0);
+    productBasket.generateProduct("Рубаха", 300, 0);
+    productBasket.generateProduct("Трусы", 200, 0);
+    productBasket.generateProduct("Мыло", 900, 50);
+    productBasket.generateProduct("Сало", 900, 50);
+    System.out.println();
+    Product product;
+    productBasket.addProduct(product);
     System.out.println();
     productBasket.printBasketCost();
     System.out.println();
@@ -33,16 +37,19 @@ public class App {
     System.out.println();
 
     SearchEngine searchEngine = new SearchEngine(5);
+
     System.out.println();
     searchEngine.addBasketInSearchList(productBasket);// указываем объект для вытягивания
     System.out.println();
-    searchEngine.addArticle("article1", "Инструкция к article1");
-    searchEngine.addArticle("article2", "Инструкция к article2");
-    searchEngine.addArticle("article3", "Инструкция к article3");
-    searchEngine.addArticle("article4", "Инструкция к article4");
-    searchEngine.addArticle("article5", "Инструкция к article5");
-    searchEngine.addArticle("article6", "Инструкция к article6");
+    searchEngine.generateArticle("article1", "Инструкция к article1");
+    searchEngine.generateArticle("article2", "Инструкция к article2");
+    searchEngine.generateArticle("article3", "Инструкция к article3");
+    searchEngine.generateArticle("article4", "Инструкция к article4");
+    searchEngine.generateArticle("article5", "Инструкция к article5");
+    searchEngine.generateArticle("article6", "Инструкция к article6");
     System.out.println();
+
+
     searchEngine.printSerchList();
     System.out.println();
     searchEngine.printGetStringRepresentation();
