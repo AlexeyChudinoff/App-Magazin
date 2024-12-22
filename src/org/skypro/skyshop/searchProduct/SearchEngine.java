@@ -31,9 +31,10 @@ public class SearchEngine {
     System.out.println("SizeBasket: " + searchList.size());
   }
 
-  public void addArticle(String nameArticle, String textArticle) {
-    searchList.add(new Article(nameArticle, textArticle));
-    System.out.println("Add: " + nameArticle + "'" + textArticle);
+  public void generateArticle(String nameArticle, String textArticle) {
+    Article article = new Article(nameArticle, textArticle);
+    //searchList.add(new Article(nameArticle, textArticle));
+    System.out.println("gen: " + nameArticle + "'" + textArticle);
   }
 
   public List<Searchable> searchProduct(String find) {

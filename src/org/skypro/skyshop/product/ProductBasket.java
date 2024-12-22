@@ -8,33 +8,34 @@ public class ProductBasket {
 
   private final List<Product> productBasket = new ArrayList<>();
 
-  public void addProduct(String name, int cost, int discount)
+  public void generateProduct(String name, int cost, int discount)
       throws IllegalArgumentException {
-
-    Product product = null;
+       Product product = null;
     if (cost == 0 && discount == 0) {
       try {
         product = new FixPriceProduct(name);
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось добавить: " + name);
+        System.out.println(e.getMessage() + ", Не удалось создать: " + name);
       }
     } else if (cost > 0 && discount == 0) {
       try {
         product = new SimpleProduct(name, cost);
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось добавить: " + name);
+        System.out.println(e.getMessage() + ", Не удалось создать: " + name);
       }
     } else {
       try {
         product = new DiscountedProduct(name, cost, discount);
       } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось добавить: " + name);
+        System.out.println(e.getMessage() + ", Не удалось создать: " + name);
       }
     }
-    if (product != null) {
-      productBasket.add(product);
-      System.out.println("Add: " + product);
+    System.out.println("gen: " + product);
     }
+
+  public void  addProduct (Product product) {
+    productBasket.add(product);
+    System.out.println("Add: " + product);
   }
 
   public void printBasketCost() {
@@ -54,6 +55,10 @@ public class ProductBasket {
       System.out.println("Сумма корзины: " + summ);
     }
   }
+
+
+
+
 
   public void specialProduct() {
     int namber = 0;
@@ -101,6 +106,9 @@ public class ProductBasket {
     System.out.println(dellBasket);
     return dellBasket;
   }
+
+
+
 
 
 }// main
