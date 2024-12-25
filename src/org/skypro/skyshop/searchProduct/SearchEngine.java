@@ -33,8 +33,10 @@ public class SearchEngine {
 
   public void generateArticle(String nameArticle, String textArticle) {
     Article article = new Article(nameArticle, textArticle);
-    //searchList.add(new Article(nameArticle, textArticle));
-    System.out.println("gen: " + nameArticle + "'" + textArticle);
+//    ProductBasket.allProduct.add(article);
+//    System.out.println("gen: " + article);
+    searchList.add(article);
+    System.out.println("add: " + nameArticle + "'" + textArticle);
   }
 
   public List<Searchable> searchProduct(String find) {

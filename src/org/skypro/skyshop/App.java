@@ -1,9 +1,11 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.product.DiscountedProduct;
+import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.ProductBasket;
+import org.skypro.skyshop.product.SimpleProduct;
 import org.skypro.skyshop.searchProduct.SearchEngine;
-import org.skypro.skyshop.searchProduct.Searchable;
 
 public class App {
 
@@ -12,20 +14,28 @@ public class App {
     ProductBasket productBasket = new ProductBasket();
     System.out.println();
 
-   productBasket.generateProduct("КЕПКО", 200, -5);//специально ошибочный
-    productBasket.generateProduct("ШАПКО", -100, 0);//специально ошибочный
-    productBasket.generateProduct(" ", 0, 0);//специально ошибочный
-    productBasket.generateProduct("Вода", 0, 0);
-    productBasket.generateProduct("Еда", 0, 0);
-    productBasket.generateProduct("Штаны", 400, 0);
-    productBasket.generateProduct("Штаны красивые Штаны удобные Штаны дорогие", 500, 0);
-    productBasket.generateProduct("Рубаха", 300, 0);
-    productBasket.generateProduct("Трусы", 200, 0);
-    productBasket.generateProduct("Мыло", 900, 50);
-    productBasket.generateProduct("Сало", 900, 50);
+//   productBasket.generateProduct("КЕПКО", 200, -5);//специально ошибочный
+//    productBasket.generateProduct("ШАПКО", -100, 0);//специально ошибочный
+//    productBasket.generateProduct(" ", 0, 0);//специально ошибочный
+//    productBasket.generateProduct("Вода", 0, 0);
+//    productBasket.generateProduct("Еда", 0, 0);
+//    productBasket.generateProduct("Штаны", 400, 0);
+//    productBasket.generateProduct("Штаны красивые Штаны удобные Штаны дорогие", 500, 0);
+//    productBasket.generateProduct("Рубаха", 300, 0);
+//    productBasket.generateProduct("Трусы", 200, 0);
+//    productBasket.generateProduct("Мыло", 900, 50);
+//    productBasket.generateProduct("Сало", 900, 50);
     System.out.println();
-    Product product;
-    productBasket.addProduct(product);
+    Product tovar_1 = new FixPriceProduct("Шило");
+    Product tovar_2 = new DiscountedProduct("Мыло",600,50);
+    Product tovar_3 = new SimpleProduct("Сало",300);
+    Product tovar_4 = new SimpleProduct("Сало сало сало",300);
+
+    productBasket.addProduct(tovar_1);
+    productBasket.addProduct(tovar_2);
+    productBasket.addProduct(tovar_3);
+    productBasket.addProduct(tovar_4);
+
     System.out.println();
     productBasket.printBasketCost();
     System.out.println();
@@ -56,9 +66,9 @@ public class App {
     System.out.println();
     searchEngine.searchProduct("Инструкция");
     System.out.println();
-    searchEngine.searchForMostSuitable("Штаны");
+    searchEngine.searchForMostSuitable("Сало");
     System.out.println();
-    productBasket.dellProductByName("Штаны");
+    productBasket.dellProductByName("Сало");
     System.out.println();
 
 

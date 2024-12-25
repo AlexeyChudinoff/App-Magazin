@@ -7,10 +7,12 @@ import java.util.Iterator;
 public class ProductBasket {
 
   private final List<Product> productBasket = new ArrayList<>();
+  private final List<Product> allProduct = new ArrayList<>();
+
 
   public void generateProduct(String name, int cost, int discount)
       throws IllegalArgumentException {
-       Product product = null;
+    Product product = null;
     if (cost == 0 && discount == 0) {
       try {
         product = new FixPriceProduct(name);
@@ -30,13 +32,19 @@ public class ProductBasket {
         System.out.println(e.getMessage() + ", Не удалось создать: " + name);
       }
     }
-    System.out.println("gen: " + product);
-    }
-
-  public void  addProduct (Product product) {
-    productBasket.add(product);
-    System.out.println("Add: " + product);
   }
+
+  public void addProduct(Product product) {
+    productBasket.add(product);System.out.println("Add: " + product);
+  }
+
+
+//  public void printAllProduct() {
+//    System.out.println("printAllProduct");
+//    for (Product product : allProduct) {
+//      System.out.println(product);
+//    }
+//  }
 
   public void printBasketCost() {
     System.out.println("printBasketCost");
