@@ -35,16 +35,9 @@ public class ProductBasket {
   }
 
   public void addProduct(Product product) {
-    productBasket.add(product);System.out.println("Add: " + product);
+    productBasket.add(product);
+    System.out.println("Add: " + product);
   }
-
-
-//  public void printAllProduct() {
-//    System.out.println("printAllProduct");
-//    for (Product product : allProduct) {
-//      System.out.println(product);
-//    }
-//  }
 
   public void printBasketCost() {
     System.out.println("printBasketCost");
@@ -63,9 +56,6 @@ public class ProductBasket {
       System.out.println("Сумма корзины: " + summ);
     }
   }
-
-
-
 
 
   public void specialProduct() {
@@ -114,9 +104,6 @@ public class ProductBasket {
     System.out.println(dellBasket);
     return dellBasket;
   }
-
-
-
 
 
 }// main

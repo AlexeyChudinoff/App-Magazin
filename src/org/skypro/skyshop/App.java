@@ -27,9 +27,9 @@ public class App {
 //    productBasket.generateProduct("Сало", 900, 50);
     System.out.println();
     Product tovar_1 = new FixPriceProduct("Шило");
-    Product tovar_2 = new DiscountedProduct("Мыло",600,50);
-    Product tovar_3 = new SimpleProduct("Сало",300);
-    Product tovar_4 = new SimpleProduct("Сало сало сало",300);
+    Product tovar_2 = new DiscountedProduct("Мыло", 600, 50);
+    Product tovar_3 = new SimpleProduct("Сало", 300);
+    Product tovar_4 = new SimpleProduct("Сало сало сало", 300);
 
     productBasket.addProduct(tovar_1);
     productBasket.addProduct(tovar_2);
@@ -58,7 +58,6 @@ public class App {
     searchEngine.generateArticle("article5", "Инструкция к article5");
     searchEngine.generateArticle("article6", "Инструкция к article6");
     System.out.println();
-
 
     searchEngine.printSerchList();
     System.out.println();
