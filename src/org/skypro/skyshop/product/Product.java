@@ -9,7 +9,7 @@ public abstract class Product implements Searchable {
   public Product(String nameProduct) throws IllegalArgumentException {
     if (nameProduct.isBlank()) {
       throw new IllegalArgumentException(
-          ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET + "Нет имени продукта");
+          ANSI_GREEN + "ВНИМАНИЕ ! Нет имени продукта !" + ANSI_RESET);
     }
     this.nameProduct = nameProduct;
   }
@@ -24,7 +24,7 @@ public abstract class Product implements Searchable {
 
   @Override
   public String toString() {
-    return "Product- имя продукта : " + nameProduct + " ; стоимость  = "
+    return "Product- имя продукта : " + nameProduct + " ;  = цена =  "
         + getCostProduct();
   }
 
