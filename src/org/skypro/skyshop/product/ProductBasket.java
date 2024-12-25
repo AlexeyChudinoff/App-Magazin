@@ -7,31 +7,6 @@ import java.util.Iterator;
 public class ProductBasket {
 
   private final List<Product> productBasket = new ArrayList<>();
-  private final List<Product> allProduct = new ArrayList<>();
-
-  public void generateProduct(String name, int cost, int discount)
-      throws IllegalArgumentException {
-    Product product = null;
-    if (cost == 0 && discount == 0) {
-      try {
-        product = new FixPriceProduct(name);
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось создать: " + name);
-      }
-    } else if (cost > 0 && discount == 0) {
-      try {
-        product = new SimpleProduct(name, cost);
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось создать: " + name);
-      }
-    } else {
-      try {
-        product = new DiscountedProduct(name, cost, discount);
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось создать: " + name);
-      }
-    }
-  }
 
   public void addProduct(Product product) {
     productBasket.add(product);
@@ -55,7 +30,6 @@ public class ProductBasket {
       System.out.println("Сумма корзины: " + summ);
     }
   }
-
 
   public void specialProduct() {
     int namber = 0;
@@ -103,6 +77,5 @@ public class ProductBasket {
     System.out.println(dellBasket);
     return dellBasket;
   }
-
 
 }// main
