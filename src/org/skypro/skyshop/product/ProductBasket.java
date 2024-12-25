@@ -9,7 +9,6 @@ public class ProductBasket {
   private final List<Product> productBasket = new ArrayList<>();
   private final List<Product> allProduct = new ArrayList<>();
 
-
   public void generateProduct(String name, int cost, int discount)
       throws IllegalArgumentException {
     Product product = null;
