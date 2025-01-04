@@ -1,12 +1,14 @@
 package org.skypro.skyshop.product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Map;
 
 public class ProductBasket {
 
-  private final List<Product> productBasket = new ArrayList<>();
+  private final Map<String, Product> productBasket = new HashMap<>();
 
   public void addProduct(Product product) {
     productBasket.add(product);
