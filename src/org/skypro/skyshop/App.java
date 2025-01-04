@@ -22,7 +22,7 @@ public class App {
     Product tovar_3 = new DiscountedProduct("Еда", 800, 50);
     Product tovar_4 = new DiscountedProduct("Мыло", 600, 50);
     Product tovar_5 = new SimpleProduct("Сало", 300);
-    Product tovar_6 = new SimpleProduct("Сало сало сало", 300);
+    Product tovar_6 = new SimpleProduct("Сало Сало Сало", 300);
 
     productBasket.addProduct("ШИЛО", tovar_1);
     productBasket.addProduct("ВОДА", tovar_2);
@@ -44,7 +44,7 @@ public class App {
     SearchEngine searchEngine = new SearchEngine(5);
 
     System.out.println();
-    //searchEngine.addBasketInSearchList(productBasket);// указываем объект для вытягивания
+    searchEngine.addBasketInSearchList(productBasket);// указываем объект для вытягивания
     System.out.println();
     searchEngine.generateArticle("article1", "Инструкция к article1");
     searchEngine.generateArticle("article2", "Инструкция к article2");
@@ -53,17 +53,18 @@ public class App {
     searchEngine.generateArticle("article5", "Инструкция к article5");
     searchEngine.generateArticle("article6", "Инструкция к article6");
     System.out.println();
-
-//    searchEngine.printSerchList();
-//    System.out.println();
-//    searchEngine.printGetStringRepresentation();
-//    System.out.println();
-//    searchEngine.searchProduct("Инструкция");
-//    System.out.println();
-//    searchEngine.searchForMostSuitable("Сало");
-//    System.out.println();
-    productBasket.dellProductByName("Мыло");
-//    System.out.println();
+    searchEngine.printSerchList();
+    System.out.println();
+    searchEngine.printGetStringRepresentation();
+    System.out.println();
+    searchEngine.searchProduct("Инструкция");
+    System.out.println();
+    searchEngine.searchForMostSuitable("Сало");
+    System.out.println();
+    productBasket.dellProductByName("МЫЛО");
+    System.out.println();
+    productBasket.printBasket();
+    System.out.println();
 
   }//maim
 }//App

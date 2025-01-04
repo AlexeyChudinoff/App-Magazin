@@ -59,20 +59,29 @@ public class ProductBasket {
   }
 
   // нужен для другого метода
-  public Collection<Product> getProductBasket() {
-    return productBasket.values();
+  public List<Product> getProductBasket() {
+    List<Product> addBasket = new ArrayList<>();
+    for (Product product : productBasket.values()) {
+      if (product != null) {
+        addBasket.add(product);
+        //System.out.println("product = " + product);
+      }
+    }
+    return addBasket;
   }
 
   public List<Product> dellProductByName(String name) {
+    System.out.println("dellProductByName");
     List<Product> dellBasket = new ArrayList<>();
     if (productBasket.containsKey(name)) {
       dellBasket.add(productBasket.get(name));
+      System.out.println("Dell: " + productBasket.get(name));
       productBasket.remove(name);
+    } else {
+      System.out.println("Not found product: " + name);
     }
     return dellBasket;
   }
-
-
 
   //поиск по имени обьекта внутри значения
 //  public List<Product> dellProductByName(String name) {
@@ -93,4 +102,4 @@ public class ProductBasket {
 //    return dellBasket;
 //  }
 
-}// main
+}// class
