@@ -16,16 +16,16 @@ public class SearchEngine {
     System.out.println("создан массив searchList [" + size + "]");
   }
 
-  public void addBasketInSearchList(ProductBasket basket) {
-    System.out.println("addBasketInSearchList");
-    List<Product> copiedList = basket.getProductBasket();
-    for (Product product : copiedList) {
-      searchList.add(product);
-    }
-    for (Object product : copiedList) {
-      System.out.println(product);
-    }
-  }
+//  public void addBasketInSearchList(ProductBasket basket) {
+//    System.out.println("addBasketInSearchList");
+//    List<Product> copiedList = basket.getProductBasket();
+//    for (Product product : copiedList) {
+//      searchList.add(product);
+//    }
+//    for (Object product : copiedList) {
+//      System.out.println(product);
+//    }
+//  }
 
   public void sizeBasket() {
     System.out.println("SizeBasket: " + searchList.size());

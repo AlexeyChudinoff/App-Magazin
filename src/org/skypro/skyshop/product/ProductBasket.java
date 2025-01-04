@@ -1,18 +1,20 @@
 package org.skypro.skyshop.product;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class ProductBasket {
 
-  private final Map<String, Product> productBasket = new HashMap<>();
+  private final Map<String,Product > productBasket = new HashMap<>();
 
-  public void addProduct(Product product) {
-    productBasket.add(product);
-    System.out.println("Add: " + product);
+  public void addProduct(String name, Product product) {
+    productBasket.put(name, product);
+    System.out.println("Add: " + name + ": "+ product);
   }
 
   public void printBasketCost() {
@@ -21,8 +23,7 @@ public class ProductBasket {
       System.out.println("Корзина пуста.");
     } else {
       int summ = 0;
-      for (Product product : productBasket) {
-
+      for (Product product : productBasket.values()) {
         if (product != null) {
           System.out.println(product.getNameProduct() + " cost " + product.getCostProduct());
           summ += product.getCostProduct();
@@ -36,10 +37,10 @@ public class ProductBasket {
   public void specialProduct() {
     int namber = 0;
     System.out.println("Spec tovar : ");
-    for (int i = 0; i < productBasket.size(); i++) {
-      if (productBasket.get(i) != null && productBasket.get(i).isSpecial()) {
+    for (Product product : productBasket.values()) {
+      if (product != null && product.isSpecial()) {
         namber++;
-        System.out.println(productBasket.get(i));
+        System.out.println(product);
       }
     }
     System.out.println(" Всего спец. товаров: " + namber + " шт");
@@ -51,33 +52,44 @@ public class ProductBasket {
       System.out.println("Корзина пуста");
     } else {
       System.out.println("Состав корзины:");
-      for (Product product : productBasket) {
+      for (Entry<String, Product> product : productBasket.entrySet()) {
         System.out.println(product);
       }
     }
   }
 
   // нужен для другого метода
-  public List<Product> getProductBasket() {
-    return productBasket;
+  public Collection<Product> getProductBasket() {
+    return productBasket.values();
   }
 
   public List<Product> dellProductByName(String name) {
-    System.out.println("dellProductByName");
-    List<Product> dellBasket = new ArrayList<>();
-    Iterator<Product> iterator = productBasket.iterator();
-    String answer = name + " Не найдено";
-    while (iterator.hasNext()) {
-      Product product = iterator.next();
-      if (product.searchTerm().equals(name)) {
-        dellBasket.add(product);
-        iterator.remove();
-        answer = "Найден и удалён: " + product.searchTerm();
-      }
+    List<Product> dellProduct = new ArrayList<>();
+    if (productBasket.containsKey(name)) {
+      dellProduct.add(productBasket.get(name));
+      productBasket.remove(name);
     }
-    System.out.println(answer);
-    System.out.println(dellBasket);
-    return dellBasket;
   }
+
+
+
+  //поиск по имени обьекта внутри ключа
+//  public List<Product> dellProductByName(String name) {
+//    System.out.println("dellProductByName");
+//    List<Product> dellBasket = new ArrayList<>();
+//    Iterator<Product> iterator = productBasket.values().iterator();
+//    String answer = name + " Не найдено";
+//    while (iterator.hasNext()) {
+//      Product product = iterator.next();
+//      if (product.searchTerm().equals(name)) {
+//        dellBasket.add(product);
+//        iterator.remove();
+//        answer = "Найден и удалён: " + product.searchTerm();
+//      }
+//    }
+//    System.out.println(answer);
+//    System.out.println(dellBasket);
+//    return dellBasket;
+//  }
 
 }// main
