@@ -64,16 +64,17 @@ public class ProductBasket {
   }
 
   public List<Product> dellProductByName(String name) {
-    List<Product> dellProduct = new ArrayList<>();
+    List<Product> dellBasket = new ArrayList<>();
     if (productBasket.containsKey(name)) {
-      dellProduct.add(productBasket.get(name));
+      dellBasket.add(productBasket.get(name));
       productBasket.remove(name);
     }
+    return dellBasket;
   }
 
 
 
-  //поиск по имени обьекта внутри ключа
+  //поиск по имени обьекта внутри значения
 //  public List<Product> dellProductByName(String name) {
 //    System.out.println("dellProductByName");
 //    List<Product> dellBasket = new ArrayList<>();
