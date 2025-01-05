@@ -7,14 +7,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class ProductBasket {
 
-  private final Map<String,Product > productBasket = new HashMap<>();
+  private final Map<String, Product> productBasket = new HashMap<>();
 
   public void addProduct(String name, Product product) {
     productBasket.put(name, product);
-    System.out.println("Add: " + name + ": "+ product);
+    System.out.println("Add: " + name + ": " + product);
   }
 
   public void printBasketCost() {
@@ -58,16 +59,8 @@ public class ProductBasket {
     }
   }
 
-  // нужен для другого метода
-  public List<Product> getProductBasket() {
-    List<Product> addBasket = new ArrayList<>();
-    for (Product product : productBasket.values()) {
-      if (product != null) {
-        addBasket.add(product);
-        //System.out.println("product = " + product);
-      }
-    }
-    return addBasket;
+  public Map<String, Product> getProductBasket() {
+    return productBasket;
   }
 
   public List<Product> dellProductByName(String name) {
@@ -82,24 +75,5 @@ public class ProductBasket {
     }
     return dellBasket;
   }
-
-  //поиск по имени обьекта внутри значения
-//  public List<Product> dellProductByName(String name) {
-//    System.out.println("dellProductByName");
-//    List<Product> dellBasket = new ArrayList<>();
-//    Iterator<Product> iterator = productBasket.values().iterator();
-//    String answer = name + " Не найдено";
-//    while (iterator.hasNext()) {
-//      Product product = iterator.next();
-//      if (product.searchTerm().equals(name)) {
-//        dellBasket.add(product);
-//        iterator.remove();
-//        answer = "Найден и удалён: " + product.searchTerm();
-//      }
-//    }
-//    System.out.println(answer);
-//    System.out.println(dellBasket);
-//    return dellBasket;
-//  }
 
 }// class

@@ -2,6 +2,8 @@ package org.skypro.skyshop.searchProduct;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import org.skypro.skyshop.Exeption.BestResultNotFound;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.ProductBasket;
@@ -9,20 +11,13 @@ import org.skypro.skyshop.product.Product;
 
 public class SearchEngine {
 
-  List<Searchable> searchList;
-
-  public SearchEngine(int size) {
-    searchList = new ArrayList<>(size);
-    System.out.println("создан массив searchList [" + size + "]");
-  }
+  private final Map<String, Searchable> searchList = new TreeMap<>();
 
   public void addBasketInSearchList(ProductBasket basket) {
     System.out.println("addBasketInSearchList");
-    List<Product> copiedList = basket.getProductBasket();
-    searchList.addAll(copiedList);
-    for (Object product : copiedList) {
-      System.out.println(product);
-    }
+    Map<String, Product> copiedList = basket.getProductBasket();
+    searchList.putAll(copiedList);
+    System.out.println(searchList);
   }
 
   public void sizeBasket() {
@@ -31,50 +26,50 @@ public class SearchEngine {
 
   public void generateArticle(String nameArticle, String textArticle) {
     Article article = new Article(nameArticle, textArticle);
-    searchList.add(article);
-    System.out.println("add: " + nameArticle + "'" + textArticle);
+    searchList.put(nameArticle, article);
+    System.out.println("add: " + nameArticle + "'" + article);
   }
 
-  public List<Searchable> searchProduct(String finde) {
+  public Map<String, Searchable> searchProduct(String findName) {
     System.out.println("searchProduct");
-    List<Searchable> findeProduct = new ArrayList<>();
-    for (Searchable product : searchList) {
+    Map<String, Searchable> findProduct = new TreeMap<>();
+    for (Map.Entry<String, Searchable> product : searchList.entrySet()) {
       if (product == null) {
         break;
       }
-      if (product.searchTerm().contains(finde)) {
-        findeProduct.add(product);
+      if (searchList.containsKey(findName)) {
+        findProduct.put(findName, searchList.get(findName));
       }
     }
-    for (Object product : findeProduct) {
-      System.out.println(product);
-    }
-    return findeProduct;
+    System.out.println("findProduct = " + findProduct);
+    return findProduct;
   }
 
   public void printGetStringRepresentation() {
     System.out.println("printGetStringRepresentation");
-    for (Searchable object : searchList) {
-      if (object == null) {
-        return;
+    for (Map.Entry<String, Searchable> product : searchList.entrySet()) {
+      if (product == null) {
+        System.out.println("Нет объектов для поиска ");
+        break;
       }
-      object.getStringRepresentation();
+      product.getValue().getStringRepresentation();
     }
   }
 
-  public List<Searchable> searchForMostSuitable(String substring) {
+  public Map<String, Searchable> searchForMostSuitable(String substring) {
     System.out.println("searchForMostSuitable");
-    List<Searchable> listMostSuitable = new ArrayList<>();
-    for (Searchable object : searchList) {
+    Map<String, Searchable> MostSuitableProduct = new TreeMap<>();
+    for (Map.Entry<String, Searchable> object : searchList.entrySet()) {
       if (object == null) {
         System.out.println(ANSI_BLUE + "Дальше нет объектов для поиска, список пуст " + ANSI_RESET);
         break;
       }
       int i = 0;
-      int idxVhod = object.searchTerm().indexOf(substring, i);
+      int idxVhod = object.getValue().searchTerm().indexOf(substring, i);
       if (idxVhod < 0) {
         try {
-          throw new BestResultNotFound("Не найдено :" + substring + " в " + object.searchTerm());
+          throw new BestResultNotFound(
+              "Не найдено :" + substring + " в " + object.getValue().searchTerm());
         } catch (BestResultNotFound e) {
           System.out.println(e.getMessage());
         }
@@ -82,23 +77,23 @@ public class SearchEngine {
       int count = 0;
       while (idxVhod >= 0) {
         count++;
-        listMostSuitable.add(object);
+        MostSuitableProduct.put(object.getKey(), object.getValue());
         i = idxVhod + substring.length();
-        idxVhod = object.searchTerm().indexOf(substring, i);
+        idxVhod = object.getValue().searchTerm().indexOf(substring, i);
       }
       if (count > 0) {
         System.out.println(
-            "в объекте: " + object.searchTerm() + " =  Нашлось " + count + " раз(а)");
+            "в объекте: " + object.getValue().searchTerm() + " =  Нашлось " + count + " раз(а)");
       }
     }
-    System.out.println(listMostSuitable);
-    return listMostSuitable;
+    System.out.println(MostSuitableProduct);
+    return MostSuitableProduct;
   }
 
   public void printSerchList() {
     System.out.println("printSerchList");
-    for (Searchable product : searchList) {
-      System.out.println(product);
+    for (Map.Entry<String, Searchable> object : searchList.entrySet()) {
+      System.out.println(object);
     }
   }
 
@@ -110,4 +105,3 @@ public class SearchEngine {
   //ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET +
 
 }//class
-

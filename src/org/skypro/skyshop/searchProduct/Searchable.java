@@ -12,5 +12,3 @@ public interface Searchable {
         " тип объекта: " + searchTipContent());
   }
 }
-
-
