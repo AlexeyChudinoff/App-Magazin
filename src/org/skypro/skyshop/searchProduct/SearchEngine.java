@@ -13,12 +13,12 @@ public class SearchEngine {
 
   private final Map<String, Searchable> searchList = new TreeMap<>();
 
-  public void addBasketInSearchList(ProductBasket basket) {
-    System.out.println("addBasketInSearchList");
-    Map<String, Product> copiedList = basket.getProductBasket();
-    searchList.putAll(copiedList);
-    System.out.println(searchList);
-  }
+//  public void addBasketInSearchList(ProductBasket basket) {
+//    System.out.println("addBasketInSearchList");
+//    Map<String, Product> copiedList = basket.getProductBasket();
+//    searchList.putAll(copiedList);
+//    System.out.println(searchList);
+//  }
 
   public void sizeBasket() {
     System.out.println("SizeBasket: " + searchList.size());
