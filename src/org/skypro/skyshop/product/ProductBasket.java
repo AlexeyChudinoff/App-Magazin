@@ -41,6 +41,27 @@ public class ProductBasket {
     }
   }
 
+  public void printBasketCost() {
+    System.out.println("printBasketCost");
+    if (productBasket.isEmpty()) {
+      System.out.println("Корзина пуста.");
+    } else {
+      int summ = 0;
+      for (List<Product> products : productBasket.values()) {//по каждому списку
+        if (products != null) {
+          for (Product product : products) {// по каждому продукту
+            if (product != null) {
+              System.out.println(product.searchTerm() +
+                  " cost " + product.getCostProduct());
+              summ = summ + product.getCostProduct();
+            }
+          }
+                  }
+      }
+      System.out.println("________________________");
+      System.out.println("Сумма корзины: " + summ);
+    }
+  }
 
 //  public void printBasketCost() {
 //    System.out.println("printBasketCost");

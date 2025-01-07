@@ -20,8 +20,6 @@ public class App {
     Product tovar_5 = new SimpleProduct("Сало", 300);
     Product tovar_6 = new SimpleProduct("Сало Сало Сало", 300);
 
-//    productBasket.GreateCategoriProduct("Съедобный");
-//    productBasket.GreateCategoriProduct("Не съедобный");
     productBasket.addProduct("Не съедобный", tovar_1);
     productBasket.addProduct("Съедобный", tovar_2);
     productBasket.addProduct("Съедобный", tovar_3);
@@ -30,8 +28,8 @@ public class App {
     productBasket.addProduct("Съедобный", tovar_6);
     productBasket.printBasket();
 
-//    System.out.println();
-//    productBasket.printBasketCost();
+    System.out.println();
+    productBasket.printBasketCost();
 //    System.out.println();
 //    productBasket.specialProduct();
 //    System.out.println();
