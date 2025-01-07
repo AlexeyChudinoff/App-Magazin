@@ -30,23 +30,23 @@ public class App {
 
     System.out.println();
     productBasket.printBasketCost();
-//    System.out.println();
-//    productBasket.specialProduct();
-//    System.out.println();
-//    productBasket.printBasket();
-//    System.out.println();
-//    productBasket.dellProductByName("МЫЛО");
-//    System.out.println();
-//    productBasket.printBasket();
-//    System.out.println();
-//    System.out.println("=============================");
-//    System.out.println();
-//    System.out.println();
+    System.out.println();
+    productBasket.specialProduct();
+    System.out.println();
+    productBasket.printBasket();
+    System.out.println();
+    productBasket.dellProductByName("Мыло");
+    System.out.println();
+    productBasket.printBasket();
+    System.out.println();
+    System.out.println("=============================");
+    System.out.println();
+    System.out.println();
 
     SearchEngine searchEngine = new SearchEngine();
 
     System.out.println();
-   // searchEngine.addBasketInSearchList(productBasket);
+    searchEngine.addBasketInSearchList(productBasket);
     System.out.println();
     searchEngine.generateArticle("article1", "Инструкция к article1");
     searchEngine.generateArticle("article2", "Инструкция к article2");
@@ -54,15 +54,16 @@ public class App {
     searchEngine.generateArticle("article4", "Инструкция к article4");
     searchEngine.generateArticle("article5", "Инструкция к article5");
     searchEngine.generateArticle("article6", "Инструкция к article6");
+    searchEngine.addArticle("Инструкции",article1);
     System.out.println();
     searchEngine.printSerchList();
-//    System.out.println();
-//    searchEngine.printGetStringRepresentation();
-//    System.out.println();
-//    searchEngine.searchProduct("article3");
-//    System.out.println();
-//    searchEngine.searchForMostSuitable("Сало");
-//    System.out.println();
+    System.out.println();
+    searchEngine.printGetStringRepresentation();
+    System.out.println();
+    searchEngine.searchProduct("article3");
+    System.out.println();
+   // searchEngine.searchForMostSuitable("Сало");
+    System.out.println();
 
 
   }//maim

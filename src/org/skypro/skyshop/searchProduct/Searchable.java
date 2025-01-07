@@ -11,4 +11,6 @@ public interface Searchable {
     System.out.println("Имя объекта: " + searchTerm() + " ;  " +
         " тип объекта: " + searchTipContent());
   }
+
+
 }

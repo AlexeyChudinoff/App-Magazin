@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.TreeMap;
+import org.skypro.skyshop.searchProduct.Searchable;
 
 public class ProductBasket {
 
@@ -27,6 +28,10 @@ public class ProductBasket {
 
     System.out.println("Add in category: " + category + ", product: " + product);
     System.out.println("Current basket: " + productBasket);
+  }
+
+  public Map<String, List<Product>> getProductBasket() {
+    return productBasket;
   }
 
   public void printBasket() {
@@ -56,59 +61,53 @@ public class ProductBasket {
               summ = summ + product.getCostProduct();
             }
           }
-                  }
+        }
       }
       System.out.println("________________________");
       System.out.println("Сумма корзины: " + summ);
     }
   }
 
-//  public void printBasketCost() {
-//    System.out.println("printBasketCost");
-//    if (productBasket.isEmpty()) {
-//      System.out.println("Корзина пуста.");
-//    } else {
-//      int summ = 0;
-//      for (Product product : productBasket.values()) {
-//        if (product != null) {
-//          System.out.println(product.getNameProduct() + " cost " + product.getCostProduct());
-//          summ += product.getCostProduct();
-//        }
-//      }
-//      System.out.println("________________________");
-//      System.out.println("Сумма корзины: " + summ);
-//    }
-//  }
-//
-//  public void specialProduct() {
-//    int namber = 0;
-//    System.out.println("Spec tovar : ");
-//    for (Product product : productBasket.values()) {
-//      if (product != null && product.isSpecial()) {
-//        namber++;
-//        System.out.println(product);
-//      }
-//    }
-//    System.out.println(" Всего спец. товаров: " + namber + " шт");
-//  }
-//
+  public void specialProduct() {
+    System.out.println("Spec tovar : ");
+    int namber = 0;
+    for (List<Product> products : productBasket.values()) {
+      if (products != null) {
+        for (Product product : products) {
+          if (product != null && product.isSpecial()) {
+            namber++;
+            System.out.println(product);
+          }
+        }
+      }
+    }
+    System.out.println(" Всего спец. товаров: " + namber + " шт");
+  }
 
-//  public Map<String, Product> getProductBasket() {
-//    return productBasket;
-//  }
-//
-//  public List<Product> dellProductByName(String name) {
-//    System.out.println("dellProductByName");
-//    List<Product> dellBasket = new ArrayList<>();
-//    if (productBasket.containsKey(name)) {
-//      dellBasket.add(productBasket.get(name));
-//      System.out.println("Dell: " + productBasket.get(name));
-//      productBasket.remove(name);
-//    } else {
-//      System.out.println("Not found product: " + name);
-//    }
-//    return dellBasket;
-//  }
+  public List<Product> dellProductByName(String name) {
+    System.out.println("dellProductByName");
+    List<Product> dellBasket = new ArrayList<>();
+    boolean productFound = false;
+    for (List<Product> products : productBasket.values()) {
+      // только через Iterator удалять элементы из списка
+      // во время итерации, иначе ConcurrentModificationException
+      Iterator<Product> iterator = products.iterator();
+      while (iterator.hasNext()) {
+        Product product = iterator.next();
+        if (product.getNameProduct().equals(name)) {
+          dellBasket.add(product);
+          iterator.remove();
+          productFound = true;
+        }
+      }
+    }
+    if (!productFound) {
+      System.out.println("Not found product: " + name);
+      return dellBasket;
+    }
+    System.out.println(" Dell product: " + dellBasket);
+    return dellBasket;
+  }
 
   @Override
   public boolean equals(Object o) {
