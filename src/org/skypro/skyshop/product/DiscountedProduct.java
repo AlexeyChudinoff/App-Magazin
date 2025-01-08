@@ -50,16 +50,6 @@ public class DiscountedProduct extends Product {
         " = цена со скидкой = " + costAfterDiscount;
   }
 
-  @Override
-  public String searchTerm() {
-    return super.searchTerm();
-  }
-
-  @Override
-  public String searchTipContent() {
-    return super.searchTipContent();
-  }
-
   public boolean isSpecial() {
     return true;
   }

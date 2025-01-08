@@ -27,13 +27,4 @@ public class FixPriceProduct extends Product {
     return true;
   }
 
-  @Override
-  public String searchTerm() {
-    return super.searchTerm();
-  }
-
-  @Override
-  public String searchTipContent() {
-    return super.searchTipContent();
-  }
 }

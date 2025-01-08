@@ -111,20 +111,4 @@ public class ProductBasket {
     return dellBasket;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    ProductBasket that = (ProductBasket) o;
-    return Objects.equals(productBasket, that.productBasket);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hashCode(productBasket);
-  }
 }// class
