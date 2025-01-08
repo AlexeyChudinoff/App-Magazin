@@ -30,7 +30,8 @@ public class SearchEngine {
       // Если список продуктов для категории не пустой
       if (products != null && !products.isEmpty()) {
         // Получаем или создаем список Searchable для данной категории
-        List<Searchable> searchableList = searchList.computeIfAbsent(category, k -> new ArrayList<>());
+        List<Searchable> searchableList = searchList.computeIfAbsent(category,
+            k -> new ArrayList<>());
 
         // Добавляем каждый продукт в список Searchable
         for (Product product : products) {
@@ -41,29 +42,9 @@ public class SearchEngine {
       }
     }
     for (Map.Entry<String, List<Searchable>> entry : searchList.entrySet()) {
-      System.out.println("Category: " + entry.getKey() + ", Products: " + entry.getValue());
+      System.out.println("Add in category: " + entry.getKey() + ", Products: " + entry.getValue());
     }
   }
-
-//  public void addBasketInSearchList(ProductBasket basket) {
-//    System.out.println("addBasketInSearchList");
-//    Map<String, List<Product>> copiedList = basket.getProductBasket();
-//    if (copiedList == null) {
-//      throw new IllegalArgumentException("Basket cannot be null");
-//    }
-//    for (Map.Entry<String, List<Product>> entry : copiedList.entrySet()) {
-//      String key = entry.getKey();
-//      List<Product> products = entry.getValue();
-//      if (products != null) {
-//        List<Searchable> searchableList = new ArrayList<>();
-//        searchableList.add(new ProductList(products));
-//        searchList.put(key, searchableList);
-//      }
-//    }
-//    for (Map.Entry<String, List<Searchable>> product : searchList.entrySet()) {
-//      System.out.println(product);
-//    }
-//  }
 
   public void sizeBasket() {
     System.out.println("SizeBasket: " + searchList.size());
@@ -145,7 +126,7 @@ public class SearchEngine {
         }
       }
     }
-    System.out.println(mostSuitableProduct);
+    System.out.println("Search Basket: " + mostSuitableProduct);
     return mostSuitableProduct;
   }
 

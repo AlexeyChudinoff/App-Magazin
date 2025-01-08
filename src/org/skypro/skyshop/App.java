@@ -20,7 +20,7 @@ public class App {
     Product tovar_4 = new DiscountedProduct("Мыло", 600, 50);
     Product tovar_5 = new SimpleProduct("Сало", 300);
     Product tovar_6 = new SimpleProduct("Сало Сало Сало", 300);
-
+    System.out.println("Add Products in Basket");
     productBasket.addProduct("Не съедобный", tovar_1);
     productBasket.addProduct("Съедобный", tovar_2);
     productBasket.addProduct("Съедобный", tovar_3);
@@ -55,7 +55,7 @@ public class App {
     Article article2 = new Article("article2", "Инструкция к article2");
     Article article3 = new Article("article3", "Инструкция к article3");
     Article article4 = new Article("article4", "Инструкция к article4");
-
+    System.out.println("Add Articles in SearchList");
     searchEngine.addArticle("Инструкции", article1);
     searchEngine.addArticle("Инструкции", article2);
     searchEngine.addArticle("Инструкции", article3);
