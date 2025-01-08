@@ -1,5 +1,6 @@
 package org.skypro.skyshop.searchProduct;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.skypro.skyshop.product.Product;
 
@@ -13,22 +14,27 @@ public class ProductList implements Searchable {
 
   @Override
   public String toString() {
-    return "ProductList{" +
-        "products=" + products +
-        '}';
+    return products != null ? products.toString() : "null";
   }
 
   public List<Product> getProducts() {
     return products;
   }
 
+//разобраться ещё раз
   @Override
   public String searchTerm() {
-    return "";
+    StringBuilder searchTerm = new StringBuilder();
+    for (Product product : products) {
+      if (product != null) {
+        searchTerm.append(product.searchTerm()).append(", ");
+      }
+    }
+    return searchTerm.length() > 0 ? searchTerm.substring(0, searchTerm.length() - 2) : "";
   }
 
   @Override
   public String searchTipContent() {
-    return "";
+    return "PRODUCT";
   }
 }

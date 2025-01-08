@@ -27,7 +27,7 @@ public class ProductBasket {
     products.add(product);
 
     System.out.println("Add in category: " + category + ", product: " + product);
-    System.out.println("Current basket: " + productBasket);
+    //System.out.println("Current basket: " + productBasket);
   }
 
   public Map<String, List<Product>> getProductBasket() {
@@ -88,24 +88,26 @@ public class ProductBasket {
     System.out.println("dellProductByName");
     List<Product> dellBasket = new ArrayList<>();
     boolean productFound = false;
-    for (List<Product> products : productBasket.values()) {
-      // только через Iterator удалять элементы из списка
-      // во время итерации, иначе ConcurrentModificationException
-      Iterator<Product> iterator = products.iterator();
-      while (iterator.hasNext()) {
-        Product product = iterator.next();
-        if (product.getNameProduct().equals(name)) {
-          dellBasket.add(product);
-          iterator.remove();
-          productFound = true;
+    for (List<Product> products : productBasket.values()){
+      if (products != null) {
+        // только через Iterator удалять элементы из списка
+        // во время итерации, иначе ConcurrentModificationException
+        Iterator<Product> iterator = products.iterator();
+        while (iterator.hasNext()) {
+          Product product = iterator.next();
+          if (product.getNameProduct().equals(name)) {
+            dellBasket.add(product);
+            iterator.remove();
+            productFound = true;
+          }
         }
       }
     }
     if (!productFound) {
-      System.out.println("Not found product: " + name);
+      System.out.println("Не найден продукт: " + name);
       return dellBasket;
     }
-    System.out.println(" Dell product: " + dellBasket);
+    System.out.println("Удаленные продукты: " + dellBasket);
     return dellBasket;
   }
 

@@ -21,30 +21,82 @@ public class SearchEngine {
     if (copiedList == null) {
       throw new IllegalArgumentException("Basket cannot be null");
     }
+
+    // Проходим по всем категориям и продуктам в корзине
     for (Map.Entry<String, List<Product>> entry : copiedList.entrySet()) {
-      String key = entry.getKey();
+      String category = entry.getKey();
       List<Product> products = entry.getValue();
 
-      List<Searchable> searchableList = new ArrayList<>();
-      searchableList.add(new ProductList(products));
-      searchList.put(key, searchableList);
+      // Если список продуктов для категории не пустой
+      if (products != null && !products.isEmpty()) {
+        // Получаем или создаем список Searchable для данной категории
+        List<Searchable> searchableList = searchList.computeIfAbsent(category, k -> new ArrayList<>());
+
+        // Добавляем каждый продукт в список Searchable
+        for (Product product : products) {
+          if (product != null) {
+            searchableList.add(product);
+          }
+        }
+      }
     }
-    for (Map.Entry<String, List<Searchable>> product : searchList.entrySet()) {
-      System.out.println(product);
+
+    // Выводим содержимое searchList для отладки
+    for (Map.Entry<String, List<Searchable>> entry : searchList.entrySet()) {
+      System.out.println("Category: " + entry.getKey() + ", Products: " + entry.getValue());
     }
   }
+
+//  public void addBasketInSearchList(ProductBasket basket) {
+//    System.out.println("addBasketInSearchList");
+//    Map<String, List<Product>> copiedList = basket.getProductBasket();
+//    if (copiedList == null) {
+//      throw new IllegalArgumentException("Basket cannot be null");
+//    }
+//    for (Map.Entry<String, List<Product>> entry : copiedList.entrySet()) {
+//      String key = entry.getKey();
+//      List<Product> products = entry.getValue();
+//      if (products != null) {
+//        List<Searchable> searchableList = new ArrayList<>();
+//        searchableList.add(new ProductList(products));
+//        searchList.put(key, searchableList);
+//      }
+//    }
+//    for (Map.Entry<String, List<Searchable>> product : searchList.entrySet()) {
+//      System.out.println(product);
+//    }
+//  }
 
   public void sizeBasket() {
     System.out.println("SizeBasket: " + searchList.size());
   }
 
-  public void generateArticle(String nameArticle, String textArticle) {
-    Article article = new Article(nameArticle, textArticle);
-    System.out.println("generate: " + nameArticle + "'" + article);
+  public void addArticle(String category, Article article) {
+    List<Searchable> articles = searchList.get(category);
+    if (articles == null) {
+      articles = new ArrayList<>();
+      searchList.put(category, articles);
+    }
+    articles.add(article);
+    System.out.println("Add in category: " + category + ", articles: " + articles);
+    //System.out.println("Current List: " + searchList);
   }
 
-  public void addArticle(String category, Article article) {
-    searchList.put(category, (List<Searchable>) article);
+  public void printGetStringRepresentation() {
+    System.out.println("printGetStringRepresentation");
+    for (List<Searchable> products : searchList.values()) {
+      if (products == null) {
+        System.out.println(ANSI_GREEN + "ВНИМАНИЕ ! List is null" + ANSI_RESET);
+        continue;
+      }
+      for (Searchable product : products) {
+        if (product == null) {
+          System.out.println(ANSI_GREEN + "ВНИМАНИЕ ! product is null" + ANSI_RESET);
+          continue;
+        }
+        product.getStringRepresentation();
+      }
+    }
   }
 
   public List<Searchable> searchProduct(String findName) {
@@ -66,26 +118,10 @@ public class SearchEngine {
     }
     if (!productFound) {
       System.out.println("Не найден продукт: " + findName);
+    } else {
+      System.out.println("Найдены продукты: " + searchProductList);
     }
-    System.out.println("SНайдены продукты: " + searchProductList);
     return searchProductList;
-  }
-
-  public void printGetStringRepresentation() {
-    System.out.println("printGetStringRepresentation");
-    for (List<Searchable> products : searchList.values()) {
-      if (products == null) {
-        System.out.println(ANSI_GREEN + "ВНИМАНИЕ ! List is null" + ANSI_RESET);
-        continue;
-      }
-      for (Searchable product : products) {
-        if (product == null) {
-          System.out.println(ANSI_GREEN + "ВНИМАНИЕ ! product is null" + ANSI_RESET );
-          continue;
-        }
-        product.getStringRepresentation();
-      }
-    }
   }
 
   public List<Searchable> searchForMostSuitable(String substring) {
@@ -114,7 +150,6 @@ public class SearchEngine {
     System.out.println(mostSuitableProduct);
     return mostSuitableProduct;
   }
-
 
   public void printSerchList() {
     System.out.println("printSerchList");

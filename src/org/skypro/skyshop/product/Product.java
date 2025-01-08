@@ -25,7 +25,7 @@ public abstract class Product implements Searchable {
 
   @Override
   public String toString() {
-    return "Product- имя продукта : " + nameProduct + " ;  = цена =  "
+    return "Product- имя продукта : " + (nameProduct != null ? nameProduct : "null") + " ;  = цена =  "
         + getCostProduct();
   }
 
@@ -38,7 +38,6 @@ public abstract class Product implements Searchable {
   public String searchTipContent() {
     return "PRODUCT";
   }
-
 
   public static final String ANSI_RESET = "\u001B[0m";
   public static final String ANSI_RED = "\u001B[31m";

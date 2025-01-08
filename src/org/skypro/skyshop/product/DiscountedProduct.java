@@ -6,9 +6,9 @@ import org.skypro.skyshop.searchProduct.Searchable;
 
 public class DiscountedProduct extends Product {
 
-  private int baseCost;
-  private int discountBaseCost;//целое число от 0 до 100
-  private int costAfterDiscount;
+  private final int baseCost;
+  private final int discountBaseCost;//целое число от 0 до 100
+  private final int costAfterDiscount;
 
   public DiscountedProduct(String nameProduct, int baseCost, int discountBaseCost)
       throws RuntimeException {
@@ -48,6 +48,16 @@ public class DiscountedProduct extends Product {
     return "Disc._" + getNameProduct() + " = цена без скидки = " + baseCost +
         " , скидка = " + discountBaseCost + "%" +
         " = цена со скидкой = " + costAfterDiscount;
+  }
+
+  @Override
+  public String searchTerm() {
+    return super.searchTerm();
+  }
+
+  @Override
+  public String searchTipContent() {
+    return super.searchTipContent();
   }
 
   public boolean isSpecial() {
