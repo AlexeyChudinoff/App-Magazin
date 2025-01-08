@@ -40,8 +40,6 @@ public class SearchEngine {
         }
       }
     }
-
-    // Выводим содержимое searchList для отладки
     for (Map.Entry<String, List<Searchable>> entry : searchList.entrySet()) {
       System.out.println("Category: " + entry.getKey() + ", Products: " + entry.getValue());
     }
