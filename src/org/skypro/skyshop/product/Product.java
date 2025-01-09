@@ -1,5 +1,6 @@
 package org.skypro.skyshop.product;
 
+import java.util.List;
 import org.skypro.skyshop.searchProduct.Searchable;
 
 public abstract class Product implements Searchable {
@@ -24,7 +25,7 @@ public abstract class Product implements Searchable {
 
   @Override
   public String toString() {
-    return "Product- имя продукта : " + nameProduct + " ;  = цена =  "
+    return "Product- имя продукта : " + (nameProduct != null ? nameProduct : "null") + " ;  = цена =  "
         + getCostProduct();
   }
 
@@ -38,12 +39,12 @@ public abstract class Product implements Searchable {
     return "PRODUCT";
   }
 
-
   public static final String ANSI_RESET = "\u001B[0m";
   public static final String ANSI_RED = "\u001B[31m";
   public static final String ANSI_GREEN = "\u001B[32m";
   public static final String ANSI_YELLOW = "\u001B[33m";
   public static final String ANSI_BLUE = "\u001B[34m";
+
   //ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET +
 
 }

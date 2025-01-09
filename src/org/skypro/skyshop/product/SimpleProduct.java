@@ -1,5 +1,9 @@
 package org.skypro.skyshop.product;
 
+import java.util.Collection;
+import java.util.Iterator;
+import org.skypro.skyshop.searchProduct.Searchable;
+
 public class SimpleProduct extends Product {
 
   int costSimpleProduct;
@@ -35,5 +39,8 @@ public class SimpleProduct extends Product {
   public static final String ANSI_GREEN = "\u001B[32m";
   public static final String ANSI_YELLOW = "\u001B[33m";
   public static final String ANSI_BLUE = "\u001B[34m";
+
   //ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET +
+
+
 }

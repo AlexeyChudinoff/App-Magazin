@@ -1,10 +1,14 @@
 package org.skypro.skyshop.product;
 
+import java.util.Collection;
+import java.util.Iterator;
+import org.skypro.skyshop.searchProduct.Searchable;
+
 public class DiscountedProduct extends Product {
 
-  private int baseCost;
-  private int discountBaseCost;//целое число от 0 до 100
-  private int costAfterDiscount;
+  private final int baseCost;
+  private final int discountBaseCost;//целое число от 0 до 100
+  private final int costAfterDiscount;
 
   public DiscountedProduct(String nameProduct, int baseCost, int discountBaseCost)
       throws RuntimeException {
@@ -30,7 +34,7 @@ public class DiscountedProduct extends Product {
     return baseCost;
   }
 
-  public int getDdiscountBaseCost() {
+  public int getDiscountBaseCost() {
     return discountBaseCost;
   }
 

@@ -14,15 +14,13 @@ public class Article implements Searchable {
 
   @Override
   public String toString() {
-    return "Название статьи = " + nameArticle +
-        " , Текст статьи = " + textArticle;
+    return "Название статьи = " + (nameArticle != null ? nameArticle : "null") +
+        " , Текст статьи = " + (textArticle != null ? textArticle : "null");
   }
-
   @Override
   public String searchTerm() {
-    return nameArticle + " , " + textArticle;
+    return nameArticle ;
   }
-
   @Override
   public String searchTipContent() {
     return "ARTICLE";

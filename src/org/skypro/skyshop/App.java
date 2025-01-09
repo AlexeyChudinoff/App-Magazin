@@ -1,5 +1,6 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.DiscountedProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
@@ -10,31 +11,24 @@ import org.skypro.skyshop.searchProduct.SearchEngine;
 public class App {
 
   public static void main(String[] args) {
-
+    System.out.println();
     ProductBasket productBasket = new ProductBasket();
-    System.out.println();
 
-//   productBasket.generateProduct("КЕПКО", 200, -5);//специально ошибочный
-//    productBasket.generateProduct("ШАПКО", -100, 0);//специально ошибочный
-//    productBasket.generateProduct(" ", 0, 0);//специально ошибочный
-//    productBasket.generateProduct("Вода", 0, 0);
-//    productBasket.generateProduct("Еда", 0, 0);
-//    productBasket.generateProduct("Штаны", 400, 0);
-//    productBasket.generateProduct("Штаны красивые Штаны удобные Штаны дорогие", 500, 0);
-//    productBasket.generateProduct("Рубаха", 300, 0);
-//    productBasket.generateProduct("Трусы", 200, 0);
-//    productBasket.generateProduct("Мыло", 900, 50);
-//    productBasket.generateProduct("Сало", 900, 50);
-    System.out.println();
     Product tovar_1 = new FixPriceProduct("Шило");
-    Product tovar_2 = new DiscountedProduct("Мыло", 600, 50);
-    Product tovar_3 = new SimpleProduct("Сало", 300);
-    Product tovar_4 = new SimpleProduct("Сало сало сало", 300);
-
-    productBasket.addProduct(tovar_1);
-    productBasket.addProduct(tovar_2);
-    productBasket.addProduct(tovar_3);
-    productBasket.addProduct(tovar_4);
+    Product tovar_2 = new FixPriceProduct("Вода");
+    Product tovar_3 = new DiscountedProduct("Еда", 800, 50);
+    Product tovar_4 = new DiscountedProduct("Мыло", 600, 50);
+    Product tovar_5 = new SimpleProduct("Сало", 300);
+    Product tovar_6 = new SimpleProduct("Сало Сало Сало", 300);
+    System.out.println("Add Products in Basket");
+    productBasket.addProduct("Не съедобный", tovar_1);
+    productBasket.addProduct("Съедобный", tovar_2);
+    productBasket.addProduct("Съедобный", tovar_3);
+    productBasket.addProduct("Не съедобный", tovar_4);
+    productBasket.addProduct("Съедобный", tovar_5);
+    productBasket.addProduct("Съедобный", tovar_6);
+    System.out.println();
+    productBasket.printBasket();
 
     System.out.println();
     productBasket.printBasketCost();
@@ -42,32 +36,39 @@ public class App {
     productBasket.specialProduct();
     System.out.println();
     productBasket.printBasket();
+    System.out.println();
+    productBasket.dellProductByName("Мыло");
+    System.out.println();
+    productBasket.printBasket();
+    System.out.println();
     System.out.println("=============================");
     System.out.println();
     System.out.println();
 
-    SearchEngine searchEngine = new SearchEngine(5);
+    SearchEngine searchEngine = new SearchEngine();
 
     System.out.println();
-    searchEngine.addBasketInSearchList(productBasket);// указываем объект для вытягивания
+    searchEngine.addBasketInSearchList(productBasket);
     System.out.println();
-    searchEngine.generateArticle("article1", "Инструкция к article1");
-    searchEngine.generateArticle("article2", "Инструкция к article2");
-    searchEngine.generateArticle("article3", "Инструкция к article3");
-    searchEngine.generateArticle("article4", "Инструкция к article4");
-    searchEngine.generateArticle("article5", "Инструкция к article5");
-    searchEngine.generateArticle("article6", "Инструкция к article6");
+
+    Article article1 = new Article("article1", "Инструкция к article1");
+    Article article2 = new Article("article2", "Инструкция к article2");
+    Article article3 = new Article("article3", "Инструкция к article3");
+    Article article4 = new Article("article4", "Инструкция к article4");
+    System.out.println("Add Articles in SearchList");
+    searchEngine.addArticle("Инструкции", article1);
+    searchEngine.addArticle("Инструкции", article2);
+    searchEngine.addArticle("Инструкции", article3);
+    searchEngine.addArticle("Инструкции", article4);
     System.out.println();
 
     searchEngine.printSerchList();
     System.out.println();
     searchEngine.printGetStringRepresentation();
     System.out.println();
-    searchEngine.searchProduct("Инструкция");
+    searchEngine.searchProduct("article3");
     System.out.println();
     searchEngine.searchForMostSuitable("Сало");
-    System.out.println();
-    productBasket.dellProductByName("Сало");
     System.out.println();
 
 

@@ -1,46 +1,37 @@
 package org.skypro.skyshop.product;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.TreeMap;
+import org.skypro.skyshop.searchProduct.Searchable;
 
 public class ProductBasket {
 
-  private final List<Product> productBasket = new ArrayList<>();
+  private final Map<String, List<Product>> productBasket = new HashMap<>();
 
-  public void addProduct(Product product) {
-    productBasket.add(product);
-    System.out.println("Add: " + product);
+  public void addProduct(String category, Product product) {
+    // Получаем список продуктов для данной категории
+    List<Product> products = productBasket.get(category);
+    // Если список для категории еще не существует, создаем его
+    if (products == null) {
+      products = new ArrayList<>();
+      productBasket.put(category, products);
+    }
+    // Добавляем продукт в список
+    products.add(product);
+
+    System.out.println("Add in category: " + category + ", product: " + product);
+    //System.out.println("Current basket: " + productBasket);
   }
 
-  public void printBasketCost() {
-    System.out.println("printBasketCost");
-    if (productBasket.isEmpty()) {
-      System.out.println("Корзина пуста.");
-    } else {
-      int summ = 0;
-      for (Product product : productBasket) {
-
-        if (product != null) {
-          System.out.println(product.getNameProduct() + " cost " + product.getCostProduct());
-          summ += product.getCostProduct();
-        }
-      }
-      System.out.println("________________________");
-      System.out.println("Сумма корзины: " + summ);
-    }
-  }
-
-  public void specialProduct() {
-    int namber = 0;
-    System.out.println("Spec tovar : ");
-    for (int i = 0; i < productBasket.size(); i++) {
-      if (productBasket.get(i) != null && productBasket.get(i).isSpecial()) {
-        namber++;
-        System.out.println(productBasket.get(i));
-      }
-    }
-    System.out.println(" Всего спец. товаров: " + namber + " шт");
+  public Map<String, List<Product>> getProductBasket() {
+    return productBasket;
   }
 
   public void printBasket() {
@@ -49,33 +40,75 @@ public class ProductBasket {
       System.out.println("Корзина пуста");
     } else {
       System.out.println("Состав корзины:");
-      for (Product product : productBasket) {
+      for (Entry<String, List<Product>> product : productBasket.entrySet()) {
         System.out.println(product);
       }
     }
   }
 
-  // нужен для другого метода
-  public List<Product> getProductBasket() {
-    return productBasket;
+  public void printBasketCost() {
+    System.out.println("printBasketCost");
+    if (productBasket.isEmpty()) {
+      System.out.println("Корзина пуста.");
+    } else {
+      int summ = 0;
+      for (List<Product> products : productBasket.values()) {//по каждому списку
+        if (products != null) {
+          for (Product product : products) {// по каждому продукту
+            if (product != null) {
+              System.out.println(product.searchTerm() +
+                  " cost " + product.getCostProduct());
+              summ = summ + product.getCostProduct();
+            }
+          }
+        }
+      }
+      System.out.println("________________________");
+      System.out.println("Сумма корзины: " + summ);
+    }
+  }
+
+  public void specialProduct() {
+    System.out.println("Spec tovar : ");
+    int namber = 0;
+    for (List<Product> products : productBasket.values()) {
+      if (products != null) {
+        for (Product product : products) {
+          if (product != null && product.isSpecial()) {
+            namber++;
+            System.out.println(product);
+          }
+        }
+      }
+    }
+    System.out.println(" Всего спец. товаров: " + namber + " шт");
   }
 
   public List<Product> dellProductByName(String name) {
     System.out.println("dellProductByName");
     List<Product> dellBasket = new ArrayList<>();
-    Iterator<Product> iterator = productBasket.iterator();
-    String answer = name + " Не найдено";
-    while (iterator.hasNext()) {
-      Product product = iterator.next();
-      if (product.searchTerm().equals(name)) {
-        dellBasket.add(product);
-        iterator.remove();
-        answer = "Найден и удалён: " + product.searchTerm();
+    boolean productFound = false;
+    for (List<Product> products : productBasket.values()){
+      if (products != null) {
+        // только через Iterator удалять элементы из списка
+        // во время итерации, иначе ConcurrentModificationException
+        Iterator<Product> iterator = products.iterator();
+        while (iterator.hasNext()) {
+          Product product = iterator.next();
+          if (product.getNameProduct().equals(name)) {
+            dellBasket.add(product);
+            iterator.remove();
+            productFound = true;
+          }
+        }
       }
     }
-    System.out.println(answer);
-    System.out.println(dellBasket);
+    if (!productFound) {
+      System.out.println("Не найден продукт: " + name);
+      return dellBasket;
+    }
+    System.out.println("Удаленные продукты: " + dellBasket);
     return dellBasket;
   }
 
-}// main
+}// class
