@@ -1,6 +1,7 @@
 package org.skypro.skyshop.product;
 
 import java.util.List;
+import java.util.Objects;
 import org.skypro.skyshop.searchProduct.Searchable;
 
 public abstract class Product implements Searchable {
@@ -37,6 +38,23 @@ public abstract class Product implements Searchable {
   @Override
   public String searchTipContent() {
     return "PRODUCT";
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Product product = (Product) o;
+    return Objects.equals(nameProduct, product.nameProduct);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(nameProduct);
   }
 
   public static final String ANSI_RESET = "\u001B[0m";
