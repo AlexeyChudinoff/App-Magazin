@@ -88,7 +88,7 @@ public class ProductBasket {
     System.out.println("dellProductByName");
     List<Product> dellBasket = new ArrayList<>();
     boolean productFound = false;
-    for (List<Product> products : productBasket.values()){
+    for (List<Product> products : productBasket.values()) {
       if (products != null) {
         // только через Iterator удалять элементы из списка
         // во время итерации, иначе ConcurrentModificationException
@@ -110,5 +110,6 @@ public class ProductBasket {
     System.out.println("Удаленные продукты: " + dellBasket);
     return dellBasket;
   }
+
 
 }// class

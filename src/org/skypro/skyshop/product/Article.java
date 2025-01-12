@@ -3,7 +3,7 @@ package org.skypro.skyshop.product;
 import java.util.Objects;
 import org.skypro.skyshop.searchProduct.Searchable;
 
-public class Article implements Searchable {
+public class Article implements Searchable, Comparable {
 
   private final String nameArticle;
   private final String textArticle;
@@ -42,5 +42,15 @@ public class Article implements Searchable {
   @Override
   public int hashCode() {
     return Objects.hash(nameArticle);
+  }
+
+  // когда стало public class Article implements Comparable
+  @Override
+  public int compareTo(Object o) {
+    if (o instanceof Article) {
+      Article other = (Article) o;
+      return this.nameArticle.compareTo(other.nameArticle);
+    }
+    throw new IllegalArgumentException("Object is not an Article");
   }
 }

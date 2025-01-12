@@ -17,7 +17,7 @@ import org.skypro.skyshop.product.Product;
 
 public class SearchEngine {
 
-  private final Map<String,List<Searchable>> searchList = new HashMap<>();
+  private final Set<List<Searchable>> searchList = new HashSet<>();
 
   public void addBasketInSearchList(ProductBasket basket) {
     System.out.println("addBasketInSearchList");
@@ -25,45 +25,38 @@ public class SearchEngine {
     if (copiedList == null) {
       throw new IllegalArgumentException("Basket cannot be null");
     }
+    Set<Searchable> setSeachable = new HashSet<>();
 
-    // Проходим по всем категориям и продуктам в корзине
-    for (Map.Entry<String, List<Product>> entry : copiedList.entrySet()) {
-      String category = entry.getKey();
-      List<Product> products = entry.getValue();
-
-      // Если список продуктов для категории не пустой
-      if (category != null && products != null && !products.isEmpty()) {
-        // Получаем или создаем список Searchable для данной категории
-        List<Searchable> searchableList = searchList.computeIfAbsent(category,
-            k -> new ArrayList<>());
-
-        // Добавляем каждый продукт в список Searchable
+    for (List<Product> products : copiedList.values()) {
+      if (products != null) {
         for (Product product : products) {
           if (product != null) {
-            searchableList.add(product);
+            setSeachable.add(product);
           }
         }
       }
     }
-    for (Map.Entry<String, List<Searchable>> entry : searchList.entrySet()) {
-      System.out.println("Add in category: " + entry.getKey() + ", Products: " + entry.getValue());
+    for (Searchable product : setSeachable) {
+      List<Searchable> prodList = new ArrayList<>();
+      prodList.add(product);
+      searchList.add(prodList);
     }
+    System.out.println(searchList);
+    System.out.println(searchList.size());
   }
 
-    public void addArticle(String category, Article article) {
-    List<Searchable> articles = searchList.get(category);
-    if (articles == null) {
-      articles = new ArrayList<>();
-      searchList.put(category, articles);
-    }
+  public void addArticle(Article article) {
+    List<Searchable> articles = new ArrayList<>();
     articles.add(article);
-    System.out.println("Add in category: " + category + ", articles: " + articles);
+    searchList.add(articles);
+
+    System.out.println("Add  article: " + article);
     //System.out.println("Current List: " + searchList);
   }
 
   public void printGetStringRepresentation() {
     System.out.println("printGetStringRepresentation");
-    for (List<Searchable> products : searchList.values()) {
+    for (List<Searchable> products : searchList) {
       if (products == null) {
         System.out.println(ANSI_GREEN + "ВНИМАНИЕ ! List is null" + ANSI_RESET);
         continue;
@@ -78,17 +71,18 @@ public class SearchEngine {
     }
   }
 
-  public List<Searchable> searchProduct(String findName) {
+
+  public Set<Searchable> searchProduct(String findName) {
     System.out.println("searchProduct");
-    List<Searchable> searchProductList = new ArrayList<>();
-    if (findName == null) {
-      System.out.println("findName is null ");
+    Set<Searchable> searchProductList = new HashSet<>(); // Используем HashSet вместо TreeSet, чтобы избежать необходимости в Comparable
+    if (findName == null || searchList == null) {
+      System.out.println("findName or searchList is null");
       return searchProductList;
     }
+
     boolean productFound = false;
-    for (List<Searchable> products : searchList.values()) {
+    for (List<Searchable> products : searchList) {
       for (Searchable product : products) {
-        // Проверка на null и соответствие searchTerm
         if (product != null && findName.equals(product.searchTerm())) {
           searchProductList.add(product);
           productFound = true;
@@ -100,13 +94,14 @@ public class SearchEngine {
     } else {
       System.out.println("Найдены продукты: " + searchProductList);
     }
-    return searchProductList;
+    Set<Searchable> searchProductTreeSet = new TreeSet<>(searchProductList);
+    return searchProductTreeSet;
   }
 
   public List<Searchable> searchForMostSuitable(String substring) {
     System.out.println("searchForMostSuitable");
     List<Searchable> mostSuitableProduct = new ArrayList<>();
-    for (List<Searchable> entry : searchList.values()) {
+    for (List<Searchable> entry : searchList) {
       for (Searchable object : entry) {
         int i = 0;
         int indexVhoda = object.searchTerm().indexOf(substring, i);
@@ -132,10 +127,32 @@ public class SearchEngine {
 
   public void printSerchList() {
     System.out.println("printSerchList");
-    for (Entry<String, List<Searchable>> product : searchList.entrySet()) {
+    for (List<Searchable> product : searchList) {
       System.out.println(product);
     }
   }
+
+//  public void printSerchList() {
+//    System.out.println("printSerchList");
+//    List<Searchable> allProducts = new ArrayList<>();
+//    for (List<Searchable> products : searchList) {
+//      allProducts.addAll(products);
+//    }
+//
+//    // Сортировка по длине имени, а затем в натуральном порядке
+//    allProducts.sort((s1, s2) -> {
+//      int lengthCompare = Integer.compare(s1.searchTerm().length(), s2.searchTerm().length());
+//      if (lengthCompare != 0) {
+//        return lengthCompare;
+//      } else {
+//        return s1.searchTerm().compareTo(s2.searchTerm());
+//      }
+//    });
+//
+//    for (Searchable product : allProducts) {
+//      System.out.println(product);
+//    }
+//  }
 
   public static final String ANSI_RESET = "\u001B[0m";
   public static final String ANSI_RED = "\u001B[31m";

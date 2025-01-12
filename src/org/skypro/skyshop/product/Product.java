@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import org.skypro.skyshop.searchProduct.Searchable;
 
-public abstract class Product implements Searchable {
+public abstract class Product implements Searchable, Comparable {
 
   private final String nameProduct;
 
@@ -55,6 +55,15 @@ public abstract class Product implements Searchable {
   @Override
   public int hashCode() {
     return Objects.hashCode(nameProduct);
+  }
+
+  @Override
+  public int compareTo(Object o) {
+    if (o instanceof Product) {
+      Product other = (Product) o;
+      return this.nameProduct.compareTo(other.nameProduct);
+    }
+    throw new IllegalArgumentException("Object is not a Product");
   }
 
   public static final String ANSI_RESET = "\u001B[0m";
