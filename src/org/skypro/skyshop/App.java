@@ -67,6 +67,7 @@ public class App {
     searchEngine.printGetStringRepresentation();
     System.out.println();
     searchEngine.searchProduct("article3");
+    searchEngine.searchProduct("Шило");
     System.out.println();
     searchEngine.searchForMostSuitable("Сало");
     System.out.println();

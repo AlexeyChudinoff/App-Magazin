@@ -50,11 +50,7 @@ public class SearchEngine {
     }
   }
 
-  public void sizeBasket() {
-    System.out.println("SizeBasket: " + searchList.size());
-  }
-
-  public void addArticle(String category, Article article) {
+    public void addArticle(String category, Article article) {
     List<Searchable> articles = searchList.get(category);
     if (articles == null) {
       articles = new ArrayList<>();
