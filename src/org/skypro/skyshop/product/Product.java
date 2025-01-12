@@ -1,6 +1,5 @@
 package org.skypro.skyshop.product;
 
-import java.util.List;
 import java.util.Objects;
 import org.skypro.skyshop.searchProduct.Searchable;
 
@@ -26,7 +25,8 @@ public abstract class Product implements Searchable, Comparable {
 
   @Override
   public String toString() {
-    return "Product- имя продукта : " + (nameProduct != null ? nameProduct : "null") + " ;  = цена =  "
+    return "Product- имя продукта : " + (nameProduct != null ? nameProduct : "null")
+        + " ;  = цена =  "
         + getCostProduct();
   }
 

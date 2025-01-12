@@ -1,9 +1,5 @@
 package org.skypro.skyshop.product;
 
-import java.util.Collection;
-import java.util.Iterator;
-import org.skypro.skyshop.searchProduct.Searchable;
-
 public class DiscountedProduct extends Product {
 
   private final int baseCost;
@@ -28,14 +24,6 @@ public class DiscountedProduct extends Product {
     this.baseCost = baseCost;
     this.discountBaseCost = discountBaseCost;
     costAfterDiscount = (this.baseCost * this.discountBaseCost) / 100;
-  }
-
-  public int getBaseCost() {
-    return baseCost;
-  }
-
-  public int getDiscountBaseCost() {
-    return discountBaseCost;
   }
 
   @Override
