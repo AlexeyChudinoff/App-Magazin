@@ -1,6 +1,8 @@
 package org.skypro.skyshop.searchProduct;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +17,7 @@ import org.skypro.skyshop.product.Product;
 
 public class SearchEngine {
 
-  private final Set<List<Searchable>> searchList = new TreeSet<>();
+  private final Map<String,List<Searchable>> searchList = new HashMap<>();
 
   public void addBasketInSearchList(ProductBasket basket) {
     System.out.println("addBasketInSearchList");
@@ -30,7 +32,7 @@ public class SearchEngine {
       List<Product> products = entry.getValue();
 
       // Если список продуктов для категории не пустой
-      if (products != null && !products.isEmpty()) {
+      if (category != null && products != null && !products.isEmpty()) {
         // Получаем или создаем список Searchable для данной категории
         List<Searchable> searchableList = searchList.computeIfAbsent(category,
             k -> new ArrayList<>());
