@@ -102,77 +102,44 @@ public class SearchEngine {
     return mostSuitableProduct;
   }
 
-//public List<Searchable> searchForMostSuitable(String substring) {
-//  System.out.println("searchForMostSuitable");
-//  if (substring == null || substring.isBlank()) {
-//    throw new IllegalArgumentException("ВНИМАНИЕ ! Подстрока для поиска не может быть пустой !");
+//  public void printSerchList() {
+//    System.out.println("printSerchList");
+//    // Используем TreeSet с кастомным компаратором
+//    Set<Searchable> printSerchList = new TreeSet<>((s1, s2) -> {
+//      if (s1 == null || s2 == null) {
+//        throw new IllegalArgumentException(
+//            "ВНИМАНИЕ ! Объекты для сравнения не могут быть null !");
+//      }
+//      return s1.searchTerm().compareTo(s2.searchTerm());
+//    }
+//    );
+//    printSerchList.addAll(searchList);
+//    for (Searchable product : printSerchList) {
+//      System.out.println(product);
+//    }
+//    System.out.println("printSerchList = " + printSerchList);
 //  }
-//  List<Searchable> mostSuitableProduct = new ArrayList<>();
-//  for (Searchable object : searchList) {
-//    int i = 0;
-//    int indexVhoda = object.searchTerm().indexOf(substring, i);
-//    if (indexVhoda < 0) {
-//      System.out.println("Не найдено :" + substring + " в " + object.searchTerm());
-//    }
-//    int count = 0;
-//    while (indexVhoda >= 0) {
-//      count++;
-//      mostSuitableProduct.add(object);
-//      i = indexVhoda + substring.length();
-//      indexVhoda = object.searchTerm().indexOf(substring, i);
-//    }
-//    if (count > 0) {
-//      System.out.println(
-//          "в объекте: " + object.searchTerm() + " =  Нашлось " + count + " раз(а)");
-//    }
-//  }
-//
-//  System.out.println("Search Basket: " + mostSuitableProduct);
-//  return mostSuitableProduct;
-//}
 
   public void printSerchList() {
     System.out.println("printSerchList");
-    // Используем TreeSet с кастомным компаратором
-    Set<Searchable> printSerchList = new TreeSet<>(new Comparator<Searchable>() {
-      @Override
-      public int compare(Searchable s1, Searchable s2) {
-        if (s1 == null || s2 == null) {
-          throw new IllegalArgumentException(
-              "ВНИМАНИЕ ! Объекты для сравнения не могут быть null !");
-        }
+    List<Searchable> allProducts = new ArrayList<>();
+    for (Searchable products : searchList) {
+      allProducts.add(products);
+    }
+    // Сортировка по длине имени, а затем в натуральном порядке
+    allProducts.sort((s1, s2) -> {
+      int lengthCompare = Integer.compare(s1.searchTerm().length(), s2.searchTerm().length());
+      if (lengthCompare != 0) {
+        return lengthCompare;
+      } else {
         return s1.searchTerm().compareTo(s2.searchTerm());
       }
-    }
-    );
-    printSerchList.addAll(searchList);
-    for (Searchable product : printSerchList) {
+    });
+
+    for (Searchable product : allProducts) {
       System.out.println(product);
     }
-    System.out.println("printSerchList = " + printSerchList);
   }
-
-//  public void printSerchList() {
-//    System.out.println("printSerchList");
-//    List<Searchable> allProducts = new ArrayList<>();
-//    for (List<Searchable> products : searchList) {
-//      allProducts.addAll(products);
-//    }
-//
-//    // Сортировка по длине имени, а затем в натуральном порядке
-//    allProducts.sort((s1, s2) -> {
-//      int lengthCompare = Integer.compare(s1.searchTerm().length(), s2.searchTerm().length());
-//      if (lengthCompare != 0) {
-//        return lengthCompare;
-//      } else {
-//        return s1.searchTerm().compareTo(s2.searchTerm());
-//      }
-//    });
-//
-//    for (Searchable product : allProducts) {
-//      System.out.println(product);
-//    }
-//  }
 
   public static final String ANSI_RESET = "\u001B[0m";
   public static final String ANSI_RED = "\u001B[31m";
