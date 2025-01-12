@@ -26,8 +26,8 @@ public class SimpleProduct extends Product {
 
   @Override
   public String toString() {
-    return "Simpl._" + getNameProduct() +
-        "  = цена =  " + costSimpleProduct;
+    return "(Simpl.) " + getNameProduct() +
+        " , цена =  " + costSimpleProduct;
   }
 
   public boolean isSpecial() {

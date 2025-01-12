@@ -47,10 +47,16 @@ public class Article implements Searchable, Comparable {
   // когда стало public class Article implements Comparable
   @Override
   public int compareTo(Object o) {
+    if (o == null) {
+      throw new IllegalArgumentException(" Объект для сравнения не может быть null !");
+    }
     if (o instanceof Article) {
       Article other = (Article) o;
+      if (this.nameArticle == null || other.nameArticle == null) {
+        throw new IllegalArgumentException(" Имя статьи не может быть null !");
+      }
       return this.nameArticle.compareTo(other.nameArticle);
     }
-    throw new IllegalArgumentException("Object is not an Article");
+    throw new IllegalArgumentException(" Объект не является Article");
   }
 }

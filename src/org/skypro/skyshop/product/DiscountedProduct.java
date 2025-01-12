@@ -45,9 +45,9 @@ public class DiscountedProduct extends Product {
 
   @Override
   public String toString() {
-    return "Disc._" + getNameProduct() + " = цена без скидки = " + baseCost +
+    return "(Disc.) " + getNameProduct() + " , цена без скидки = " + baseCost +
         " , скидка = " + discountBaseCost + "%" +
-        " = цена со скидкой = " + costAfterDiscount;
+        " , цена со скидкой = " + costAfterDiscount;
   }
 
   public boolean isSpecial() {

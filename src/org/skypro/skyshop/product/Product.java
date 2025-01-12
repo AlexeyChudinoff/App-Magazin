@@ -59,11 +59,17 @@ public abstract class Product implements Searchable, Comparable {
 
   @Override
   public int compareTo(Object o) {
+    if (o == null) {
+      throw new IllegalArgumentException("Объект для сравнения не может быть null !");
+    }
     if (o instanceof Product) {
       Product other = (Product) o;
+      if (this.nameProduct == null || other.nameProduct == null) {
+        throw new IllegalArgumentException("Имя продукта не может быть null !");
+      }
       return this.nameProduct.compareTo(other.nameProduct);
     }
-    throw new IllegalArgumentException("Object is not a Product");
+    throw new IllegalArgumentException("Объект не является Product");
   }
 
   public static final String ANSI_RESET = "\u001B[0m";

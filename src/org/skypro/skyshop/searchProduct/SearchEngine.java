@@ -1,6 +1,7 @@
 package org.skypro.skyshop.searchProduct;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -17,38 +18,29 @@ import org.skypro.skyshop.product.Product;
 
 public class SearchEngine {
 
-  private final Set<List<Searchable>> searchList = new HashSet<>();
+  private final Set<Searchable> searchList = new HashSet<>();
 
   public void addBasketInSearchList(ProductBasket basket) {
     System.out.println("addBasketInSearchList");
-    Map<String, List<Product>> copiedList = basket.getProductBasket();
-    if (copiedList == null) {
-      throw new IllegalArgumentException("Basket cannot be null");
+    if (basket == null) {
+      throw new IllegalArgumentException("ВНИМАНИЕ ! Корзина не может быть null !");
     }
-    Set<Searchable> setSeachable = new HashSet<>();
-
+    Map<String, List<Product>> copiedList = basket.getProductBasket();
     for (List<Product> products : copiedList.values()) {
       if (products != null) {
         for (Product product : products) {
           if (product != null) {
-            setSeachable.add(product);
+            searchList.add(product);
           }
         }
       }
-    }
-    for (Searchable product : setSeachable) {
-      List<Searchable> prodList = new ArrayList<>();
-      prodList.add(product);
-      searchList.add(prodList);
     }
     System.out.println(searchList);
     System.out.println(searchList.size());
   }
 
   public void addArticle(Article article) {
-    List<Searchable> articles = new ArrayList<>();
-    articles.add(article);
-    searchList.add(articles);
+    searchList.add(article);
 
     System.out.println("Add  article: " + article);
     //System.out.println("Current List: " + searchList);
@@ -56,37 +48,31 @@ public class SearchEngine {
 
   public void printGetStringRepresentation() {
     System.out.println("printGetStringRepresentation");
-    for (List<Searchable> products : searchList) {
-      if (products == null) {
-        System.out.println(ANSI_GREEN + "ВНИМАНИЕ ! List is null" + ANSI_RESET);
+    if (searchList == null || searchList.isEmpty()) {
+      System.out.println("ВНИМАНИЕ ! Список поиска пуст или равен null !");
+      return;
+    }
+    for (Searchable product : searchList) {
+      if (product == null) {
+        System.out.println(ANSI_GREEN + "ВНИМАНИЕ ! product is null" + ANSI_RESET);
         continue;
       }
-      for (Searchable product : products) {
-        if (product == null) {
-          System.out.println(ANSI_GREEN + "ВНИМАНИЕ ! product is null" + ANSI_RESET);
-          continue;
-        }
-        product.getStringRepresentation();
-      }
+      product.getStringRepresentation();
     }
   }
 
 
   public Set<Searchable> searchProduct(String findName) {
     System.out.println("searchProduct");
-    Set<Searchable> searchProductList = new HashSet<>(); // Используем HashSet вместо TreeSet, чтобы избежать необходимости в Comparable
-    if (findName == null || searchList == null) {
-      System.out.println("findName or searchList is null");
-      return searchProductList;
+    Set<Searchable> searchProductList = new HashSet<>();
+    if (findName == null || findName.isBlank()) {
+      throw new IllegalArgumentException("ВНИМАНИЕ ! Имя для поиска не может быть пустым !");
     }
-
     boolean productFound = false;
-    for (List<Searchable> products : searchList) {
-      for (Searchable product : products) {
-        if (product != null && findName.equals(product.searchTerm())) {
-          searchProductList.add(product);
-          productFound = true;
-        }
+    for (Searchable product : searchList) {
+      if (product != null && findName.equals(product.searchTerm())) {
+        searchProductList.add(product);
+        productFound = true;
       }
     }
     if (!productFound) {
@@ -100,36 +86,75 @@ public class SearchEngine {
 
   public List<Searchable> searchForMostSuitable(String substring) {
     System.out.println("searchForMostSuitable");
+    if (substring == null || substring.isBlank()) {
+      throw new IllegalArgumentException("ВНИМАНИЕ ! Подстрока для поиска не может быть пустой !");
+    }
     List<Searchable> mostSuitableProduct = new ArrayList<>();
-    for (List<Searchable> entry : searchList) {
-      for (Searchable object : entry) {
-        int i = 0;
-        int indexVhoda = object.searchTerm().indexOf(substring, i);
-        if (indexVhoda < 0) {
-          System.out.println("Не найдено :" + substring + " в " + object.searchTerm());
-        }
-        int count = 0;
-        while (indexVhoda >= 0) {
-          count++;
-          mostSuitableProduct.add(object);
-          i = indexVhoda + substring.length();
-          indexVhoda = object.searchTerm().indexOf(substring, i);
-        }
-        if (count > 0) {
-          System.out.println(
-              "в объекте: " + object.searchTerm() + " =  Нашлось " + count + " раз(а)");
-        }
+    for (Searchable object : searchList) {
+      int count = 0;
+      int i = 0;
+      while ((i = object.searchTerm().indexOf(substring, i)) >= 0) {
+        count++;
+        i += substring.length();
+      }
+      if (count > 0) {
+        mostSuitableProduct.add(object);
+        System.out.println(
+            "в объекте: " + object.searchTerm() + " =  Нашлось " + count + " раз(а)");
       }
     }
     System.out.println("Search Basket: " + mostSuitableProduct);
     return mostSuitableProduct;
   }
 
+//public List<Searchable> searchForMostSuitable(String substring) {
+//  System.out.println("searchForMostSuitable");
+//  if (substring == null || substring.isBlank()) {
+//    throw new IllegalArgumentException("ВНИМАНИЕ ! Подстрока для поиска не может быть пустой !");
+//  }
+//  List<Searchable> mostSuitableProduct = new ArrayList<>();
+//  for (Searchable object : searchList) {
+//    int i = 0;
+//    int indexVhoda = object.searchTerm().indexOf(substring, i);
+//    if (indexVhoda < 0) {
+//      System.out.println("Не найдено :" + substring + " в " + object.searchTerm());
+//    }
+//    int count = 0;
+//    while (indexVhoda >= 0) {
+//      count++;
+//      mostSuitableProduct.add(object);
+//      i = indexVhoda + substring.length();
+//      indexVhoda = object.searchTerm().indexOf(substring, i);
+//    }
+//    if (count > 0) {
+//      System.out.println(
+//          "в объекте: " + object.searchTerm() + " =  Нашлось " + count + " раз(а)");
+//    }
+//  }
+//
+//  System.out.println("Search Basket: " + mostSuitableProduct);
+//  return mostSuitableProduct;
+//}
+
   public void printSerchList() {
     System.out.println("printSerchList");
-    for (List<Searchable> product : searchList) {
+    // Используем TreeSet с кастомным компаратором
+    Set<Searchable> printSerchList = new TreeSet<>(new Comparator<Searchable>() {
+      @Override
+      public int compare(Searchable s1, Searchable s2) {
+        if (s1 == null || s2 == null) {
+          throw new IllegalArgumentException(
+              "ВНИМАНИЕ ! Объекты для сравнения не могут быть null !");
+        }
+        return s1.searchTerm().compareTo(s2.searchTerm());
+      }
+    }
+    );
+    printSerchList.addAll(searchList);
+    for (Searchable product : printSerchList) {
       System.out.println(product);
     }
+    System.out.println("printSerchList = " + printSerchList);
   }
 
 //  public void printSerchList() {
