@@ -7,27 +7,25 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.TreeMap;
-import org.skypro.skyshop.searchProduct.Searchable;
 
 public class ProductBasket {
 
   private final Map<String, List<Product>> productBasket = new HashMap<>();
 
   public void addProduct(String category, Product product) {
-    // Получаем список продуктов для данной категории
+    if (category == null || category.isBlank()) {
+      throw new IllegalArgumentException("ВНИМАНИЕ ! Категория не может быть пустой !");
+    }
+    if (product == null) {
+      throw new IllegalArgumentException("ВНИМАНИЕ ! Продукт не может быть null !");
+    }
     List<Product> products = productBasket.get(category);
-    // Если список для категории еще не существует, создаем его
     if (products == null) {
       products = new ArrayList<>();
       productBasket.put(category, products);
     }
-    // Добавляем продукт в список
     products.add(product);
-
     System.out.println("Add in category: " + category + ", product: " + product);
-    //System.out.println("Current basket: " + productBasket);
   }
 
   public Map<String, List<Product>> getProductBasket() {
@@ -86,9 +84,12 @@ public class ProductBasket {
 
   public List<Product> dellProductByName(String name) {
     System.out.println("dellProductByName");
+    if (name == null || name.isBlank()) {
+      throw new IllegalArgumentException("ВНИМАНИЕ ! Имя продукта не может быть пустым !");
+    }
     List<Product> dellBasket = new ArrayList<>();
     boolean productFound = false;
-    for (List<Product> products : productBasket.values()){
+    for (List<Product> products : productBasket.values()) {
       if (products != null) {
         // только через Iterator удалять элементы из списка
         // во время итерации, иначе ConcurrentModificationException
@@ -110,5 +111,6 @@ public class ProductBasket {
     System.out.println("Удаленные продукты: " + dellBasket);
     return dellBasket;
   }
+
 
 }// class

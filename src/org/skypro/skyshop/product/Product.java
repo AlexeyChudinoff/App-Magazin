@@ -1,9 +1,9 @@
 package org.skypro.skyshop.product;
 
-import java.util.List;
+import java.util.Objects;
 import org.skypro.skyshop.searchProduct.Searchable;
 
-public abstract class Product implements Searchable {
+public abstract class Product implements Searchable, Comparable {
 
   private final String nameProduct;
 
@@ -25,7 +25,8 @@ public abstract class Product implements Searchable {
 
   @Override
   public String toString() {
-    return "Product- имя продукта : " + (nameProduct != null ? nameProduct : "null") + " ;  = цена =  "
+    return "Product- имя продукта : " + (nameProduct != null ? nameProduct : "null")
+        + " ;  = цена =  "
         + getCostProduct();
   }
 
@@ -37,6 +38,38 @@ public abstract class Product implements Searchable {
   @Override
   public String searchTipContent() {
     return "PRODUCT";
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Product product = (Product) o;
+    return Objects.equals(nameProduct, product.nameProduct);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(nameProduct);
+  }
+
+  @Override
+  public int compareTo(Object o) {
+    if (o == null) {
+      throw new IllegalArgumentException("Объект для сравнения не может быть null !");
+    }
+    if (o instanceof Product) {
+      Product other = (Product) o;
+      if (this.nameProduct == null || other.nameProduct == null) {
+        throw new IllegalArgumentException("Имя продукта не может быть null !");
+      }
+      return this.nameProduct.compareTo(other.nameProduct);
+    }
+    throw new IllegalArgumentException("Объект не является Product");
   }
 
   public static final String ANSI_RESET = "\u001B[0m";

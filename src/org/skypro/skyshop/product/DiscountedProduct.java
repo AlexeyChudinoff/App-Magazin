@@ -1,9 +1,5 @@
 package org.skypro.skyshop.product;
 
-import java.util.Collection;
-import java.util.Iterator;
-import org.skypro.skyshop.searchProduct.Searchable;
-
 public class DiscountedProduct extends Product {
 
   private final int baseCost;
@@ -30,14 +26,6 @@ public class DiscountedProduct extends Product {
     costAfterDiscount = (this.baseCost * this.discountBaseCost) / 100;
   }
 
-  public int getBaseCost() {
-    return baseCost;
-  }
-
-  public int getDiscountBaseCost() {
-    return discountBaseCost;
-  }
-
   @Override
   public int getCostProduct() {
     return costAfterDiscount;
@@ -45,9 +33,9 @@ public class DiscountedProduct extends Product {
 
   @Override
   public String toString() {
-    return "Disc._" + getNameProduct() + " = цена без скидки = " + baseCost +
+    return "(Disc.) " + getNameProduct() + " , цена без скидки = " + baseCost +
         " , скидка = " + discountBaseCost + "%" +
-        " = цена со скидкой = " + costAfterDiscount;
+        " , цена со скидкой = " + costAfterDiscount;
   }
 
   public boolean isSpecial() {

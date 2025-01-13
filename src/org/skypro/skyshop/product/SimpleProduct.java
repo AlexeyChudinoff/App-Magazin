@@ -1,9 +1,5 @@
 package org.skypro.skyshop.product;
 
-import java.util.Collection;
-import java.util.Iterator;
-import org.skypro.skyshop.searchProduct.Searchable;
-
 public class SimpleProduct extends Product {
 
   int costSimpleProduct;
@@ -26,8 +22,8 @@ public class SimpleProduct extends Product {
 
   @Override
   public String toString() {
-    return "Simpl._" + getNameProduct() +
-        "  = цена =  " + costSimpleProduct;
+    return "(Simpl.) " + getNameProduct() +
+        " , цена =  " + costSimpleProduct;
   }
 
   public boolean isSpecial() {
