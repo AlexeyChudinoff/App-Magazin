@@ -128,11 +128,11 @@ public class SearchEngine {
     }
     // Сортировка по длине имени, а затем в натуральном порядке
     allProducts.sort((s1, s2) -> {
-      int lengthCompare = Integer.compare(s1.searchTerm().length(), s2.searchTerm().length());
+      int lengthCompare = Integer.compare(s2.searchTerm().length(), s1.searchTerm().length());
       if (lengthCompare != 0) {
         return lengthCompare;
       } else {
-        return s1.searchTerm().compareTo(s2.searchTerm());
+        return s2.searchTerm().compareTo(s1.searchTerm());
       }
     });
 
