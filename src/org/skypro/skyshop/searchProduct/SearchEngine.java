@@ -1,7 +1,6 @@
 package org.skypro.skyshop.searchProduct;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -31,14 +30,12 @@ public class SearchEngine {
       }
     }
     System.out.println(searchList);
-    System.out.println(searchList.size());
+    System.out.println("size bascet " + searchList.size());
   }
 
   public void addArticle(Article article) {
     searchList.add(article);
-
     System.out.println("Add  article: " + article);
-    //System.out.println("Current List: " + searchList);
   }
 
   public void printGetStringRepresentation() {
@@ -55,7 +52,6 @@ public class SearchEngine {
       product.getStringRepresentation();
     }
   }
-
 
   public Set<Searchable> searchProduct(String findName) {
     System.out.println("searchProduct");
@@ -102,24 +98,6 @@ public class SearchEngine {
     return mostSuitableProduct;
   }
 
-//  public void printSerchList() {
-//    System.out.println("printSerchList");
-//    // Используем TreeSet с кастомным компаратором
-//    Set<Searchable> printSerchList = new TreeSet<>((s1, s2) -> {
-//      if (s1 == null || s2 == null) {
-//        throw new IllegalArgumentException(
-//            "ВНИМАНИЕ ! Объекты для сравнения не могут быть null !");
-//      }
-//      return s1.searchTerm().compareTo(s2.searchTerm());
-//    }
-//    );
-//    printSerchList.addAll(searchList);
-//    for (Searchable product : printSerchList) {
-//      System.out.println(product);
-//    }
-//    System.out.println("printSerchList = " + printSerchList);
-//  }
-
   public void printSerchList() {
     System.out.println("printSerchList");
     List<Searchable> allProducts = new ArrayList<>();
@@ -128,6 +106,10 @@ public class SearchEngine {
     }
     // Сортировка по длине имени, а затем в натуральном порядке
     allProducts.sort((s1, s2) -> {
+      if (s1 == null || s2 == null) {
+        throw new IllegalArgumentException(
+            "ВНИМАНИЕ ! Объекты для сравнения не могут быть null !");
+      }//метод compareTo надо прописать в тех классах, объекты которых будут сравниваться
       int lengthCompare = Integer.compare(s2.searchTerm().length(), s1.searchTerm().length());
       if (lengthCompare != 0) {
         return lengthCompare;

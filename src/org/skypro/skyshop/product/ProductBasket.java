@@ -1,7 +1,6 @@
 package org.skypro.skyshop.product;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -111,6 +110,5 @@ public class ProductBasket {
     System.out.println("Удаленные продукты: " + dellBasket);
     return dellBasket;
   }
-
 
 }// class
