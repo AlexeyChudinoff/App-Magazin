@@ -44,30 +44,64 @@ public class ProductBasket {
       });
     }
   }//  а вот так без категорий только продукты
-//      productBasket.values().stream().flatMap(List::stream)
-//          .forEach(product -> System.out.println("Продукты = " + product));
+//      productBasket.values().stream()
+//      .flatMap(List::stream)
+//      .forEach(product -> System.out.println("Продукты = " + product));
 
-  public void printBasketCost() {
+//  public void printBasketCost() {
+//    System.out.println("printBasketCost");
+//    if (productBasket.isEmpty()) {
+//      System.out.println("Корзина пуста.");
+//    } else {
+//      int summ = 0;
+//      productBasket.values().stream()
+//          .flatMap(List::stream)
+//          .forEach(product -> System.out.println(product.searchTerm() +
+//              " cost " + product.getCostProduct()))
+//          .sum();
+//    }
+//    System.out.println("________________________");
+//    // System.out.println("Сумма корзины: " + summ);
+//  }
+
+  public void printBasketCost2() {
     System.out.println("printBasketCost");
     if (productBasket.isEmpty()) {
       System.out.println("Корзина пуста.");
     } else {
-      int summ = 0;
-      for (List<Product> products : productBasket.values()) {//по каждому списку
-        if (products != null) {
-          for (Product product : products) {// по каждому продукту
-            if (product != null) {
-              System.out.println(product.searchTerm() +
-                  " cost " + product.getCostProduct());
-              summ = summ + product.getCostProduct();
-            }
-          }
-        }
-      }
+      int summ = productBasket.values().stream()
+          .flatMap(List::stream)
+          .mapToInt(product -> {
+            System.out.println(product.searchTerm() + " Цена " + product.getCostProduct());
+            return product.getCostProduct();
+          })
+          .sum();
       System.out.println("________________________");
       System.out.println("Сумма корзины: " + summ);
     }
   }
+
+//  public void printBasketCost() {
+//    System.out.println("printBasketCost");
+//    if (productBasket.isEmpty()) {
+//      System.out.println("Корзина пуста.");
+//    } else {
+//      int summ = 0;
+//      for (List<Product> products : productBasket.values()) {//по каждому списку
+//        if (products != null) {
+//          for (Product product : products) {// по каждому продукту
+//            if (product != null) {
+//              System.out.println(product.searchTerm() +
+//                  " cost " + product.getCostProduct());
+//              summ = summ + product.getCostProduct();
+//            }
+//          }
+//        }
+//      }
+//      System.out.println("________________________");
+//      System.out.println("Сумма корзины: " + summ);
+//    }
+//  }
 
   public void specialProduct() {
     System.out.println("Spec tovar : ");
