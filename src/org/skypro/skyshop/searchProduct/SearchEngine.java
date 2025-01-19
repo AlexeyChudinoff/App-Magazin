@@ -72,28 +72,6 @@ public class SearchEngine {
     return searchProdList;
   }
 
-//  public Set<Searchable> searchProduct(String findName) {
-//    System.out.println("searchProduct");
-//    Set<Searchable> searchProductList = new HashSet<>();
-//    if (findName == null || findName.isBlank()) {
-//      throw new IllegalArgumentException("ВНИМАНИЕ ! Имя для поиска не может быть пустым !");
-//    }
-//    boolean productFound = false;
-//    for (Searchable product : searchList) {
-//      if (product != null && findName.equals(product.searchTerm())) {
-//        searchProductList.add(product);
-//        productFound = true;
-//      }
-//    }
-//    if (!productFound) {
-//      System.out.println("Не найден продукт: " + findName);
-//    } else {
-//      System.out.println("Найдены продукты: " + searchProductList);
-//    }
-//    Set<Searchable> searchProductTreeSet = new TreeSet<>(searchProductList);
-//    return searchProductTreeSet;
-//  }
-
   public List<Searchable> searchForMostSuitable(String substring) {
     System.out.println("searchForMostSuitable");
     if (substring == null || substring.isBlank()) {

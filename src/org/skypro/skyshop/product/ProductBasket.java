@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 public class ProductBasket {
 
@@ -37,11 +38,14 @@ public class ProductBasket {
       System.out.println("Корзина пуста");
     } else {
       System.out.println("Состав корзины:");
-      for (Entry<String, List<Product>> product : productBasket.entrySet()) {
-        System.out.println(product);
-      }
+      productBasket.forEach((category, product) -> {
+        System.out.println("Категория: " + category);
+        System.out.println("Продукты: " + product);
+      });
     }
-  }
+  }//  а вот так без категорий только продукты
+//      productBasket.values().stream().flatMap(List::stream)
+//          .forEach(product -> System.out.println("Продукты = " + product));
 
   public void printBasketCost() {
     System.out.println("printBasketCost");
