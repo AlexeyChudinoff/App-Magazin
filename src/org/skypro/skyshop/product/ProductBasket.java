@@ -48,23 +48,7 @@ public class ProductBasket {
 //      .flatMap(List::stream)
 //      .forEach(product -> System.out.println("Продукты = " + product));
 
-//  public void printBasketCost() {
-//    System.out.println("printBasketCost");
-//    if (productBasket.isEmpty()) {
-//      System.out.println("Корзина пуста.");
-//    } else {
-//      int summ = 0;
-//      productBasket.values().stream()
-//          .flatMap(List::stream)
-//          .forEach(product -> System.out.println(product.searchTerm() +
-//              " cost " + product.getCostProduct()))
-//          .sum();
-//    }
-//    System.out.println("________________________");
-//    // System.out.println("Сумма корзины: " + summ);
-//  }
-
-  public void printBasketCost2() {
+  public void printBasketCost() {
     System.out.println("printBasketCost");
     if (productBasket.isEmpty()) {
       System.out.println("Корзина пуста.");
@@ -81,43 +65,31 @@ public class ProductBasket {
     }
   }
 
-//  public void printBasketCost() {
-//    System.out.println("printBasketCost");
-//    if (productBasket.isEmpty()) {
-//      System.out.println("Корзина пуста.");
-//    } else {
-//      int summ = 0;
-//      for (List<Product> products : productBasket.values()) {//по каждому списку
-//        if (products != null) {
-//          for (Product product : products) {// по каждому продукту
-//            if (product != null) {
-//              System.out.println(product.searchTerm() +
-//                  " cost " + product.getCostProduct());
-//              summ = summ + product.getCostProduct();
-//            }
+  public void specialProduct() {
+    System.out.println("Специальные товары : ");
+    long size = productBasket.values().stream()
+        .flatMap(List::stream)
+        .filter(Product::isSpecial)
+       // .peek(product -> System.out.println(product))
+        .peek(System.out::println)
+        .count();
+    System.out.println("Всего: " + size + " продуктов");
+
+  }
+
+//        0;
+//    for (List<Product> products : productBasket.values()) {
+//      if (products != null) {
+//        for (Product product : products) {
+//          if (product != null && product.isSpecial()) {
+//            namber++;
+//            System.out.println(product);
 //          }
 //        }
 //      }
-//      System.out.println("________________________");
-//      System.out.println("Сумма корзины: " + summ);
 //    }
+//    System.out.println(" Всего спец. товаров: " + namber + " шт");
 //  }
-
-  public void specialProduct() {
-    System.out.println("Spec tovar : ");
-    int namber = 0;
-    for (List<Product> products : productBasket.values()) {
-      if (products != null) {
-        for (Product product : products) {
-          if (product != null && product.isSpecial()) {
-            namber++;
-            System.out.println(product);
-          }
-        }
-      }
-    }
-    System.out.println(" Всего спец. товаров: " + namber + " шт");
-  }
 
   public List<Product> dellProductByName(String name) {
     System.out.println("dellProductByName");
