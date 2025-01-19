@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.ProductBasket;
 import org.skypro.skyshop.product.Product;
@@ -55,25 +56,43 @@ public class SearchEngine {
 
   public Set<Searchable> searchProduct(String findName) {
     System.out.println("searchProduct");
-    Set<Searchable> searchProductList = new HashSet<>();
     if (findName == null || findName.isBlank()) {
       throw new IllegalArgumentException("ВНИМАНИЕ ! Имя для поиска не может быть пустым !");
     }
-    boolean productFound = false;
-    for (Searchable product : searchList) {
-      if (product != null && findName.equals(product.searchTerm())) {
-        searchProductList.add(product);
-        productFound = true;
-      }
-    }
-    if (!productFound) {
+    Set<Searchable> searchProdList = searchList.stream()
+        .filter(product -> product != null && findName.equalsIgnoreCase(product.searchTerm()))
+        .collect(Collectors.toCollection(() -> new TreeSet<>(new StringLengthComparator())));
+
+    if (searchProdList.isEmpty()) {
       System.out.println("Не найден продукт: " + findName);
     } else {
-      System.out.println("Найдены продукты: " + searchProductList);
+      System.out.println("Найдены продукты: " + searchProdList);
     }
-    Set<Searchable> searchProductTreeSet = new TreeSet<>(searchProductList);
-    return searchProductTreeSet;
+
+    return searchProdList;
   }
+
+//  public Set<Searchable> searchProduct(String findName) {
+//    System.out.println("searchProduct");
+//    Set<Searchable> searchProductList = new HashSet<>();
+//    if (findName == null || findName.isBlank()) {
+//      throw new IllegalArgumentException("ВНИМАНИЕ ! Имя для поиска не может быть пустым !");
+//    }
+//    boolean productFound = false;
+//    for (Searchable product : searchList) {
+//      if (product != null && findName.equals(product.searchTerm())) {
+//        searchProductList.add(product);
+//        productFound = true;
+//      }
+//    }
+//    if (!productFound) {
+//      System.out.println("Не найден продукт: " + findName);
+//    } else {
+//      System.out.println("Найдены продукты: " + searchProductList);
+//    }
+//    Set<Searchable> searchProductTreeSet = new TreeSet<>(searchProductList);
+//    return searchProductTreeSet;
+//  }
 
   public List<Searchable> searchForMostSuitable(String substring) {
     System.out.println("searchForMostSuitable");

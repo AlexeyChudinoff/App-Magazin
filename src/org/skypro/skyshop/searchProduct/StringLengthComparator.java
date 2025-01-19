@@ -20,11 +20,10 @@ import java.util.Comparator;
 //  }
 //}
 
-public class StringLengthComparator implements Comparator<String> {
+public class StringLengthComparator implements Comparator<Searchable> {
 
   @Override
-  public int compare(String s2, String s1) {
-    return Integer.compare(s2.length(), s1.length());
+  public int compare(Searchable s2, Searchable s1) {
+    return Integer.compare(s2.searchTerm().length(), s1.searchTerm().length());
   }
-
 }

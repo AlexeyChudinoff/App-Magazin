@@ -62,4 +62,5 @@ public class Article implements Searchable, Comparable {
     }
     throw new IllegalArgumentException(" Объект не является Article");
   }
+
 }
