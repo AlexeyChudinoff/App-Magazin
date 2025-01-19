@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
+
 
 public class ProductBasket {
 
@@ -43,11 +42,7 @@ public class ProductBasket {
         System.out.println("Продукты: " + product);
       });
     }
-  }//  а вот так без категорий только продукты
-//      productBasket.values().stream()
-//      .flatMap(List::stream)
-//      .forEach(product -> System.out.println("Продукты = " + product));
-
+  }
   public void printBasketCost() {
     System.out.println("printBasketCost");
     if (productBasket.isEmpty()) {
@@ -70,26 +65,12 @@ public class ProductBasket {
     long size = productBasket.values().stream()
         .flatMap(List::stream)
         .filter(Product::isSpecial)
-       // .peek(product -> System.out.println(product))
-        .peek(System.out::println)
+        .peek(product -> System.out.println(product))
+        // .peek(System.out::println)
         .count();
     System.out.println("Всего: " + size + " продуктов");
 
   }
-
-//        0;
-//    for (List<Product> products : productBasket.values()) {
-//      if (products != null) {
-//        for (Product product : products) {
-//          if (product != null && product.isSpecial()) {
-//            namber++;
-//            System.out.println(product);
-//          }
-//        }
-//      }
-//    }
-//    System.out.println(" Всего спец. товаров: " + namber + " шт");
-//  }
 
   public List<Product> dellProductByName(String name) {
     System.out.println("dellProductByName");

@@ -101,7 +101,6 @@ public class SearchEngine {
     for (Searchable products : searchList) {
       allProducts.add(products);
     }
-    // Сортировка по длине имени, а затем в натуральном порядке
     allProducts.sort((s1, s2) -> {
       if (s1 == null || s2 == null) {
         throw new IllegalArgumentException(
