@@ -1,12 +1,11 @@
 package org.skypro.skyshop.product;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+
 
 public class ProductBasket {
 
@@ -38,48 +37,39 @@ public class ProductBasket {
       System.out.println("Корзина пуста");
     } else {
       System.out.println("Состав корзины:");
-      for (Entry<String, List<Product>> product : productBasket.entrySet()) {
-        System.out.println(product);
-      }
+      productBasket.forEach((category, product) -> {
+        System.out.println("Категория: " + category);
+        System.out.println("Продукты: " + product);
+      });
     }
   }
-
   public void printBasketCost() {
     System.out.println("printBasketCost");
     if (productBasket.isEmpty()) {
       System.out.println("Корзина пуста.");
     } else {
-      int summ = 0;
-      for (List<Product> products : productBasket.values()) {//по каждому списку
-        if (products != null) {
-          for (Product product : products) {// по каждому продукту
-            if (product != null) {
-              System.out.println(product.searchTerm() +
-                  " cost " + product.getCostProduct());
-              summ = summ + product.getCostProduct();
-            }
-          }
-        }
-      }
+      int summ = productBasket.values().stream()
+          .flatMap(List::stream)
+          .mapToInt(product -> {
+            System.out.println(product.searchTerm() + " Цена " + product.getCostProduct());
+            return product.getCostProduct();
+          })
+          .sum();
       System.out.println("________________________");
       System.out.println("Сумма корзины: " + summ);
     }
   }
 
   public void specialProduct() {
-    System.out.println("Spec tovar : ");
-    int namber = 0;
-    for (List<Product> products : productBasket.values()) {
-      if (products != null) {
-        for (Product product : products) {
-          if (product != null && product.isSpecial()) {
-            namber++;
-            System.out.println(product);
-          }
-        }
-      }
-    }
-    System.out.println(" Всего спец. товаров: " + namber + " шт");
+    System.out.println("Специальные товары : ");
+    long size = productBasket.values().stream()
+        .flatMap(List::stream)
+        .filter(Product::isSpecial)
+        .peek(product -> System.out.println(product))
+        // .peek(System.out::println)
+        .count();
+    System.out.println("Всего: " + size + " продуктов");
+
   }
 
   public List<Product> dellProductByName(String name) {
@@ -111,6 +101,5 @@ public class ProductBasket {
     System.out.println("Удаленные продукты: " + dellBasket);
     return dellBasket;
   }
-
 
 }// class

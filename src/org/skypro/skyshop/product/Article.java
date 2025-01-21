@@ -18,10 +18,12 @@ public class Article implements Searchable, Comparable {
     return "Название статьи = " + (nameArticle != null ? nameArticle : "null") +
         " , Текст статьи = " + (textArticle != null ? textArticle : "null");
   }
+
   @Override
   public String searchTerm() {
-    return nameArticle ;
+    return nameArticle;
   }
+
   @Override
   public String searchTipContent() {
     return "ARTICLE";
@@ -36,6 +38,7 @@ public class Article implements Searchable, Comparable {
       return false;
     }
     Article article = (Article) o;
+    // оставляем только имя, т.к искать и сравнивать будем только по имени
     return Objects.equals(nameArticle, article.nameArticle);
   }
 
@@ -59,4 +62,5 @@ public class Article implements Searchable, Comparable {
     }
     throw new IllegalArgumentException(" Объект не является Article");
   }
+
 }

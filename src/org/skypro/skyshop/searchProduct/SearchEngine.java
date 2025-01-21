@@ -1,12 +1,12 @@
 package org.skypro.skyshop.searchProduct;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 import org.skypro.skyshop.product.Article;
 import org.skypro.skyshop.product.ProductBasket;
 import org.skypro.skyshop.product.Product;
@@ -31,14 +31,12 @@ public class SearchEngine {
       }
     }
     System.out.println(searchList);
-    System.out.println(searchList.size());
+    System.out.println("size bascet " + searchList.size());
   }
 
   public void addArticle(Article article) {
     searchList.add(article);
-
     System.out.println("Add  article: " + article);
-    //System.out.println("Current List: " + searchList);
   }
 
   public void printGetStringRepresentation() {
@@ -56,27 +54,22 @@ public class SearchEngine {
     }
   }
 
-
   public Set<Searchable> searchProduct(String findName) {
     System.out.println("searchProduct");
-    Set<Searchable> searchProductList = new HashSet<>();
     if (findName == null || findName.isBlank()) {
       throw new IllegalArgumentException("ВНИМАНИЕ ! Имя для поиска не может быть пустым !");
     }
-    boolean productFound = false;
-    for (Searchable product : searchList) {
-      if (product != null && findName.equals(product.searchTerm())) {
-        searchProductList.add(product);
-        productFound = true;
-      }
-    }
-    if (!productFound) {
+    Set<Searchable> searchProdList = searchList.stream()
+        .filter(product -> product != null && findName.equalsIgnoreCase(product.searchTerm()))
+        .collect(Collectors.toCollection(() -> new TreeSet<>(new StringLengthComparator())));
+
+    if (searchProdList.isEmpty()) {
       System.out.println("Не найден продукт: " + findName);
     } else {
-      System.out.println("Найдены продукты: " + searchProductList);
+      System.out.println("Найдены продукты: " + searchProdList);
     }
-    Set<Searchable> searchProductTreeSet = new TreeSet<>(searchProductList);
-    return searchProductTreeSet;
+
+    return searchProdList;
   }
 
   public List<Searchable> searchForMostSuitable(String substring) {
@@ -102,32 +95,17 @@ public class SearchEngine {
     return mostSuitableProduct;
   }
 
-//  public void printSerchList() {
-//    System.out.println("printSerchList");
-//    // Используем TreeSet с кастомным компаратором
-//    Set<Searchable> printSerchList = new TreeSet<>((s1, s2) -> {
-//      if (s1 == null || s2 == null) {
-//        throw new IllegalArgumentException(
-//            "ВНИМАНИЕ ! Объекты для сравнения не могут быть null !");
-//      }
-//      return s1.searchTerm().compareTo(s2.searchTerm());
-//    }
-//    );
-//    printSerchList.addAll(searchList);
-//    for (Searchable product : printSerchList) {
-//      System.out.println(product);
-//    }
-//    System.out.println("printSerchList = " + printSerchList);
-//  }
-
   public void printSerchList() {
     System.out.println("printSerchList");
     List<Searchable> allProducts = new ArrayList<>();
     for (Searchable products : searchList) {
       allProducts.add(products);
     }
-    // Сортировка по длине имени, а затем в натуральном порядке
     allProducts.sort((s1, s2) -> {
+      if (s1 == null || s2 == null) {
+        throw new IllegalArgumentException(
+            "ВНИМАНИЕ ! Объекты для сравнения не могут быть null !");
+      }//метод compareTo надо прописать в тех классах, объекты которых будут сравниваться
       int lengthCompare = Integer.compare(s2.searchTerm().length(), s1.searchTerm().length());
       if (lengthCompare != 0) {
         return lengthCompare;

@@ -54,12 +54,10 @@ public class App {
     Article article1 = new Article("artic1", "Инструкция к article1");
     Article article2 = new Article("articl2", "Инструкция к article2");
     Article article3 = new Article("article3", "Инструкция к article3");
-   // Article article4 = new Article("article4", "Инструкция к article4");
     System.out.println("..Adding Articles in SearchList");
-    searchEngine.addArticle( article1);
-    searchEngine.addArticle( article2);
-    searchEngine.addArticle( article3);
-    //searchEngine.addArticle("Инструкции", article4);
+    searchEngine.addArticle(article1);
+    searchEngine.addArticle(article2);
+    searchEngine.addArticle(article3);
     System.out.println();
 
     searchEngine.printSerchList();
