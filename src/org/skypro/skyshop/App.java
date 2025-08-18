@@ -70,6 +70,5 @@ public class App {
     searchEngine.searchForMostSuitable("Сало");
     System.out.println();
 
-
   }//maim
 }//App
