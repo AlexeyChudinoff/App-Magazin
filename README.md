@@ -257,3 +257,4 @@ engine.searchExactMatch("iPhone");
 
 ⭐ Если проект вам понравился, поставьте звезду на GitHub!
 ```
+
