@@ -1,21 +1,26 @@
 package org.skypro.skyshop.product;
 
-import org.skypro.skyshop.searchProduct.Searchable;
+import org.skypro.skyshop.search.Searchable;
+import org.skypro.skyshop.search.Printable;
+import org.skypro.skyshop.util.SimpleLogger;
+import org.skypro.skyshop.util.ConsoleColors;
 
-public abstract class Product implements Searchable {
+import java.util.Objects;
 
+public abstract class Product implements Searchable, Printable, Comparable<Product> {
   private final String nameProduct;
 
-  public Product(String nameProduct) throws IllegalArgumentException {
-    if (nameProduct.isBlank()) {
-      throw new IllegalArgumentException(
-          ANSI_GREEN + "ВНИМАНИЕ ! Нет имени продукта !" + ANSI_RESET);
+  protected Product(String nameProduct) {
+    if (nameProduct == null || nameProduct.isBlank()) {
+      String errorMsg = "Нет имени продукта!";
+      SimpleLogger.error(errorMsg);
+      throw new IllegalArgumentException(errorMsg);
     }
     this.nameProduct = nameProduct;
+    SimpleLogger.debug("Создан продукт: " + nameProduct);
   }
 
   public abstract boolean isSpecial();
-
   public abstract int getCostProduct();
 
   public String getNameProduct() {
@@ -24,8 +29,7 @@ public abstract class Product implements Searchable {
 
   @Override
   public String toString() {
-    return "Product- имя продукта : " + nameProduct + " ;  = цена =  "
-        + getCostProduct();
+    return nameProduct + " - цена: " + getCostProduct() + " руб.";
   }
 
   @Override
@@ -38,12 +42,29 @@ public abstract class Product implements Searchable {
     return "PRODUCT";
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Product product = (Product) o;
+    return Objects.equals(nameProduct, product.nameProduct);
+  }
 
-  public static final String ANSI_RESET = "\u001B[0m";
-  public static final String ANSI_RED = "\u001B[31m";
-  public static final String ANSI_GREEN = "\u001B[32m";
-  public static final String ANSI_YELLOW = "\u001B[33m";
-  public static final String ANSI_BLUE = "\u001B[34m";
-  //ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET +
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(nameProduct);
+  }
 
+  @Override
+  public int compareTo(Product other) {
+    if (other == null) {
+      throw new IllegalArgumentException("Объект для сравнения не может быть null!");
+    }
+    return this.nameProduct.compareTo(other.nameProduct);
+  }
+
+  @Override
+  public void print() {
+    SimpleLogger.info(toString());
+  }
 }

@@ -1,109 +1,111 @@
 package org.skypro.skyshop.product;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
+import org.skypro.skyshop.util.SimpleLogger;
+
+import java.util.*;
 
 public class ProductBasket {
 
-  private final List<Product> productBasket = new ArrayList<>();
-  private final List<Product> allProduct = new ArrayList<>();
+
+  private final Map<String, List<Product>> productBasket = new HashMap<>();
 
 
-  public void generateProduct(String name, int cost, int discount)
-      throws IllegalArgumentException {
-    Product product = null;
-    if (cost == 0 && discount == 0) {
-      try {
-        product = new FixPriceProduct(name);
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось создать: " + name);
-      }
-    } else if (cost > 0 && discount == 0) {
-      try {
-        product = new SimpleProduct(name, cost);
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось создать: " + name);
-      }
+  public void addProduct(String category, Product product) {
+    if (category == null || category.isBlank()) {
+      SimpleLogger.warn("Категория не может быть пустой! Продукт не добавлен.");
+      return;
+    }
+
+    if (product == null) {
+      SimpleLogger.warn("Продукт не может быть null! Не добавлен в категорию: " + category);
+      return;
+    }
+
+    productBasket.computeIfAbsent(category, k -> new ArrayList<>()).add(product);
+    SimpleLogger.info("Добавлен продукт: " + product.getNameProduct() + " в категорию: " + category);
+  }
+
+  public void dellProductByName(String productName) {
+    if (productName == null || productName.isBlank()) {
+      SimpleLogger.warn("Имя продукта для удаления не может быть пустым!");
+      return;
+    }
+
+    boolean removed = false;
+    for (List<Product> products : productBasket.values()) {
+      removed |= products.removeIf(product ->
+          product != null && productName.equalsIgnoreCase(product.getNameProduct()));
+    }
+
+    if (removed) {
+      SimpleLogger.info("Удален продукт: " + productName);
     } else {
-      try {
-        product = new DiscountedProduct(name, cost, discount);
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage() + ", Не удалось создать: " + name);
-      }
+      SimpleLogger.warn("Продукт не найден для удаления: " + productName);
     }
-  }
-
-  public void addProduct(Product product) {
-    productBasket.add(product);
-    System.out.println("Add: " + product);
-  }
-
-  public void printBasketCost() {
-    System.out.println("printBasketCost");
-    if (productBasket.isEmpty()) {
-      System.out.println("Корзина пуста.");
-    } else {
-      int summ = 0;
-      for (Product product : productBasket) {
-
-        if (product != null) {
-          System.out.println(product.getNameProduct() + " cost " + product.getCostProduct());
-          summ += product.getCostProduct();
-        }
-      }
-      System.out.println("________________________");
-      System.out.println("Сумма корзины: " + summ);
-    }
-  }
-
-
-  public void specialProduct() {
-    int namber = 0;
-    System.out.println("Spec tovar : ");
-    for (int i = 0; i < productBasket.size(); i++) {
-      if (productBasket.get(i) != null && productBasket.get(i).isSpecial()) {
-        namber++;
-        System.out.println(productBasket.get(i));
-      }
-    }
-    System.out.println(" Всего спец. товаров: " + namber + " шт");
   }
 
   public void printBasket() {
-    System.out.println("printBasket");
+    SimpleLogger.info("=== СОДЕРЖИМОЕ КОРЗИНЫ ===");
+
     if (productBasket.isEmpty()) {
-      System.out.println("Корзина пуста");
-    } else {
-      System.out.println("Состав корзины:");
-      for (Product product : productBasket) {
-        System.out.println(product);
+      SimpleLogger.info("Корзина пуста!");
+      return;
+    }
+
+    for (Map.Entry<String, List<Product>> entry : productBasket.entrySet()) {
+      SimpleLogger.info("Категория: " + entry.getKey());
+      for (Product product : entry.getValue()) {
+        SimpleLogger.info("  - " + product.toString());
       }
     }
   }
 
-  // нужен для другого метода
-  public List<Product> getProductBasket() {
-    return productBasket;
-  }
-
-  public List<Product> dellProductByName(String name) {
-    System.out.println("dellProductByName");
-    List<Product> dellBasket = new ArrayList<>();
-    Iterator<Product> iterator = productBasket.iterator();
-    String answer = name + " Не найдено";
-    while (iterator.hasNext()) {
-      Product product = iterator.next();
-      if (product.searchTerm().equals(name)) {
-        dellBasket.add(product);
-        iterator.remove();
-        answer = "Найден и удалён: " + product.searchTerm();
+  public void printBasketCost() {
+    int totalCost = 0;
+    for (List<Product> products : productBasket.values()) {
+      for (Product product : products) {
+        totalCost += product.getCostProduct();
       }
     }
-    System.out.println(answer);
-    System.out.println(dellBasket);
-    return dellBasket;
+    SimpleLogger.info("Общая стоимость корзины: " + totalCost + " руб.");
   }
 
+  public void specialProduct() {
+    SimpleLogger.info("=== СПЕЦИАЛЬНЫЕ ПРОДУКТЫ ===");
+    boolean hasSpecial = false;
 
-}// main
+    for (List<Product> products : productBasket.values()) {
+      for (Product product : products) {
+        if (product.isSpecial()) {
+          SimpleLogger.info("Специальный: " + product.toString());
+          hasSpecial = true;
+        }
+      }
+    }
+
+    if (!hasSpecial) {
+      SimpleLogger.info("Специальные продукты отсутствуют");
+    }
+  }
+
+  public Map<String, List<Product>> getProductBasket() {
+    // Возвращаем копию для защиты от внешних изменений
+    Map<String, List<Product>> copy = new HashMap<>();
+    for (Map.Entry<String, List<Product>> entry : productBasket.entrySet()) {
+      copy.put(entry.getKey(), new ArrayList<>(entry.getValue()));
+    }
+    return copy;
+  }
+
+  public boolean isEmpty() {
+    return productBasket.isEmpty();
+  }
+
+  public int getTotalProductsCount() {
+    int count = 0;
+    for (List<Product> products : productBasket.values()) {
+      count += products.size();
+    }
+    return count;
+  }
+}
