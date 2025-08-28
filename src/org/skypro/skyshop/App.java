@@ -6,69 +6,96 @@ import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.ProductBasket;
 import org.skypro.skyshop.product.SimpleProduct;
-import org.skypro.skyshop.searchProduct.SearchEngine;
+import org.skypro.skyshop.search.SearchEngine;
 
 public class App {
 
   public static void main(String[] args) {
-    System.out.println();
+    System.out.println("🚀 Запуск приложения SkyShop!");
+    System.out.println("=".repeat(50));
+
+    // Создаем корзину продуктов
     ProductBasket productBasket = new ProductBasket();
 
-    Product tovar_1 = new FixPriceProduct("Шило");
-    Product tovar_2 = new FixPriceProduct("Водичка");
-    Product tovar_3 = new DiscountedProduct("Еда", 800, 50);
-    Product tovar_4 = new DiscountedProduct("Мыло", 600, 50);
-    Product tovar_5 = new SimpleProduct("Сало", 300);
-    Product tovar_6 = new SimpleProduct("Сало Сало Сало", 300);
-    System.out.println("..Adding Products in Basket");
-    productBasket.addProduct("Не съедобный", tovar_1);
-    productBasket.addProduct("Съедобный", tovar_2);
-    productBasket.addProduct("Съедобный", tovar_3);
-    productBasket.addProduct("Не съедобный", tovar_4);
-    productBasket.addProduct("Съедобный", tovar_5);
-    productBasket.addProduct("Съедобный", tovar_6);
-    System.out.println();
-    productBasket.printBasket();
+    // Создаем различные продукты
+    Product tovar1 = new FixPriceProduct("Шило");
+    Product tovar2 = new DiscountedProduct("Мыло", 600, 50);  // 50% скидка = 300 руб.
+    Product tovar3 = new SimpleProduct("Сало", 300);
+    Product tovar4 = new SimpleProduct("Сало сало сало", 500);
+    Product tovar5 = new DiscountedProduct("Хлеб", 100, 20);   // 20% скидка = 80 руб.
+    Product tovar6 = new FixPriceProduct("Молоток");
 
-    System.out.println();
+    // Группируем продукты по категориям
+    String prod = "Продовольственные товары";
+    String hoz = "Хозяйственные товары";
+
+    // Добавляем продукты в корзину
+    productBasket.addProduct(prod, tovar1);
+    productBasket.addProduct(hoz, tovar2);
+    productBasket.addProduct(prod, tovar3);
+    productBasket.addProduct(prod, tovar4);
+    productBasket.addProduct(prod, tovar5);
+    productBasket.addProduct(hoz, tovar6);
+
+    System.out.println("\n📊 ИНФОРМАЦИЯ О КОРЗИНЕ:");
+    System.out.println("=".repeat(30));
+
+    // Выводим общую стоимость
     productBasket.printBasketCost();
     System.out.println();
+
+    // Показываем специальные продукты
     productBasket.specialProduct();
     System.out.println();
-    productBasket.printBasket();
-    System.out.println();
-    productBasket.dellProductByName("Мыло");
-    System.out.println();
-    productBasket.printBasket();
-    System.out.println();
-    System.out.println("=============================");
-    System.out.println();
-    System.out.println();
 
+    // Выводим содержимое корзины
+    productBasket.printBasket();
+
+    System.out.println("\n" + "=".repeat(50));
+    System.out.println("🔍 ПОИСКОВАЯ СИСТЕМА:");
+    System.out.println("=".repeat(30));
+
+    // Создаем поисковый движок
     SearchEngine searchEngine = new SearchEngine();
 
-    System.out.println();
+    // Добавляем корзину в поисковый индекс
     searchEngine.addBasketInSearchList(productBasket);
-    System.out.println();
 
-    Article article1 = new Article("artic1", "Инструкция к article1");
-    Article article2 = new Article("articl2", "Инструкция к article2");
-    Article article3 = new Article("article3", "Инструкция к article3");
-    System.out.println("..Adding Articles in SearchList");
+    // Создаем и добавляем статьи
+    Article article1 = new Article("article1", "Инструкция по использованию мыла");
+    Article article2 = new Article("article2", "Как правильно хранить сало");
+    Article article3 = new Article("article3", "Обзор хозяйственных товаров");
+    Article article4 = new Article("Сало", "Рецепты приготовления сала"); // Статья с таким же названием как продукт
+
     searchEngine.addArticle(article1);
     searchEngine.addArticle(article2);
     searchEngine.addArticle(article3);
-    System.out.println();
+    searchEngine.addArticle(article4);
 
-    searchEngine.printSerchList();
-    System.out.println();
-    searchEngine.printGetStringRepresentation();
-    System.out.println();
-    searchEngine.searchProduct("article3");
-    searchEngine.searchProduct("Шило");
-    System.out.println();
-    searchEngine.searchForMostSuitable("Сало");
-    System.out.println();
+    System.out.println("\n📋 ВСЕ ОБЪЕКТЫ В ПОИСКЕ:");
+    searchEngine.printSearchListSorted();
 
-  }//maim
-}//App
+    System.out.println("\n🏷️ СТРОКОВЫЕ ПРЕДСТАВЛЕНИЯ:");
+    searchEngine.printAllStringRepresentations();
+
+    System.out.println("\n🔎 ПОИСК ТОЧНЫХ СОВПАДЕНИЙ:");
+    searchEngine.searchExactMatch("Сало"); // Найдет и продукт и статью
+    searchEngine.searchExactMatch("Мыло");
+    searchEngine.searchExactMatch("Несуществующий"); // Не найдет
+
+    System.out.println("\n🔍 ПОИСК ПО ПОДСТРОКЕ:");
+    searchEngine.searchContains("сало"); // Найдет все упоминания
+    searchEngine.searchContains("товар"); // Найдет в описании статьи
+
+    System.out.println("\n🗑️ УДАЛЕНИЕ ПРОДУКТА ИЗ КОРЗИНЫ:");
+    productBasket.dellProductByName("Сало"); // Удаляем один продукт "Сало"
+
+    System.out.println("\n📊 КОРЗИНА ПОСЛЕ УДАЛЕНИЯ:");
+    productBasket.printBasket();
+    productBasket.printBasketCost();
+
+    System.out.println("\n" + "=".repeat(50));
+    System.out.println("✅ ПРИЛОЖЕНИЕ УСПЕШНО ЗАВЕРШЕНО!");
+    System.out.println("=".repeat(50));
+  }
+}

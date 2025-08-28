@@ -1,105 +1,111 @@
 package org.skypro.skyshop.product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import org.skypro.skyshop.util.SimpleLogger;
 
+import java.util.*;
 
 public class ProductBasket {
 
+
   private final Map<String, List<Product>> productBasket = new HashMap<>();
+
 
   public void addProduct(String category, Product product) {
     if (category == null || category.isBlank()) {
-      throw new IllegalArgumentException("ВНИМАНИЕ ! Категория не может быть пустой !");
+      SimpleLogger.warn("Категория не может быть пустой! Продукт не добавлен.");
+      return;
     }
+
     if (product == null) {
-      throw new IllegalArgumentException("ВНИМАНИЕ ! Продукт не может быть null !");
+      SimpleLogger.warn("Продукт не может быть null! Не добавлен в категорию: " + category);
+      return;
     }
-    List<Product> products = productBasket.get(category);
-    if (products == null) {
-      products = new ArrayList<>();
-      productBasket.put(category, products);
-    }
-    products.add(product);
-    System.out.println("Add in category: " + category + ", product: " + product);
+
+    productBasket.computeIfAbsent(category, k -> new ArrayList<>()).add(product);
+    SimpleLogger.info("Добавлен продукт: " + product.getNameProduct() + " в категорию: " + category);
   }
 
-  public Map<String, List<Product>> getProductBasket() {
-    return productBasket;
+  public void dellProductByName(String productName) {
+    if (productName == null || productName.isBlank()) {
+      SimpleLogger.warn("Имя продукта для удаления не может быть пустым!");
+      return;
+    }
+
+    boolean removed = false;
+    for (List<Product> products : productBasket.values()) {
+      removed |= products.removeIf(product ->
+          product != null && productName.equalsIgnoreCase(product.getNameProduct()));
+    }
+
+    if (removed) {
+      SimpleLogger.info("Удален продукт: " + productName);
+    } else {
+      SimpleLogger.warn("Продукт не найден для удаления: " + productName);
+    }
   }
 
   public void printBasket() {
-    System.out.println("printBasket");
+    SimpleLogger.info("=== СОДЕРЖИМОЕ КОРЗИНЫ ===");
+
     if (productBasket.isEmpty()) {
-      System.out.println("Корзина пуста");
-    } else {
-      System.out.println("Состав корзины:");
-      productBasket.forEach((category, product) -> {
-        System.out.println("Категория: " + category);
-        System.out.println("Продукты: " + product);
-      });
+      SimpleLogger.info("Корзина пуста!");
+      return;
+    }
+
+    for (Map.Entry<String, List<Product>> entry : productBasket.entrySet()) {
+      SimpleLogger.info("Категория: " + entry.getKey());
+      for (Product product : entry.getValue()) {
+        SimpleLogger.info("  - " + product.toString());
+      }
     }
   }
+
   public void printBasketCost() {
-    System.out.println("printBasketCost");
-    if (productBasket.isEmpty()) {
-      System.out.println("Корзина пуста.");
-    } else {
-      int summ = productBasket.values().stream()
-          .flatMap(List::stream)
-          .mapToInt(product -> {
-            System.out.println(product.searchTerm() + " Цена " + product.getCostProduct());
-            return product.getCostProduct();
-          })
-          .sum();
-      System.out.println("________________________");
-      System.out.println("Сумма корзины: " + summ);
+    int totalCost = 0;
+    for (List<Product> products : productBasket.values()) {
+      for (Product product : products) {
+        totalCost += product.getCostProduct();
+      }
     }
+    SimpleLogger.info("Общая стоимость корзины: " + totalCost + " руб.");
   }
 
   public void specialProduct() {
-    System.out.println("Специальные товары : ");
-    long size = productBasket.values().stream()
-        .flatMap(List::stream)
-        .filter(Product::isSpecial)
-        .peek(product -> System.out.println(product))
-        // .peek(System.out::println)
-        .count();
-    System.out.println("Всего: " + size + " продуктов");
+    SimpleLogger.info("=== СПЕЦИАЛЬНЫЕ ПРОДУКТЫ ===");
+    boolean hasSpecial = false;
 
-  }
-
-  public List<Product> dellProductByName(String name) {
-    System.out.println("dellProductByName");
-    if (name == null || name.isBlank()) {
-      throw new IllegalArgumentException("ВНИМАНИЕ ! Имя продукта не может быть пустым !");
-    }
-    List<Product> dellBasket = new ArrayList<>();
-    boolean productFound = false;
     for (List<Product> products : productBasket.values()) {
-      if (products != null) {
-        // только через Iterator удалять элементы из списка
-        // во время итерации, иначе ConcurrentModificationException
-        Iterator<Product> iterator = products.iterator();
-        while (iterator.hasNext()) {
-          Product product = iterator.next();
-          if (product.getNameProduct().equals(name)) {
-            dellBasket.add(product);
-            iterator.remove();
-            productFound = true;
-          }
+      for (Product product : products) {
+        if (product.isSpecial()) {
+          SimpleLogger.info("Специальный: " + product.toString());
+          hasSpecial = true;
         }
       }
     }
-    if (!productFound) {
-      System.out.println("Не найден продукт: " + name);
-      return dellBasket;
+
+    if (!hasSpecial) {
+      SimpleLogger.info("Специальные продукты отсутствуют");
     }
-    System.out.println("Удаленные продукты: " + dellBasket);
-    return dellBasket;
   }
 
-}// class
+  public Map<String, List<Product>> getProductBasket() {
+    // Возвращаем копию для защиты от внешних изменений
+    Map<String, List<Product>> copy = new HashMap<>();
+    for (Map.Entry<String, List<Product>> entry : productBasket.entrySet()) {
+      copy.put(entry.getKey(), new ArrayList<>(entry.getValue()));
+    }
+    return copy;
+  }
+
+  public boolean isEmpty() {
+    return productBasket.isEmpty();
+  }
+
+  public int getTotalProductsCount() {
+    int count = 0;
+    for (List<Product> products : productBasket.values()) {
+      count += products.size();
+    }
+    return count;
+  }
+}

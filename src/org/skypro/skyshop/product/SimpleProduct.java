@@ -1,18 +1,22 @@
 package org.skypro.skyshop.product;
 
+import org.skypro.skyshop.util.SimpleLogger;
+import org.skypro.skyshop.util.ConsoleColors;
+
 public class SimpleProduct extends Product {
+  private final int costSimpleProduct;
 
-  int costSimpleProduct;
-
-  public SimpleProduct(String nameProduct, int costSimpleProduct)
-      throws IllegalArgumentException {
+  public SimpleProduct(String nameProduct, int costSimpleProduct) {
     super(nameProduct);
 
     if (costSimpleProduct <= 0) {
-      throw new IllegalArgumentException(
-          ANSI_GREEN + "ВНИМАНИЕ ! Цена меньше нуля !" + ANSI_RESET);
+      String errorMsg = "Цена должна быть больше нуля!";
+      SimpleLogger.error(errorMsg);
+      throw new IllegalArgumentException(errorMsg);
     }
+
     this.costSimpleProduct = costSimpleProduct;
+    SimpleLogger.debug("Создан простой продукт: " + nameProduct + " за " + costSimpleProduct + " руб.");
   }
 
   @Override
@@ -21,22 +25,12 @@ public class SimpleProduct extends Product {
   }
 
   @Override
-  public String toString() {
-    return "(Simpl.) " + getNameProduct() +
-        " , цена =  " + costSimpleProduct;
-  }
-
   public boolean isSpecial() {
     return false;
   }
 
-  public static final String ANSI_RESET = "\u001B[0m";
-  public static final String ANSI_RED = "\u001B[31m";
-  public static final String ANSI_GREEN = "\u001B[32m";
-  public static final String ANSI_YELLOW = "\u001B[33m";
-  public static final String ANSI_BLUE = "\u001B[34m";
-
-  //ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET +
-
-
+  @Override
+  public String toString() {
+    return "(Simple) " + super.toString();
+  }
 }

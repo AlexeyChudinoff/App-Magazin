@@ -1,29 +1,35 @@
 package org.skypro.skyshop.product;
 
-public class DiscountedProduct extends Product {
+import org.skypro.skyshop.util.SimpleLogger;
+import org.skypro.skyshop.util.ConsoleColors;
 
+public class DiscountedProduct extends Product {
   private final int baseCost;
-  private final int discountBaseCost;//целое число от 0 до 100
+  private final int discountPercent;
   private final int costAfterDiscount;
 
-  public DiscountedProduct(String nameProduct, int baseCost, int discountBaseCost)
-      throws RuntimeException {
+  public DiscountedProduct(String nameProduct, int baseCost, int discountPercent) {
     super(nameProduct);
+
     if (baseCost <= 0) {
-      throw new IllegalArgumentException(
-          ANSI_GREEN + "ВНИМАНИЕ ! Цена продукта меньше нуля !" + ANSI_RESET);
+      String errorMsg = "Базовая цена должна быть больше нуля!";
+      SimpleLogger.error(errorMsg);
+      throw new IllegalArgumentException(errorMsg);
     }
-    if (discountBaseCost < 0) {
-      throw new IllegalArgumentException(
-          ANSI_GREEN + "ВНИМАНИЕ ! Размер скидки меньше нуля !" + ANSI_RESET);
+
+    if (discountPercent < 0 || discountPercent > 100) {
+      String errorMsg = "Скидка должна быть от 0 до 100%!";
+      SimpleLogger.error(errorMsg);
+      throw new IllegalArgumentException(errorMsg);
     }
-    if (discountBaseCost > 100) {
-      throw new IllegalArgumentException(
-          ANSI_GREEN + "ВНИМАНИЕ ! Размер скидки больше ста процентов !" + ANSI_RESET);
-    }
+
     this.baseCost = baseCost;
-    this.discountBaseCost = discountBaseCost;
-    costAfterDiscount = (this.baseCost * this.discountBaseCost) / 100;
+    this.discountPercent = discountPercent;
+    this.costAfterDiscount = baseCost - (baseCost * discountPercent / 100);
+
+    SimpleLogger.debug("Создан продукт со скидкой: " + nameProduct +
+        " - базовая цена: " + baseCost +
+        ", скидка: " + discountPercent + "%");
   }
 
   @Override
@@ -32,21 +38,15 @@ public class DiscountedProduct extends Product {
   }
 
   @Override
-  public String toString() {
-    return "(Disc.) " + getNameProduct() + " , цена без скидки = " + baseCost +
-        " , скидка = " + discountBaseCost + "%" +
-        " , цена со скидкой = " + costAfterDiscount;
-  }
-
   public boolean isSpecial() {
     return true;
   }
 
-  public static final String ANSI_RESET = "\u001B[0m";
-  public static final String ANSI_RED = "\u001B[31m";
-  public static final String ANSI_GREEN = "\u001B[32m";
-  public static final String ANSI_YELLOW = "\u001B[33m";
-  public static final String ANSI_BLUE = "\u001B[34m";
-  //ANSI_GREEN + "ВНИМАНИЕ !" + ANSI_RESET +
-
+  @Override
+  public String toString() {
+    return "(Discounted) " + getNameProduct() +
+        " - базовая цена: " + baseCost + " руб." +
+        ", скидка: " + discountPercent + "%" +
+        ", итого: " + costAfterDiscount + " руб.";
+  }
 }
